@@ -3,12 +3,16 @@
  *
  *Current configuration:
  *Background must be black
- *Camera should be rotated 90 degrees counterclockwise
+ *Camera should be rotated 180 degrees
  */
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -53,12 +57,17 @@ public class TouchController
 		//Local variables
 	    Mat rawImage = new Mat();
 	    Mat filteredImage = new Mat();
-	    int numOfDivisions = 100;
-	    Point farthestPoint;
-	    double divisionSize;
+	    Point mousePoint;
+	    Point adjustedMousePoint;
+	    Point previousMousePoint = new Point(0,0);
+	    Point volumePoint;
+	    int previousVolume = 100;
 	    int volume;
-	    int shiftFromEdges = 50;
-	    int previousVolume = 0;
+	    int shiftFromEdges = 10;
+	    int numOfDivisions = 100;
+	    double divisionSize;
+	    Rect mousePad;
+	    Rect volumeSlider;
 
 	    //Start camera
 	    VideoCapture camera = new VideoCapture(0);
@@ -70,15 +79,17 @@ public class TouchController
 	    //Create display
 	    ImageDisplay display = new ImageDisplay((int)cameraWidth, (int)cameraHeight);
 	    display.buildGUI();
-
-	    //Create components
-	    Rect volumeSlider = new Rect(new Point(shiftFromEdges, cameraHeight/2.0 + shiftFromEdges),
-	    							 new Point(cameraWidth - shiftFromEdges, cameraHeight - shiftFromEdges));
 	    
-	    //Image divided into volume sectors
-	    divisionSize = calculateDivisionSize(volumeSlider.width, numOfDivisions);
-
-		//Wait for camera to get images
+	    //Create components
+	    mousePad = new Rect(new Point(shiftFromEdges, shiftFromEdges), 
+	    					new Point(0.75 * cameraWidth - shiftFromEdges, cameraHeight - shiftFromEdges));
+	    volumeSlider = new Rect(new Point(0.75 * cameraWidth + shiftFromEdges, shiftFromEdges),
+	    						new Point(cameraWidth - shiftFromEdges, cameraHeight - shiftFromEdges));
+	    
+	    //Create sectors, each representing a slider setting
+	    divisionSize = calculateDivisionSize(volumeSlider.height, numOfDivisions);
+	    
+	    //Wait for camera to get images before proceeding
 	    while (rawImage.empty())
 	    {
 			camera.read(rawImage);
@@ -87,28 +98,63 @@ public class TouchController
 	    //While frame is not closed
     	while (display.getStatus())
     	{
+    		//Read image from camera
     		camera.read(rawImage);
+    		
+    		//Flip image 180 degrees for screen viewing
+    		Core.flip(rawImage, rawImage , -1);
+    		
+    		//Filter for processing
     		filteredImage = filterImage(rawImage);
-    		drawSlider(rawImage, volumeSlider, numOfDivisions, previousVolume);
 
-    		//Find the farthest point on the screen that is not background
-			farthestPoint = findFarthestPoint(filteredImage, volumeSlider);
-
-			//If a non-background point is found
-			if (farthestPoint != null)
+    		//Draw components onto image
+    		drawRect(rawImage, mousePad);
+    		drawRect(rawImage, volumeSlider);
+    		
+    		//Find the farthest point that is not background
+			mousePoint = findFarthestPoint(filteredImage, mousePad);
+			volumePoint = findFarthestPoint(filteredImage, volumeSlider);
+			
+			//If a non-background point is found in range
+			if (mousePoint != null)
 			{
 				//Mark detection
-				Imgproc.circle(rawImage, farthestPoint, 10, new Scalar(0, 255, 0));
-
-				//Determine the volume sector in which the point is located
-				volume = determineDivision(farthestPoint, shiftFromEdges, divisionSize);
-
-				if (volume != previousVolume)
+				Imgproc.circle(rawImage, mousePoint, 10, new Scalar(0, 255, 0));
+				
+				//Check proximity - limit jumpiness of mouse; decreases fluidity
+				if (Math.abs(mousePoint.x - previousMousePoint.x) > 4 &&
+					Math.abs(mousePoint.y - previousMousePoint.y) > 2)
 				{
-					setVolume(volume);
-					previousVolume = volume;
+					//Convert point in range to point on screen
+					adjustedMousePoint = adjustPoint(mousePoint, mousePad);
+					
+					moveMouse(adjustedMousePoint);
+					previousMousePoint = mousePoint;
 				}
 			}
+			
+			//If a non-background point is found in range
+			if (volumePoint != null)
+			{
+				//Mark detection
+				Imgproc.circle(rawImage, volumePoint, 10, new Scalar(0, 255, 0));
+
+				//Determine the volume sector in which the point is located
+				volume = determineDivision(volumePoint, shiftFromEdges, divisionSize);
+
+				//
+				if (volume != previousVolume)
+				{
+				    if (volume >= 0 && volume <= numOfDivisions)
+				    {
+				    	previousVolume = volume;
+						volume = numOfDivisions - volume;
+						setVolume(volume);
+				    }
+				}
+			}
+			
+			setSliderStatus(rawImage, volumeSlider, previousVolume, divisionSize);
 
 			showImage(display, rawImage);
 
@@ -121,28 +167,26 @@ public class TouchController
     	camera.release();
 	}
 
-	private void drawSlider(Mat rawImage, Rect slider, int numOfDivisions, int previousVolume)
+	private void setSliderStatus(Mat rawImage, Rect slider, int division, double divisionSize)
 	{
-		//Local Variables
-		double divisionSize;
-		double xPosition;
-		Point upperLeft;
-		Point lowerRight;
-		Scalar sliderColor = new Scalar(255, 0, 0); //Scalar is BGR
-		Scalar infoColor = new Scalar(0, 255, 0);
-
-		//Determine slider state
-		divisionSize = calculateDivisionSize(slider.width, numOfDivisions);
-		xPosition = divisionSize * previousVolume + slider.x;
-		upperLeft = new Point(slider.x, slider.y);
-		lowerRight = new Point(slider.x + slider.width, slider.y + slider.height);
-
-		//Draw components
-		Imgproc.rectangle(rawImage, upperLeft, lowerRight, sliderColor, 3);
-		Imgproc.line(rawImage, new Point(xPosition, slider.y),
-					 new Point(xPosition, slider.y + slider.height), infoColor, 3);
-		Imgproc.putText(rawImage, previousVolume + "%", new Point(xPosition + 5, slider.y + 15),
-						Core.FONT_HERSHEY_COMPLEX, 0.5, infoColor);
+		//Local variables
+		double yPosition;
+		Scalar infoColor = new Scalar(0, 255, 0); //Scalar is BGR
+		int shift;
+		
+		//Determine status
+		if (100 - division >= 50)
+			shift = 18;
+		else
+			shift = -8;
+		
+		yPosition = divisionSize * division + slider.y;
+		
+		//Draw status
+		Imgproc.line(rawImage, new Point(slider.x, yPosition),
+				 new Point(slider.x + slider.width, yPosition), infoColor, 3);
+		Imgproc.putText(rawImage, 100 - division + "%", new Point(slider.x + 5, yPosition + shift),
+					Core.FONT_HERSHEY_COMPLEX, 0.5, infoColor);
 	}
 
 	private double calculateDivisionSize(double sliderWidth, int numOfDivisions)
@@ -155,7 +199,33 @@ public class TouchController
 
 		return divisionSize;
 	}
+	
+	private int determineDivision(Point farthestPoint, int shift, double divisionSize)
+	{
+		//Local variables
+		int division;
 
+		//Calculations
+		division = (int) Math.ceil(((farthestPoint.y - shift) / divisionSize));
+
+		return division;
+	}
+	
+	private void drawRect(Mat rawImage, Rect slider)
+	{
+		Point upperLeft;
+		Point lowerRight;
+		Scalar sliderColor = new Scalar(255, 0, 0); //Scalar is BGR
+		new Scalar(0, 255, 0);
+
+		//Determine slider state
+		upperLeft = new Point(slider.x, slider.y);
+		lowerRight = new Point(slider.x + slider.width, slider.y + slider.height);
+
+		//Draw components
+		Imgproc.rectangle(rawImage, upperLeft, lowerRight, sliderColor, 3);
+	}
+	
 	private Mat filterImage(Mat image)
 	{
 		//Local variables
@@ -202,36 +272,28 @@ public class TouchController
 	private Point findFarthestPoint(Mat filteredImage, Rect range)
 	{
 		//Local variables
-		Point farthestPoint = new Point(0, 0);
+		Point farthestPoint = new Point();
 		boolean doneSearching = false;
-		int counter = 0;
-		int errorThreshold = 25;
+		double[] pixelColor;
 
 		//Starting in the lower right corner, search for non-background pixel
 		outerLoop:
-		for (int x = range.x + range.width; x >= range.x; x--)
+		for (int y = range.y; y < range.y + range.height; y++)
 		{
 			innerLoop:
-			for (int y = range.y + range.height; y >= range.y; y--)
+			for (int x = range.x + range.width; x >= range.x; x--)
 			{
 				//Get pixel at coordinate
-				double[] pixelColors = filteredImage.get(y, x);
+				pixelColor = filteredImage.get(y, x);
 
-				if (pixelColors != null)
+				//Check pixel for non-background coloring
+				if (pixelColor[0] != 255.0)
 				{
-					//Check pixel for non-background coloring
-					if (pixelColors[0] != 255.0)
-					{
-						counter++;
-
-						if (counter >= errorThreshold)
-						{
-							farthestPoint.x = x;
-							farthestPoint.y = y;
-							doneSearching = true;
-						}
-					}
+					farthestPoint.x = x;
+					farthestPoint.y = y;
+					doneSearching = true;
 				}
+					
 				if (doneSearching)
 					break innerLoop;
 			}
@@ -240,21 +302,56 @@ public class TouchController
 		}
 
 		//No non-background pixel found
-		if (farthestPoint.x == 0 || farthestPoint.y == 0)
+		if (farthestPoint.x == range.x || farthestPoint.y == range.y ||
+			farthestPoint.x == 0	   || farthestPoint.y == 0)
+		{
 			farthestPoint = null;
+		}
 
 		return farthestPoint;
 	}
-
-	private int determineDivision(Point farthestPoint, int shift, double divisionSize)
+	
+	private Point adjustPoint(Point imagePoint, Rect component)
 	{
 		//Local variables
-		int division;
+		Point adjustedPoint = new Point();
+		double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		double widthAdjustment = screenWidth / component.width;
+		double heightAdjustment = screenHeight / component.height;
+		
+		//Adjust point
+		adjustedPoint.x = imagePoint.x * widthAdjustment;
+		adjustedPoint.y = imagePoint.y * heightAdjustment;
+		
+		return adjustedPoint;
+	}
 
-		//Calculations
-		division = (int) Math.ceil(((farthestPoint.x - shift) / divisionSize));
-
-		return division;
+	private void moveMouse(Point adjustedPoint)
+	{
+		//Local variables
+		Robot mouseMover = createRobot();
+		
+		//Move mouse to adjusted point
+		mouseMover.mouseMove((int) adjustedPoint.x, (int) adjustedPoint.y);
+	}
+	
+	private Robot createRobot()
+	{
+		//Local variable
+		Robot robot = null;
+		
+		//Create robot
+		try
+		{
+			robot = new Robot();
+		}
+		catch (AWTException e)
+		{
+			
+		}
+		
+		return robot;
 	}
 
 	private void setVolume(int volume)
@@ -262,24 +359,22 @@ public class TouchController
 		//Nircmd allows volume changing
 		File nircmdPath = new File("./nircmd.exe");
 
-		//Validate volume
-	    if (volume >= 0 && volume <= 100)
-	    {
-	    	//Calculate volume in nircmd terms
-	        double endVolume = 655.35 * volume;
+    	System.out.println("Volume set to: " + volume);
+    	
+    	//Calculate volume in nircmd terms
+        double endVolume = 655.35 * volume;
 
-	        try
-	        {
-	        	//Set volume
-	        	Runtime.getRuntime().exec(nircmdPath.getCanonicalPath() + " setsysvolume " + endVolume);
-	        }
-	        catch (IOException e)
-	        {
-	            e.printStackTrace();
-	        }
-	    }
+        try
+        {
+        	//Set volume
+        	Runtime.getRuntime().exec(nircmdPath.getCanonicalPath() + " setsysvolume " + endVolume);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 	}
-
+	
 	private void showImage(ImageDisplay display, Mat rawImage)
 	{
 		//Local variables

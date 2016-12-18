@@ -48,7 +48,7 @@ public class ImageDisplay extends JPanel
 	private JFrame setPreferences(JFrame frame)
 	{
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-	    frame.setTitle("Slider");
+	    frame.setTitle("Touch Control");
 	    frame.setSize(this.getWidth() + 16, this.getHeight() + 39);
 	    frame.addWindowListener(new WindowAdapter() 
 	    {
