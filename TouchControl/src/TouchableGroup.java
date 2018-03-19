@@ -59,7 +59,6 @@ public class TouchableGroup
 	private void checkCollision()
 	{
 		for (int i = 0; i < components.size(); i++)
-		{
 			for (int j = i + 1; j < components.size(); j++)
 			{
 				//Get components dimensions
@@ -72,10 +71,9 @@ public class TouchableGroup
 
 				//Print warning
 				if (overlaps)
-					System.out.println("Touchable colision warning in " + super.toString() + 
-							" between component " + i + " and component " + j);
+					System.out.println("Touchable colision warning in " + super.toString() + " between component " + i
+							+ " and component " + j);
 			}
-		}
 	}
 
 	public void addComponent(Touchable component)

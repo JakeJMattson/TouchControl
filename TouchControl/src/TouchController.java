@@ -51,7 +51,7 @@ public class TouchController
 		topLeft = new Point(0.75 * cameraWidth, padding);
 		bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
 		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
-		
+
 		//Create components
 		MousePad mousePad = new MousePad(mousePadRect);
 		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect);
@@ -59,15 +59,14 @@ public class TouchController
 		//Create group of Touchable objects
 		TouchableGroup group = new TouchableGroup(mousePad, volumeSlider);
 
-		System.out.println(group);
-
 		//Create matrices
 		Mat cameraImage = new Mat();
 		Mat filteredImage = new Mat();
 
 		//Wait for camera to get images before proceeding
-		while (cameraImage.empty())
+		do
 			camera.read(cameraImage);
+		while (cameraImage.empty());
 
 		//While frame is open
 		while (display.isOpen())

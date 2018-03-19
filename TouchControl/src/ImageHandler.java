@@ -69,7 +69,7 @@ public class ImageHandler
 
 		return modifiedImage;
 	}
-	
+
 	private Mat createStructuringElement(Size size)
 	{
 		//Create matrix
