@@ -64,11 +64,16 @@ public class ImageHandler
 		Mat modifiedImage = new Mat();
 
 		//Remove noise from image
-		Imgproc.erode(image, modifiedImage, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(7, 7)));
-		Imgproc.dilate(modifiedImage, modifiedImage,
-				Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
+		Imgproc.erode(image, modifiedImage, createStructuringElement(new Size(7, 7)));
+		Imgproc.dilate(modifiedImage, modifiedImage, createStructuringElement(new Size(2, 2)));
 
 		return modifiedImage;
+	}
+	
+	private Mat createStructuringElement(Size size)
+	{
+		//Create matrix
+		return Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, size);
 	}
 
 	public BufferedImage convertMatToImage(Mat matrix)

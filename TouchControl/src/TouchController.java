@@ -45,52 +45,56 @@ public class TouchController
 
 		//Create component dimensions
 		int padding = 10;
-		Rect mousePadRect = new Rect(new Point(padding, padding),
-				new Point(0.75 * cameraWidth - padding, cameraHeight - padding));
-		Rect volumeSliderRect = new Rect(new Point(0.75 * cameraWidth, padding),
-				new Point(cameraWidth - padding, cameraHeight - padding));
-
+		Point topLeft = new Point(padding, padding);
+		Point bottomRight = new Point(0.75 * cameraWidth - padding, cameraHeight - padding);
+		Rect mousePadRect = new Rect(topLeft, bottomRight);
+		topLeft = new Point(0.75 * cameraWidth, padding);
+		bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
+		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
+		
 		//Create components
 		MousePad mousePad = new MousePad(mousePadRect);
 		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect);
 
+		//Create group of Touchable objects
+		TouchableGroup group = new TouchableGroup(mousePad, volumeSlider);
+
+		System.out.println(group);
+
 		//Create matrices
-		Mat rawImage = new Mat();
+		Mat cameraImage = new Mat();
 		Mat filteredImage = new Mat();
 
 		//Wait for camera to get images before proceeding
-		while (rawImage.empty())
-			camera.read(rawImage);
+		while (cameraImage.empty())
+			camera.read(cameraImage);
 
 		//While frame is open
 		while (display.isOpen())
 		{
 			//Read image from camera
-			camera.read(rawImage);
+			camera.read(cameraImage);
 
 			//Flip image 180 degrees
-			Core.flip(rawImage, rawImage, -1);
+			Core.flip(cameraImage, cameraImage, -1);
 
 			//Filter image for processing
-			filteredImage = handler.filterImage(rawImage);
+			filteredImage = handler.filterImage(cameraImage);
 
 			//Find the farthest point that is not background
-			mousePad.updateDetectionPoint(filteredImage);
-			volumeSlider.updateDetectionPoint(filteredImage);
+			group.updateDetectionPoint(filteredImage);
 
 			//Draw components onto image
-			mousePad.drawOnto(rawImage);
-			volumeSlider.drawOnto(rawImage);
+			group.drawOnto(cameraImage);
 
 			//Perform class action
-			mousePad.performAction();
-			volumeSlider.performAction();
+			group.performAction();
 
 			//Display components
-			display.showImage(handler.convertMatToImage(rawImage));
+			display.showImage(handler.convertMatToImage(cameraImage));
 
 			//Dispose matrices
-			rawImage.release();
+			cameraImage.release();
 			filteredImage.release();
 		}
 

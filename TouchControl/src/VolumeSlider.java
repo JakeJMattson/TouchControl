@@ -26,15 +26,14 @@ public class VolumeSlider extends Slider
 	public void performAction()
 	{
 		if (hasDetection())
-			if (volume >= 0 && volume <= numOfDivisions)
-			{
-				//Calculate volume
-				int newVolume = numOfDivisions - division;
+		{
+			//Calculate volume
+			int newVolume = (numOfDivisions - division) * (100 / numOfDivisions);
 
-				//Avoid unnecessary calls
-				if (volume != newVolume)
-					setVolume(newVolume);
-			}
+			//Avoid unnecessary calls
+			if (volume != newVolume)
+				setVolume(newVolume);
+		}
 	}
 
 	private void setVolume(int volume)

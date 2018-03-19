@@ -29,7 +29,7 @@ public abstract class Slider extends Touchable
 	//Setters
 	protected void setNumOfDivisions(int numOfDivisions)
 	{
-		this.numOfDivisions = numOfDivisions;
+		this.numOfDivisions = validateDivisions(numOfDivisions);
 
 		calculateDivisionSize();
 	}
@@ -50,10 +50,21 @@ public abstract class Slider extends Touchable
 		return this.percentageVisible;
 	}
 
+	//Class methods
 	private void calculateDivisionSize()
 	{
 		//Calculate the size of a single slider sector
 		divisionSize = (double) dimensions.height / numOfDivisions;
+	}
+
+	private int validateDivisions(int divisions)
+	{
+		if (divisions < 0)
+			divisions = 0;
+		else if (divisions > 100)
+			divisions = 100;
+
+		return divisions;
 	}
 
 	@Override
@@ -85,10 +96,13 @@ public abstract class Slider extends Touchable
 		if (percentageVisible)
 		{
 			//Offset text to avoid collision with line and slider
-			int textShift = (100 - division >= 50) ? 18 : -8;
+			int textShift = (numOfDivisions - division >= (numOfDivisions / 2.0)) ? 18 : -8;
+
+			//Calculate percentage to display
+			int percent = (numOfDivisions - division) * (100 / numOfDivisions);
 
 			//Draw text
-			Imgproc.putText(rawImage, 100 - division + "%", new Point(dimensions.x + 5, linePosition + textShift),
+			Imgproc.putText(rawImage, percent + "%", new Point(dimensions.x + 5, linePosition + textShift),
 					Core.FONT_HERSHEY_COMPLEX, 0.5, color);
 		}
 	}
