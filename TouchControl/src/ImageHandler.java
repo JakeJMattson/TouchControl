@@ -8,14 +8,13 @@ public class ImageHandler
 	private Scalar backgroundColor;
 	private Scalar rangeColor;
 
-	private final Scalar DEFAULT_BACKGROUND = new Scalar(0, 0, 0);
-	private final Scalar DEFAULT_RANGE = new Scalar(175, 175, 175);
+	private final static Scalar DEFAULT_BACKGROUND = new Scalar(0, 0, 0);
+	private final static Scalar DEFAULT_RANGE = new Scalar(175, 175, 175);
 
 	//Constructors
 	public ImageHandler()
 	{
-		this.backgroundColor = DEFAULT_BACKGROUND;
-		this.rangeColor = DEFAULT_RANGE;
+		this(DEFAULT_BACKGROUND, DEFAULT_RANGE);
 	}
 
 	public ImageHandler(Scalar backgroundColor, Scalar rangeColor)
@@ -24,6 +23,7 @@ public class ImageHandler
 		this.rangeColor = rangeColor;
 	}
 
+	//Setters
 	public void setBackgroundColor(Scalar backgroundColor)
 	{
 		this.backgroundColor = backgroundColor;
@@ -40,10 +40,12 @@ public class ImageHandler
 		this.rangeColor = rangeColor;
 	}
 
+	//Getters
+
 	//Class methods
 	public Mat filterImage(Mat image)
 	{
-		//Local variables
+		//Create matrices
 		Mat hsvImage = new Mat();
 		Mat grayImage = new Mat();
 		Mat filteredImage = new Mat();
@@ -58,39 +60,40 @@ public class ImageHandler
 
 	private Mat filterNoise(Mat image)
 	{
-		//Local Variables
+		//Create matrix
 		Mat modifiedImage = new Mat();
-		Size erodeSize = new Size(7, 7);
-		Size dilateSize = new Size(2, 2);
 
 		//Remove noise from image
-		Imgproc.erode(image, modifiedImage, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, erodeSize));
-		Imgproc.dilate(modifiedImage, modifiedImage, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, dilateSize));
+		Imgproc.erode(image, modifiedImage, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(7, 7)));
+		Imgproc.dilate(modifiedImage, modifiedImage,
+				Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(2, 2)));
 
 		return modifiedImage;
 	}
 
 	public BufferedImage convertMatToImage(Mat matrix)
 	{
-		//Local variables
+		//Get image dimensions
 		int width = matrix.width();
 		int height = matrix.height();
-		int type = BufferedImage.TYPE_BYTE_GRAY;
-		byte[] data = new byte[width * height * (int) matrix.elemSize()];
-		BufferedImage out;
 
-		//Determine type
+		//Determine image type
+		int type;
+
 		if (matrix.channels() != 1)
 		{
 			type = BufferedImage.TYPE_3BYTE_BGR;
 			Imgproc.cvtColor(matrix, matrix, Imgproc.COLOR_BGR2RGB);
 		}
+		else
+			type = BufferedImage.TYPE_BYTE_GRAY;
 
 		//Get matrix data
+		byte[] data = new byte[width * height * (int) matrix.elemSize()];
 		matrix.get(0, 0, data);
 
-		//Create image and pass matrix data
-		out = new BufferedImage(width, height, type);
+		//Create image with matrix data
+		BufferedImage out = new BufferedImage(width, height, type);
 		out.getRaster().setDataElements(0, 0, width, height, data);
 
 		return out;

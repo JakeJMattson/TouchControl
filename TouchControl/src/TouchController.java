@@ -12,7 +12,6 @@ public class TouchController
 {
 	public static void main(String[] args)
 	{
-		//Create instance of class
 		TouchController driver = new TouchController();
 		driver.start();
 	}
@@ -22,29 +21,15 @@ public class TouchController
 		//Load OpenCV
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-		//Begin Capture
-		try
-		{
-			capture();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			System.out.println("Exception: " + e.getClass().getSimpleName());
-		}
+		//Run program
+		capture();
 
-		//Exit
-		System.out.println("Program terminated.");
+		//Force exit
 		System.exit(0);
 	}
 
 	private void capture()
 	{
-		//Local variables
-		Mat rawImage = new Mat();
-		Mat filteredImage = new Mat();
-		ImageHandler handler = new ImageHandler();
-
 		//Start camera
 		VideoCapture camera = new VideoCapture(0);
 
@@ -55,6 +40,9 @@ public class TouchController
 		//Create display
 		ImageDisplay display = new ImageDisplay();
 
+		//Create image modifier
+		ImageHandler handler = new ImageHandler();
+
 		//Create component dimensions
 		int padding = 10;
 		Rect mousePadRect = new Rect(new Point(padding, padding),
@@ -63,23 +51,27 @@ public class TouchController
 				new Point(cameraWidth - padding, cameraHeight - padding));
 
 		//Create components
-		MousePad mousePad = new MousePad(mousePadRect, new Scalar(128, 0, 255));
+		MousePad mousePad = new MousePad(mousePadRect);
 		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect);
+
+		//Create matrices
+		Mat rawImage = new Mat();
+		Mat filteredImage = new Mat();
 
 		//Wait for camera to get images before proceeding
 		while (rawImage.empty())
 			camera.read(rawImage);
 
-		//While frame is not closed
-		while (display.getStatus())
+		//While frame is open
+		while (display.isOpen())
 		{
 			//Read image from camera
 			camera.read(rawImage);
 
-			//Flip image 180 degrees for screen viewing
+			//Flip image 180 degrees
 			Core.flip(rawImage, rawImage, -1);
 
-			//Filter for processing
+			//Filter image for processing
 			filteredImage = handler.filterImage(rawImage);
 
 			//Find the farthest point that is not background
@@ -97,7 +89,7 @@ public class TouchController
 			//Display components
 			display.showImage(handler.convertMatToImage(rawImage));
 
-			//Cleanup to avoid memory exception
+			//Dispose matrices
 			rawImage.release();
 			filteredImage.release();
 		}

@@ -7,14 +7,14 @@ public class VolumeSlider extends Slider
 	private int volume;
 
 	//Constructors
-	public VolumeSlider(Rect sliderDim)
+	public VolumeSlider(Rect dimensions)
 	{
-		super(sliderDim);
+		this(dimensions, DEFAULT_COLOR);
 	}
 
-	public VolumeSlider(Rect sliderDim, Scalar color)
+	public VolumeSlider(Rect dimensions, Scalar color)
 	{
-		super(sliderDim, color);
+		super(dimensions, color);
 	}
 
 	//Setters
@@ -25,11 +25,13 @@ public class VolumeSlider extends Slider
 	@Override
 	public void performAction()
 	{
-		if (validateAction())
+		if (hasDetection())
 			if (volume >= 0 && volume <= numOfDivisions)
 			{
+				//Calculate volume
 				int newVolume = numOfDivisions - division;
 
+				//Avoid unnecessary calls
 				if (volume != newVolume)
 					setVolume(newVolume);
 			}
@@ -38,18 +40,28 @@ public class VolumeSlider extends Slider
 	private void setVolume(int volume)
 	{
 		//Nircmd allows volume changing
-		File nircmdPath = new File("./nircmd.exe");
+		File nircmd = new File("nircmd.exe");
+		String nircmdPath = nircmd.getAbsolutePath();
 
+		//Convert volume to nircmd standard
+		double nircmdVolume = 655.35 * volume;
+
+		//Build command to set system volume
+		String command = nircmdPath + " setsysvolume " + nircmdVolume;
+
+		//Set volume
+		this.volume = volume;
+		executeCommand(command);
+
+		//Display message for debugging
 		System.out.println("Volume set to: " + volume);
+	}
 
-		//Calculate volume in nircmd terms
-		double endVolume = 655.35 * volume;
-
+	private void executeCommand(String command)
+	{
 		try
 		{
-			//Set volume
-			this.volume = volume;
-			Runtime.getRuntime().exec(nircmdPath.getCanonicalPath() + " setsysvolume " + endVolume);
+			Runtime.getRuntime().exec(command);
 		}
 		catch (IOException e)
 		{

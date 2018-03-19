@@ -7,68 +7,86 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class ImageDisplay extends JPanel
 {
-	JFrame frame;
+	private JFrame frame;
 	private BufferedImage image;
-	private boolean openStatus;
+	private boolean isOpen;
 
+	//Constructors
 	public ImageDisplay()
 	{
-		super(); //JPanel
+		super();
 		buildGUI();
 	}
 
-	public void showImage(BufferedImage image)
+	//Setters
+
+	//Getters
+	public boolean isOpen()
 	{
-		this.image = image;
-		this.repaint();
-		frame.pack();
+		return this.isOpen;
 	}
 
-	//Add content to frame
-	@Override
-	public void paintComponent(Graphics g)
+	//Class methods
+	private void buildGUI()
 	{
-		super.paintComponent(g);
-		if (image != null)
-		{
-			int width = image.getWidth();
-			int height = image.getHeight();
+		//Close preferences
+		int closeOperation = WindowConstants.DO_NOTHING_ON_CLOSE;
+		WindowListener listener = createWindowListener();
 
-			//Add image
-			g.drawImage(image, 0, 0, width, height, null);
-			this.setPreferredSize(new Dimension(width, height));
-		}
-	}
-
-	public void buildGUI()
-	{
+		//Create frame
 		frame = new JFrame();
-		frame = setPreferences(frame);
+		frame.setTitle("Touch Control");
+		frame.setDefaultCloseOperation(closeOperation);
+		frame.addWindowListener(listener);
 		frame.add(this);
 		frame.setVisible(true);
-		openStatus = true;
+		isOpen = true;
 	}
 
-	private JFrame setPreferences(JFrame frame)
+	private WindowListener createWindowListener()
 	{
-		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		frame.setTitle("Touch Control");
-		frame.setSize(this.getWidth() + 16, this.getHeight() + 39);
-		frame.addWindowListener(new WindowAdapter()
+		WindowListener listener = new WindowAdapter()
 		{
 			@Override
 			public void windowClosing(WindowEvent windowClosed)
 			{
-				openStatus = false;
+				//Set window closing events
+				isOpen = false;
 				frame.dispose();
 			}
-		});
+		};
 
-		return frame;
+		return listener;
 	}
 
-	public boolean getStatus()
+	public void showImage(BufferedImage image)
 	{
-		return this.openStatus;
+		//Store image
+		this.image = image;
+
+		//Draw new image
+		this.repaint();
+
+		//Resize frame to fit image
+		frame.pack();
+	}
+
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+
+		if (image != null)
+		{
+			//Get image dimensions
+			int width = image.getWidth();
+			int height = image.getHeight();
+
+			//Add image to panel
+			g.drawImage(image, 0, 0, width, height, null);
+
+			//Set panel size
+			this.setPreferredSize(new Dimension(width, height));
+		}
 	}
 }

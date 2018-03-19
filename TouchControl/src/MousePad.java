@@ -6,67 +6,41 @@ import org.opencv.core.Point;
 public class MousePad extends Pad
 {
 	private Robot mouseMover;
-	private double screenWidth;
-	private double screenHeight;
+
+	private final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	private final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 	//Constructors
-	public MousePad(Rect padDim)
+	public MousePad(Rect dimensions)
 	{
-		super(padDim);
-		init();
+		this(dimensions, DEFAULT_COLOR);
 	}
 
-	public MousePad(Rect padDim, Scalar color)
+	public MousePad(Rect dimensions, Scalar color)
 	{
-		super(padDim, color);
+		super(dimensions, color);
 		init();
 	}
 
 	private void init()
 	{
-		screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-		screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		createRobot();
 	}
 
 	//Setters
-	public void setScreenHeight(double screenHeight)
-	{
-		this.screenHeight = screenHeight;
-	}
-
-	public void setScreenWidth(double screenWidth)
-	{
-		this.screenWidth = screenWidth;
-	}
-
-	public void setScreenDimensions(double screenHeight, double screenWidth)
-	{
-		this.screenHeight = screenHeight;
-		this.screenWidth = screenWidth;
-	}
 
 	//Getters
-	public double getScreenHeight()
-	{
-		return this.screenHeight;
-	}
-
-	public double getScreenWidth()
-	{
-		return this.screenWidth;
-	}
 
 	//Class methods
 	@Override
 	public void performAction()
 	{
-		//If a non-background point is found in range
-		if (validateAction())
+		if (hasDetection())
 		{
 			//Convert point in range to point on screen
 			Point adjustedMousePoint = adjustPoint();
 
+			//Move mouse pointer to point
 			moveMouse(adjustedMousePoint);
 		}
 	}
@@ -75,8 +49,8 @@ public class MousePad extends Pad
 	{
 		//Local variables
 		Point adjustedPoint = new Point();
-		double widthAdjustment = screenWidth / dimensions.width;
-		double heightAdjustment = screenHeight / dimensions.height;
+		double widthAdjustment = SCREEN_WIDTH / dimensions.width;
+		double heightAdjustment = SCREEN_HEIGHT / dimensions.height;
 
 		//Adjust point
 		adjustedPoint.x = detectionPoint.x * widthAdjustment;
@@ -87,6 +61,7 @@ public class MousePad extends Pad
 
 	private void moveMouse(Point point)
 	{
+		//Use robot to move mouse
 		mouseMover.mouseMove((int) point.x, (int) point.y);
 	}
 
@@ -105,7 +80,7 @@ public class MousePad extends Pad
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format(TO_STRING_FORMAT, "Screen height:", this.screenHeight)
-				+ String.format(TO_STRING_FORMAT, "Screen width:", this.screenWidth);
+		return super.toString() + String.format(TO_STRING_FORMAT, "Screen height:", this.SCREEN_HEIGHT)
+				+ String.format(TO_STRING_FORMAT, "Screen width:", this.SCREEN_WIDTH);
 	}
 }

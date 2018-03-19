@@ -3,15 +3,14 @@ import org.opencv.core.*;
 public abstract class Pad extends Touchable
 {
 	//Constructors
-	public Pad(Rect padDim)
+	protected Pad(Rect dimensions, Scalar color)
 	{
-		super(padDim);
+		super(dimensions, color);
 	}
 
-	public Pad(Rect padDim, Scalar color)
-	{
-		super(padDim, color);
-	}
+	//Setters
+
+	//Getters
 
 	//Class methods
 	@Override

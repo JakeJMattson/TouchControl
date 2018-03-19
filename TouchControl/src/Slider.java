@@ -4,88 +4,69 @@ import org.opencv.imgproc.Imgproc;
 public abstract class Slider extends Touchable
 {
 	protected int numOfDivisions;
-	private boolean percentageVisible;
 	protected int division;
+	private boolean percentageVisible;
 	private double divisionSize;
 
-	final static int DEFAULT_DIVISIONS = 100;
+	private final static int DEFAULT_DIVISIONS = 100;
+	private final static boolean DEFAULT_VISIBILITY = true;
 
 	//Constructors
-	public Slider(Rect sliderDim)
-	{
-		super(sliderDim);
-		init(DEFAULT_DIVISIONS);
-	}
-
-	public Slider(Rect sliderDim, Scalar color)
-	{
-		super(sliderDim, color);
-		init(DEFAULT_DIVISIONS);
-	}
-
-	public Slider(Rect dimensions, boolean percentageVisible)
-	{
-		super(dimensions);
-		this.percentageVisible = percentageVisible;
-		init(DEFAULT_DIVISIONS);
-	}
-
-	public Slider(Rect dimensions, Scalar color, int numOfDivisions, boolean percentageVisible)
+	protected Slider(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
-		this.numOfDivisions = numOfDivisions;
-		this.percentageVisible = percentageVisible;
-		init(numOfDivisions);
+		init();
 	}
 
-	private void init(int divisions)
+	private void init()
 	{
-		numOfDivisions = divisions;
+		numOfDivisions = DEFAULT_DIVISIONS;
+		percentageVisible = DEFAULT_VISIBILITY;
 
 		calculateDivisionSize();
 	}
 
 	//Setters
-	public void setNumOfDivisions(int numOfDivisions)
+	protected void setNumOfDivisions(int numOfDivisions)
 	{
 		this.numOfDivisions = numOfDivisions;
 
 		calculateDivisionSize();
 	}
 
-	public void setPercentageVisible(boolean percentageVisible)
+	protected void setPercentageVisible(boolean percentageVisible)
 	{
 		this.percentageVisible = percentageVisible;
 	}
 
 	//Getters
-	public int getNumOfDivisions()
+	protected int getNumOfDivisions()
 	{
 		return this.numOfDivisions;
 	}
 
-	public boolean isPercentageVisible()
+	protected boolean isPercentageVisible()
 	{
 		return this.percentageVisible;
 	}
 
 	private void calculateDivisionSize()
 	{
+		//Calculate the size of a single slider sector
 		divisionSize = (double) dimensions.height / numOfDivisions;
 	}
 
 	@Override
-	public void updateDetectionPoint(Mat filteredImage)
+	protected void updateDetectionPoint(Mat filteredImage)
 	{
 		super.updateDetectionPoint(filteredImage);
 
-		//TODO relative position
-		if (detectionPoint != null)
+		if (hasDetection())
 			division = (int) Math.ceil(((detectionPoint.y - dimensions.y) / divisionSize));
 	}
 
 	@Override
-	public void drawOnto(Mat image)
+	protected void drawOnto(Mat image)
 	{
 		super.drawOnto(image);
 
@@ -94,21 +75,21 @@ public abstract class Slider extends Touchable
 
 	private void setSliderStatus(Mat rawImage)
 	{
-		if (detectionPoint != null)
+		//Calculate position of line
+		double linePosition = divisionSize * division + dimensions.y;
+
+		//Draw status line
+		Imgproc.line(rawImage, new Point(dimensions.x, linePosition),
+				new Point(dimensions.x + dimensions.width, linePosition), color, 3);
+
+		if (percentageVisible)
 		{
-			//Local variables
-			Scalar infoColor = new Scalar(0, 255, 0); //Scalar is BGR
+			//Offset text to avoid collision with line and slider
+			int textShift = (100 - division >= 50) ? 18 : -8;
 
-			//Determine status
-			int shift = (100 - division >= 50) ? 18 : -8;
-
-			double yPosition = divisionSize * division + dimensions.y;
-
-			//Draw status
-			Imgproc.line(rawImage, new Point(dimensions.x, yPosition),
-					new Point(dimensions.x + dimensions.width, yPosition), infoColor, 3);
-			Imgproc.putText(rawImage, 100 - division + "%", new Point(dimensions.x + 5, yPosition + shift),
-					Core.FONT_HERSHEY_COMPLEX, 0.5, infoColor);
+			//Draw text
+			Imgproc.putText(rawImage, 100 - division + "%", new Point(dimensions.x + 5, linePosition + textShift),
+					Core.FONT_HERSHEY_COMPLEX, 0.5, color);
 		}
 	}
 

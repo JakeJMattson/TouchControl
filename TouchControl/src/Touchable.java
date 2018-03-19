@@ -4,63 +4,63 @@ import org.opencv.imgproc.Imgproc;
 public abstract class Touchable
 {
 	protected Rect dimensions;
-	private Scalar color;
+	protected Scalar color;
 	protected Point detectionPoint;
-	private Point previousDetection;
 
 	protected final String TO_STRING_FORMAT = "   %-17s %-1s%n";
-	private final static Scalar DEFAULT_COLOR = new Scalar(255, 0, 0);
+	protected final static Scalar DEFAULT_COLOR = new Scalar(0, 255, 0);
 
 	//Constructors
-	public Touchable(Rect dimensions)
+	protected Touchable(Rect dimensions)
 	{
 		this(dimensions, DEFAULT_COLOR);
 	}
 
-	public Touchable(Rect dimensions, Scalar color)
+	protected Touchable(Rect dimensions, Scalar color)
 	{
 		this.dimensions = dimensions;
 		this.color = color;
 	}
 
 	//Setters
-	public void setDimensions(Rect dimensions)
+	protected void setDimensions(Rect dimensions)
 	{
 		this.dimensions = dimensions;
 	}
 
-	public void setColor(Scalar color)
+	protected void setColor(Scalar color)
 	{
 		this.color = color;
 	}
 
 	//Getters
-	public Rect getDimensions()
+	protected Rect getDimensions()
 	{
 		return this.dimensions;
 	}
 
-	public Scalar getColor()
+	protected Scalar getColor()
 	{
 		return this.color;
 	}
 
-	public Point getDetectionPoint()
+	protected Point getDetectionPoint()
 	{
 		return this.detectionPoint;
 	}
 
-	public void updateDetectionPoint(Mat filteredImage)
+	protected void updateDetectionPoint(Mat filteredImage)
 	{
-		//Local variables
-		Rect range = this.dimensions;
+		//Point of possible detection
 		Point farthestPoint = new Point();
+
+		//Control flow
 		boolean doneSearching = false;
 
-		//Starting in the lower right corner, search for non-background pixel
-		outerLoop: for (int y = range.y; y < range.y + range.height; y++)
+		//Search for non-background pixel
+		for (int y = dimensions.y; y < dimensions.y + dimensions.height; y++)
 		{
-			innerLoop: for (int x = range.x + range.width; x >= range.x; x--)
+			for (int x = dimensions.x + dimensions.width; x >= dimensions.x; x--)
 			{
 				//Get pixel at coordinate
 				double[] pixelColor = filteredImage.get(y, x);
@@ -71,68 +71,57 @@ public abstract class Touchable
 					farthestPoint.x = x;
 					farthestPoint.y = y;
 					doneSearching = true;
-				}
 
-				if (doneSearching)
-					break innerLoop;
+					break;
+				}
 			}
 			if (doneSearching)
-				break outerLoop;
+				break;
 		}
 
-		//No non-background pixel found
-		if (farthestPoint.x == range.x || farthestPoint.y == range.y || farthestPoint.x == 0 || farthestPoint.y == 0)
+		//No detections
+		if (farthestPoint.y == 0)
 			farthestPoint = null;
 
-		previousDetection = detectionPoint;
+		//Save detection
 		detectionPoint = farthestPoint;
 	}
 
-	protected boolean validateAction()
+	protected boolean hasDetection()
 	{
-		boolean detected = false, changed = false;
+		boolean isValid = false;
 
-		detected = (detectionPoint != null);
+		//Validate detection
+		if (detectionPoint != null)
+			isValid = true;
 
-		if (detected)
-			changed = (!detectionPoint.equals(previousDetection));
-
-		return detected && changed;
+		return isValid;
 	}
 
-	public Point calculateRelativePoint()
+	protected void drawOnto(Mat image)
 	{
-		Point relative = new Point();
-
-		return relative;
-	}
-
-	public void drawOnto(Mat image)
-	{
-		//Local Variables
-		Point upperLeft;
-		Point lowerRight;
-
-		//Determine state
-		upperLeft = new Point(dimensions.x, dimensions.y);
-		lowerRight = new Point(dimensions.x + dimensions.width, dimensions.y + dimensions.height);
-
 		if (image != null)
 		{
-			//Draw components
+			//Determine rectangle points
+			Point upperLeft = new Point(dimensions.x, dimensions.y);
+			Point lowerRight = new Point(dimensions.x + dimensions.width, dimensions.y + dimensions.height);
+
+			//Draw component
 			Imgproc.rectangle(image, upperLeft, lowerRight, color, 3);
 
+			//Draw circle around detection
 			drawDetection(image);
 		}
 	}
 
 	private void drawDetection(Mat image)
 	{
-		if (detectionPoint != null)
-			Imgproc.circle(image, detectionPoint, 10, new Scalar(255, 0, 255));
+		if (hasDetection())
+			Imgproc.circle(image, detectionPoint, 10, color);
 	}
 
-	abstract void performAction();
+	//Enforce method
+	protected abstract void performAction();
 
 	@Override
 	public String toString()
