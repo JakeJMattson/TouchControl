@@ -5,9 +5,9 @@ public abstract class Button extends Touchable
 	protected boolean isBeingClicked;
 
 	//Constructors
-	protected Button(Rect sliderDim, Scalar color)
+	protected Button(Rect dimensions, Scalar color)
 	{
-		super(sliderDim, color);
+		super(dimensions, color);
 		isBeingClicked = false;
 	}
 

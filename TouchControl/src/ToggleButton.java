@@ -6,9 +6,9 @@ public abstract class ToggleButton extends Button
 	private boolean hasSwitched;
 
 	//Constructors
-	protected ToggleButton(Rect sliderDim, Scalar color)
+	protected ToggleButton(Rect dimensions, Scalar color)
 	{
-		super(sliderDim, color);
+		super(dimensions, color);
 		isOn = false;
 		hasSwitched = false;
 	}
