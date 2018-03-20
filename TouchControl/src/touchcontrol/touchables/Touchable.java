@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
@@ -7,8 +9,8 @@ public abstract class Touchable
 	protected Scalar color;
 	protected Point detectionPoint;
 
-	protected final String TO_STRING_FORMAT = "   %-17s %-1s%n";
-	protected final static Scalar DEFAULT_COLOR = new Scalar(0, 255, 0);
+	private final String TO_STRING_FORMAT = "   %-17s %-1s%n";
+	protected static Scalar DEFAULT_COLOR = new Scalar(0, 255, 0);
 
 	//Constructors
 	protected Touchable(Rect dimensions)
@@ -23,33 +25,28 @@ public abstract class Touchable
 	}
 
 	//Setters
-	protected void setDimensions(Rect dimensions)
+	public void setDimensions(Rect dimensions)
 	{
 		this.dimensions = dimensions;
 	}
 
-	protected void setColor(Scalar color)
+	public void setColor(Scalar color)
 	{
 		this.color = color;
 	}
 
 	//Getters
-	protected Rect getDimensions()
+	public Rect getDimensions()
 	{
-		return this.dimensions;
+		return dimensions;
 	}
 
-	protected Scalar getColor()
+	public Scalar getColor()
 	{
-		return this.color;
+		return color;
 	}
 
-	protected Point getDetectionPoint()
-	{
-		return this.detectionPoint;
-	}
-
-	protected void updateDetectionPoint(Mat filteredImage)
+	public void updateDetectionPoint(Mat filteredImage)
 	{
 		//Point of possible detection
 		Point farthestPoint = new Point();
@@ -98,7 +95,7 @@ public abstract class Touchable
 		return isValid;
 	}
 
-	protected void drawOnto(Mat image)
+	public void drawOnto(Mat image)
 	{
 		if (image != null)
 		{
@@ -121,13 +118,20 @@ public abstract class Touchable
 	}
 
 	//Enforce method
-	protected abstract void performAction();
+	public abstract void performAction();
+
+	protected <T> String format(String label, T data)
+	{
+		//Generic toString formatter
+		return String.format(TO_STRING_FORMAT, label, data);
+	}
 
 	@Override
 	public String toString()
 	{
-		return this.getClass().getSimpleName() + " (" + super.toString() + "): \n"
-				+ String.format(TO_STRING_FORMAT, "Dimensions:", this.dimensions)
-				+ String.format(TO_STRING_FORMAT, "Color:", this.color);
+		return this.getClass().getSimpleName()
+				+ " (" + super.toString() + "):\n"
+				+ format("Dimensions:", dimensions)
+				+ format("Color:", color);
 	}
 }

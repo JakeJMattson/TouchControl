@@ -5,8 +5,14 @@
  *Camera should be rotated 180 degrees
  */
 
+package touchcontrol.demo;
+
 import org.opencv.core.*;
 import org.opencv.videoio.*;
+
+import touchcontrol.display.ImageDisplay;
+import touchcontrol.filter.ImageHandler;
+import touchcontrol.touchables.*;
 
 public class TouchController
 {
@@ -25,6 +31,7 @@ public class TouchController
 		capture();
 
 		//Force exit
+		System.out.print("Program terminated.");
 		System.exit(0);
 	}
 
@@ -37,15 +44,24 @@ public class TouchController
 		double cameraWidth = camera.get(Videoio.CAP_PROP_FRAME_WIDTH);
 		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 
+		//Do not start if no camera is available
+		if (cameraWidth == 0 || cameraHeight == 0)
+		{
+			System.out.println("No camera detected!");
+			return;
+		}
+
 		//Create display
 		ImageDisplay display = new ImageDisplay();
 
 		//Create image modifier
 		ImageHandler handler = new ImageHandler();
 
-		//Demo groups
-		TouchableGroup group = createBasicDemo(cameraWidth, cameraHeight);
-		//TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight);
+		//Create demo groups
+		//TouchableGroup group = createBasicDemo(cameraWidth, cameraHeight);
+		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight);
+
+		System.out.print(group);
 
 		//Create matrices
 		Mat cameraImage = new Mat();
@@ -96,6 +112,7 @@ public class TouchController
 		Point topLeft = new Point(padding, padding);
 		Point bottomRight = new Point(0.75 * cameraWidth - padding, cameraHeight - padding);
 		Rect mousePadRect = new Rect(topLeft, bottomRight);
+
 		topLeft = new Point(0.75 * cameraWidth, padding);
 		bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
 		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
@@ -124,8 +141,8 @@ public class TouchController
 			//Base positions
 			double x1 = (i + 0.0) / notes.length * cameraWidth;
 			double x2 = (i + 1.0) / notes.length * cameraWidth;
-			double y1 = (1 / 4.0) * cameraHeight;
-			double y2 = (3 / 4.0) * cameraHeight;
+			double y1 = 1 / 4.0 * cameraHeight;
+			double y2 = 3 / 4.0 * cameraHeight;
 
 			//Create component dimensions
 			int padding = 10;

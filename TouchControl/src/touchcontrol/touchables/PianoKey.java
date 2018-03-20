@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import javax.sound.midi.*;
 
 import org.opencv.core.*;
@@ -9,12 +11,12 @@ public class PianoKey extends Button
 	private MidiChannel channel;
 
 	//Constructors
-	protected PianoKey(Rect dimensions, char note)
+	public PianoKey(Rect dimensions, char note)
 	{
 		this(dimensions, DEFAULT_COLOR, note);
 	}
 
-	protected PianoKey(Rect dimensions, Scalar color, char note)
+	public PianoKey(Rect dimensions, Scalar color, char note)
 	{
 		super(dimensions, color);
 		init(note);
@@ -23,10 +25,10 @@ public class PianoKey extends Button
 	private void init(char note)
 	{
 		//Determine key to play based on note
-		this.key = determineKey(note);
+		key = determineKey(note);
 
-		//Set up environment to play audio
-		this.channel = setupMidi();
+		//Get channel to play note on
+		channel = setupMidi();
 	}
 
 	//Setters
@@ -51,6 +53,7 @@ public class PianoKey extends Button
 
 		try
 		{
+			//Set up environment to play audio
 			@SuppressWarnings("resource")
 			Synthesizer midiSynth = MidiSystem.getSynthesizer();
 			Instrument[] instr = midiSynth.getDefaultSoundbank().getInstruments();
@@ -68,8 +71,9 @@ public class PianoKey extends Button
 	}
 
 	@Override
-	protected void performAction()
+	public void performAction()
 	{
+		//Play note
 		if (isBeingClicked)
 		{
 			if (!hasPlayed)
@@ -90,12 +94,18 @@ public class PianoKey extends Button
 		Thread thread = new Thread(player);
 		thread.start();
 	}
+
+	@Override
+	public String toString()
+	{
+		return super.toString() + format("Key (note):", key);
+	}
 }
 
 class MusicPlayer implements Runnable
 {
-	private MidiChannel channel;
-	private int key;
+	private final MidiChannel channel;
+	private final int key;
 
 	//Constructors
 	public MusicPlayer(MidiChannel channel, int key)
@@ -104,6 +114,11 @@ class MusicPlayer implements Runnable
 		this.key = key;
 	}
 
+	//Setters
+
+	//Getters
+
+	//Class methods
 	@Override
 	public void run()
 	{

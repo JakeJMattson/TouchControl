@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import java.awt.*;
 
 import org.opencv.core.*;
@@ -5,10 +7,10 @@ import org.opencv.core.Point;
 
 public class MousePad extends Pad
 {
-	private Robot mouseMover;
-
 	private final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	private final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+
+	private Robot mouseMover;
 
 	//Constructors
 	public MousePad(Rect dimensions)
@@ -47,12 +49,12 @@ public class MousePad extends Pad
 
 	private Point adjustPoint()
 	{
-		//Local variables
-		Point adjustedPoint = new Point();
+		//Determine ratio
 		double widthAdjustment = SCREEN_WIDTH / dimensions.width;
 		double heightAdjustment = SCREEN_HEIGHT / dimensions.height;
 
 		//Adjust point
+		Point adjustedPoint = new Point();
 		adjustedPoint.x = detectionPoint.x * widthAdjustment;
 		adjustedPoint.y = detectionPoint.y * heightAdjustment;
 
@@ -80,7 +82,8 @@ public class MousePad extends Pad
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format(TO_STRING_FORMAT, "Screen height:", this.SCREEN_HEIGHT)
-				+ String.format(TO_STRING_FORMAT, "Screen width:", this.SCREEN_WIDTH);
+		return super.toString()
+				+ format("Screen height:", SCREEN_HEIGHT)
+				+ format("Screen width:", SCREEN_WIDTH);
 	}
 }

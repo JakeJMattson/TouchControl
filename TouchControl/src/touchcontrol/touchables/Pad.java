@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import org.opencv.core.*;
 
 public abstract class Pad extends Touchable

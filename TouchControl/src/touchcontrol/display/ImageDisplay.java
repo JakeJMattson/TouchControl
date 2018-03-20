@@ -1,3 +1,5 @@
+package touchcontrol.display;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -23,7 +25,7 @@ public class ImageDisplay extends JPanel
 	//Getters
 	public boolean isOpen()
 	{
-		return this.isOpen;
+		return isOpen;
 	}
 
 	//Class methods
@@ -86,7 +88,7 @@ public class ImageDisplay extends JPanel
 			g.drawImage(image, 0, 0, width, height, null);
 
 			//Set panel size
-			this.setPreferredSize(new Dimension(width, height));
+			setPreferredSize(new Dimension(width, height));
 		}
 	}
 }

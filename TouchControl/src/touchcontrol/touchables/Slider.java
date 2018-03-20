@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
@@ -8,8 +10,8 @@ public abstract class Slider extends Touchable
 	private boolean percentageVisible;
 	private double divisionSize;
 
-	private final static int DEFAULT_DIVISIONS = 100;
-	private final static boolean DEFAULT_VISIBILITY = true;
+	private static int DEFAULT_DIVISIONS = 100;
+	private static boolean DEFAULT_VISIBILITY = true;
 
 	//Constructors
 	protected Slider(Rect dimensions, Scalar color)
@@ -42,12 +44,12 @@ public abstract class Slider extends Touchable
 	//Getters
 	protected int getNumOfDivisions()
 	{
-		return this.numOfDivisions;
+		return numOfDivisions;
 	}
 
 	protected boolean isPercentageVisible()
 	{
-		return this.percentageVisible;
+		return percentageVisible;
 	}
 
 	//Class methods
@@ -68,16 +70,17 @@ public abstract class Slider extends Touchable
 	}
 
 	@Override
-	protected void updateDetectionPoint(Mat filteredImage)
+	public void updateDetectionPoint(Mat filteredImage)
 	{
+		//Update state
 		super.updateDetectionPoint(filteredImage);
 
 		if (hasDetection())
-			division = (int) Math.ceil(((detectionPoint.y - dimensions.y) / divisionSize));
+			division = (int) Math.ceil((detectionPoint.y - dimensions.y) / divisionSize);
 	}
 
 	@Override
-	protected void drawOnto(Mat image)
+	public void drawOnto(Mat image)
 	{
 		super.drawOnto(image);
 
@@ -96,7 +99,7 @@ public abstract class Slider extends Touchable
 		if (percentageVisible)
 		{
 			//Offset text to avoid collision with line and slider
-			int textShift = (numOfDivisions - division >= (numOfDivisions / 2.0)) ? 18 : -8;
+			int textShift = numOfDivisions - division >= numOfDivisions / 2.0 ? 18 : -8;
 
 			//Calculate percentage to display
 			int percent = (numOfDivisions - division) * (100 / numOfDivisions);
@@ -110,7 +113,8 @@ public abstract class Slider extends Touchable
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format(TO_STRING_FORMAT, "Divisions:", this.numOfDivisions)
-				+ String.format(TO_STRING_FORMAT, "Percent visible:", this.percentageVisible);
+		return super.toString()
+				+ format("Divisions:", numOfDivisions)
+				+ format("Percent visible:", percentageVisible);
 	}
 }

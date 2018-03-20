@@ -1,3 +1,5 @@
+package touchcontrol.filter;
+
 import java.awt.image.BufferedImage;
 
 import org.opencv.core.*;
@@ -8,8 +10,8 @@ public class ImageHandler
 	private Scalar backgroundColor;
 	private Scalar rangeColor;
 
-	private final static Scalar DEFAULT_BACKGROUND = new Scalar(0, 0, 0);
-	private final static Scalar DEFAULT_RANGE = new Scalar(175, 175, 175);
+	private static Scalar DEFAULT_BACKGROUND = new Scalar(0, 0, 0);
+	private static Scalar DEFAULT_RANGE = new Scalar(175, 175, 175);
 
 	//Constructors
 	public ImageHandler()

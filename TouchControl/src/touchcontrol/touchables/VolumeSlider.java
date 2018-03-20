@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import java.io.*;
 
 import org.opencv.core.*;

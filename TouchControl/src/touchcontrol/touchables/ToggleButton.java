@@ -1,3 +1,5 @@
+package touchcontrol.touchables;
+
 import org.opencv.core.*;
 
 public abstract class ToggleButton extends Button
@@ -19,12 +21,15 @@ public abstract class ToggleButton extends Button
 
 	//Class methods
 	@Override
-	protected void updateDetectionPoint(Mat filteredImage)
+	public void updateDetectionPoint(Mat filteredImage)
 	{
+		//Save previous state
 		boolean wasClicked = isBeingClicked;
 
+		//Update state
 		super.updateDetectionPoint(filteredImage);
 
+		//Toggle state
 		if (isBeingClicked && !wasClicked)
 		{
 			if (!hasSwitched)
@@ -40,6 +45,6 @@ public abstract class ToggleButton extends Button
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format(TO_STRING_FORMAT, "Toggled on:", isOn);
+		return super.toString() + format("Toggled on:", isOn);
 	}
 }
