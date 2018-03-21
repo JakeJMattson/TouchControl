@@ -13,11 +13,6 @@ public abstract class Touchable
 	protected static Scalar DEFAULT_COLOR = new Scalar(0, 255, 0);
 
 	//Constructors
-	protected Touchable(Rect dimensions)
-	{
-		this(dimensions, DEFAULT_COLOR);
-	}
-
 	protected Touchable(Rect dimensions, Scalar color)
 	{
 		this.dimensions = dimensions;

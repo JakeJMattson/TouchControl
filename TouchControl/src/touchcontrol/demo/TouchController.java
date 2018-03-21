@@ -1,7 +1,7 @@
 /*This project is designed to be a touch screen without the screen.
  *
  *Current configuration:
- *Background must be black
+ *Object to detect should be lighter than background (darker is better)
  *Camera should be rotated 180 degrees
  */
 
@@ -40,40 +40,46 @@ public class TouchController
 		//Start camera
 		VideoCapture camera = new VideoCapture(0);
 
-		//Get camera properties
-		double cameraWidth = camera.get(Videoio.CAP_PROP_FRAME_WIDTH);
-		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
-
 		//Do not start if no camera is available
-		if (cameraWidth == 0 || cameraHeight == 0)
+		if (!camera.isOpened())
 		{
 			System.out.println("No camera detected!");
 			return;
 		}
 
-		//Create display
-		ImageDisplay display = new ImageDisplay();
+		//Get camera properties
+		double cameraWidth = camera.get(Videoio.CAP_PROP_FRAME_WIDTH);
+		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 
-		//Create image modifier
-		ImageHandler handler = new ImageHandler();
+		//Create display
+		//ImageDisplay filteredDisplay = new ImageDisplay();
+		ImageDisplay rawDisplay = new ImageDisplay();
 
 		//Create demo groups
+		//TouchableGroup group = new TouchableGroup();
 		//TouchableGroup group = createBasicDemo(cameraWidth, cameraHeight);
 		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight);
 
+		//Print objects in group
 		System.out.print(group);
 
 		//Create matrices
 		Mat cameraImage = new Mat();
 		Mat filteredImage = new Mat();
 
-		//Wait for camera to get images before proceeding
-		do
-			camera.read(cameraImage);
-		while (cameraImage.empty());
+		//Create image modifier
+		ImageHandler handler = new ImageHandler();
 
-		//While frame is open
-		while (display.isOpen())
+		//Give sample background images to subtractor
+		for (int i = 0; i < 5; i++)
+		{
+			camera.read(cameraImage);
+			Core.flip(cameraImage, cameraImage, -1);
+			handler.trainSubtractor(cameraImage);
+		}
+
+		//While frame is open and camera is detected
+		while (rawDisplay.isOpen() && camera.isOpened())
 		{
 			//Read image from camera
 			camera.read(cameraImage);
@@ -94,7 +100,8 @@ public class TouchController
 			group.performAction();
 
 			//Display components
-			display.showImage(handler.convertMatToImage(cameraImage));
+			//filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
+			rawDisplay.showImage(handler.convertMatToImage(cameraImage));
 
 			//Dispose matrices
 			cameraImage.release();
@@ -139,8 +146,8 @@ public class TouchController
 		for (int i = 0; i < notes.length; i++)
 		{
 			//Base positions
-			double x1 = (i + 0.0) / notes.length * cameraWidth;
-			double x2 = (i + 1.0) / notes.length * cameraWidth;
+			double x1 = (double)(i) / notes.length * cameraWidth;
+			double x2 = (double)(i + 1) / notes.length * cameraWidth;
 			double y1 = 1 / 4.0 * cameraHeight;
 			double y2 = 3 / 4.0 * cameraHeight;
 

@@ -4,78 +4,49 @@ import java.awt.image.BufferedImage;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.video.*;
 
 public class ImageHandler
 {
-	private Scalar backgroundColor;
-	private Scalar rangeColor;
-
-	private static Scalar DEFAULT_BACKGROUND = new Scalar(0, 0, 0);
-	private static Scalar DEFAULT_RANGE = new Scalar(175, 175, 175);
+	private final BackgroundSubtractorMOG2 subtractor;
 
 	//Constructors
 	public ImageHandler()
 	{
-		this(DEFAULT_BACKGROUND, DEFAULT_RANGE);
-	}
-
-	public ImageHandler(Scalar backgroundColor, Scalar rangeColor)
-	{
-		this.backgroundColor = backgroundColor;
-		this.rangeColor = rangeColor;
+		//Create subtractor
+		subtractor = Video.createBackgroundSubtractorMOG2();
 	}
 
 	//Setters
-	public void setBackgroundColor(Scalar backgroundColor)
-	{
-		this.backgroundColor = backgroundColor;
-	}
-
-	public void setRangeColor(Scalar rangeColor)
-	{
-		this.rangeColor = rangeColor;
-	}
-
-	public void setColors(Scalar backgroundColor, Scalar rangeColor)
-	{
-		this.backgroundColor = backgroundColor;
-		this.rangeColor = rangeColor;
-	}
 
 	//Getters
 
 	//Class methods
+	public void trainSubtractor(Mat image)
+	{
+		subtractor.apply(image, new Mat(), 0.5);
+	}
+
 	public Mat filterImage(Mat image)
 	{
-		//Create matrices
-		Mat hsvImage = new Mat();
-		Mat grayImage = new Mat();
-		Mat filteredImage = new Mat();
+		//Filters
+		Scalar backgroundColor = new Scalar(0, 0, 0);
+		Scalar rangeColor = new Scalar(75, 75, 75);
 
-		//Filter image
-		Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
-		Core.inRange(image, backgroundColor, rangeColor, hsvImage);
-		filteredImage = filterNoise(hsvImage);
+		//Create matricies
+		Mat filteredImage = new Mat();
+		Mat background = new Mat();
+
+		//Get background model
+		subtractor.getBackgroundImage(background);
+
+		//Remove background
+		Core.subtract(image, background, filteredImage);
+
+		//Apply filters
+		Core.inRange(filteredImage, backgroundColor, rangeColor, filteredImage);
 
 		return filteredImage;
-	}
-
-	private Mat filterNoise(Mat image)
-	{
-		//Create matrix
-		Mat modifiedImage = new Mat();
-
-		//Remove noise from image
-		Imgproc.erode(image, modifiedImage, createStructuringElement(new Size(7, 7)));
-		Imgproc.dilate(modifiedImage, modifiedImage, createStructuringElement(new Size(2, 2)));
-
-		return modifiedImage;
-	}
-
-	private Mat createStructuringElement(Size size)
-	{
-		//Create matrix
-		return Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, size);
 	}
 
 	public BufferedImage convertMatToImage(Mat matrix)
