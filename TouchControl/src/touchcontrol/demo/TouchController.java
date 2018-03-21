@@ -146,8 +146,8 @@ public class TouchController
 		for (int i = 0; i < notes.length; i++)
 		{
 			//Base positions
-			double x1 = (double)(i) / notes.length * cameraWidth;
-			double x2 = (double)(i + 1) / notes.length * cameraWidth;
+			double x1 = (double) i / notes.length * cameraWidth;
+			double x2 = (double) (i + 1) / notes.length * cameraWidth;
 			double y1 = 1 / 4.0 * cameraHeight;
 			double y2 = 3 / 4.0 * cameraHeight;
 

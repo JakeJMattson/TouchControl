@@ -41,7 +41,7 @@ public class VolumeSlider extends Slider
 	private void setVolume(int volume)
 	{
 		//Nircmd allows volume changing
-		File nircmd = new File("nircmd.exe");
+		File nircmd = new File("./nircmd/nircmd.exe");
 		String nircmdPath = nircmd.getAbsolutePath();
 
 		//Convert volume to nircmd standard

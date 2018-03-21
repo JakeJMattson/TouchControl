@@ -104,8 +104,13 @@ public abstract class Slider extends Touchable
 			//Calculate percentage to display
 			int percent = (numOfDivisions - division) * (100 / numOfDivisions);
 
+			String unit = "";
+
+			if (numOfDivisions == 100)
+				unit = "%";
+
 			//Draw text
-			Imgproc.putText(rawImage, percent + "%", new Point(dimensions.x + 5, linePosition + textShift),
+			Imgproc.putText(rawImage, percent + unit, new Point(dimensions.x + 5, linePosition + textShift),
 					Core.FONT_HERSHEY_COMPLEX, 0.5, color);
 		}
 	}

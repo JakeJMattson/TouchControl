@@ -31,7 +31,7 @@ public class ImageHandler
 	{
 		//Filters
 		Scalar backgroundColor = new Scalar(0, 0, 0);
-		Scalar rangeColor = new Scalar(75, 75, 75);
+		Scalar rangeColor = new Scalar(128, 128, 128);
 
 		//Create matricies
 		Mat filteredImage = new Mat();
