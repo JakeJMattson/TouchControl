@@ -102,6 +102,7 @@ public class PianoKey extends Button
 	}
 }
 
+//Thread class to play note
 class MusicPlayer implements Runnable
 {
 	private final MidiChannel channel;

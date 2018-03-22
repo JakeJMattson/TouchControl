@@ -10,7 +10,7 @@ package touchcontrol.demo;
 import org.opencv.core.*;
 import org.opencv.videoio.*;
 
-import touchcontrol.display.ImageDisplay;
+import touchcontrol.display.ImageFrame;
 import touchcontrol.filter.ImageHandler;
 import touchcontrol.touchables.*;
 
@@ -52,8 +52,8 @@ public class TouchController
 		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 
 		//Create display
-		//ImageDisplay filteredDisplay = new ImageDisplay();
-		ImageDisplay rawDisplay = new ImageDisplay();
+		ImageFrame filteredDisplay = new ImageFrame();
+		ImageFrame rawDisplay = new ImageFrame();
 
 		//Create demo groups
 		//TouchableGroup group = new TouchableGroup();
@@ -63,24 +63,25 @@ public class TouchController
 		//Print objects in group
 		System.out.print(group);
 
-		//Create matrices
-		Mat cameraImage = new Mat();
-		Mat filteredImage = new Mat();
-
 		//Create image modifier
 		ImageHandler handler = new ImageHandler();
 
 		//Give sample background images to subtractor
 		for (int i = 0; i < 5; i++)
 		{
-			camera.read(cameraImage);
-			Core.flip(cameraImage, cameraImage, -1);
-			handler.trainSubtractor(cameraImage);
+			Mat background = new Mat();
+			camera.read(background);
+			Core.flip(background, background, -1);
+			handler.trainSubtractor(background);
 		}
 
 		//While frame is open and camera is detected
 		while (rawDisplay.isOpen() && camera.isOpened())
 		{
+			//Create matrices
+			Mat cameraImage = new Mat();
+			Mat filteredImage = new Mat();
+
 			//Read image from camera
 			camera.read(cameraImage);
 
@@ -100,12 +101,8 @@ public class TouchController
 			group.performAction();
 
 			//Display components
-			//filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
+			filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
 			rawDisplay.showImage(handler.convertMatToImage(cameraImage));
-
-			//Dispose matrices
-			cameraImage.release();
-			filteredImage.release();
 		}
 
 		//Return camera control to OS

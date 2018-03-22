@@ -24,6 +24,7 @@ public class ImageHandler
 	//Class methods
 	public void trainSubtractor(Mat image)
 	{
+		//Average samples to create background model
 		subtractor.apply(image, new Mat(), 0.5);
 	}
 

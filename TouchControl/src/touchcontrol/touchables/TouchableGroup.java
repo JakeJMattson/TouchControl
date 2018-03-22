@@ -13,6 +13,7 @@ public class TouchableGroup
 {
 	ArrayList<Touchable> components;
 
+	//Constructors
 	public TouchableGroup(Touchable...components)
 	{
 		this.components = new ArrayList<>();
@@ -23,6 +24,32 @@ public class TouchableGroup
 		checkCollision();
 	}
 
+	//Setters
+	public void setColor(Scalar color)
+	{
+		for (Touchable component : components)
+			component.setColor(color);
+	}
+
+	public void addComponent(Touchable component)
+	{
+		components.add(component);
+
+		checkCollision();
+	}
+
+	public void removeComponent(Touchable component)
+	{
+		components.remove(component);
+	}
+
+	//Getters
+	public ArrayList<Touchable> getComponents()
+	{
+		return components;
+	}
+
+	//Class actions
 	public void updateDetectionPoint(Mat filteredImage)
 	{
 		for (Touchable component : components)
@@ -39,12 +66,6 @@ public class TouchableGroup
 	{
 		for (Touchable component : components)
 			component.performAction();
-	}
-
-	public void setColor(Scalar color)
-	{
-		for (Touchable component : components)
-			component.setColor(color);
 	}
 
 	@Override
@@ -78,22 +99,5 @@ public class TouchableGroup
 					System.out.println("Touchable colision warning in " + super.toString() +
 							" between component " + i + " and component " + j);
 			}
-	}
-
-	public void addComponent(Touchable component)
-	{
-		components.add(component);
-
-		checkCollision();
-	}
-
-	public void removeComponent(Touchable component)
-	{
-		components.remove(component);
-	}
-
-	public ArrayList<Touchable> getComponents()
-	{
-		return components;
 	}
 }
