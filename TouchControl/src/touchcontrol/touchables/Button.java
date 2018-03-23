@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Abstract Button - contains general (clickable) button behavior
+ */
+
 package touchcontrol.touchables;
 
 import org.opencv.core.*;

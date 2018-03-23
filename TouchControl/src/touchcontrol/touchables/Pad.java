@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Abstract Pad - contains general pad behavior
+ */
+
 package touchcontrol.touchables;
 
 import org.opencv.core.*;

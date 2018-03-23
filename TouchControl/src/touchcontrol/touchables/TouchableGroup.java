@@ -1,6 +1,6 @@
-/*
- * Component grouping can be used to apply the same function
- * over many Touchable objects
+/**
+ * Class Description:
+ * Apply the same function over many Touchable objects
  */
 
 package touchcontrol.touchables;

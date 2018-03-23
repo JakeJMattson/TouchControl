@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Frame - GUI container for components (holds ImagePanel)
+ */
+
 package touchcontrol.display;
 
 import java.awt.event.*;

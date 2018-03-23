@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Abstract Touchable - contains fundamental functions for a Touchable object of any kind
+ */
+
 package touchcontrol.touchables;
 
 import org.opencv.core.*;

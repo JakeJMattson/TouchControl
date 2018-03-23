@@ -1,3 +1,9 @@
+/**
+ * Class Description:
+ * Demo Pad - example application of abstract pad
+ * Controls mouse pointer position
+ */
+
 package touchcontrol.touchables;
 
 import java.awt.*;

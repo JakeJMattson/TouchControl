@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Handler - performs image (matrix) operations such as filtering and converting
+ */
+
 package touchcontrol.filter;
 
 import java.awt.image.BufferedImage;

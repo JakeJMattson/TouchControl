@@ -1,8 +1,13 @@
-/*This project is designed to be a touch screen without the screen.
+/**
+ * Project Description:
+ * This project is designed to be a touch screen without the screen.
  *
- *Current configuration:
- *Object to detect should be lighter than background (darker is better)
- *Camera should be rotated 180 degrees
+ * Current configuration:
+ * Object to detect should be lighter than background (darker is better)
+ * Camera should be rotated 180 degrees
+ *
+ * Class Description:
+ * Demo (main) class to run functions
  */
 
 package touchcontrol.demo;

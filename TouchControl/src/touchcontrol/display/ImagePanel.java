@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Panel - holds image to display in GUI
+ */
+
 package touchcontrol.display;
 
 import java.awt.*;

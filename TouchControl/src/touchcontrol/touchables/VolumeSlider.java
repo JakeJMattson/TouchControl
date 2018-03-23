@@ -1,3 +1,9 @@
+/**
+ * Class Description:
+ * Demo Slider - example application of abstract slider
+ * Controls system volume
+ */
+
 package touchcontrol.touchables;
 
 import java.io.*;

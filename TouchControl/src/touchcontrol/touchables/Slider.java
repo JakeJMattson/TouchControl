@@ -1,3 +1,8 @@
+/**
+ * Class Description:
+ * Abstract Slider - contains general slider behavior
+ */
+
 package touchcontrol.touchables;
 
 import org.opencv.core.*;

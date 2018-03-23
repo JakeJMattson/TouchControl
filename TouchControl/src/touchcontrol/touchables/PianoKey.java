@@ -1,3 +1,9 @@
+/**
+ * Class Description:
+ * Demo Button - example application of abstract button
+ * Plays note when touched
+ */
+
 package touchcontrol.touchables;
 
 import javax.sound.midi.*;
@@ -28,7 +34,7 @@ public class PianoKey extends Button
 		key = determineKey(note);
 
 		//Get channel to play note on
-		channel = setupMidi();
+		setupMidi();
 	}
 
 	//Setters
@@ -47,10 +53,8 @@ public class PianoKey extends Button
 		return key;
 	}
 
-	private MidiChannel setupMidi()
+	private void setupMidi()
 	{
-		MidiChannel channel = null;
-
 		try
 		{
 			//Set up environment to play audio
@@ -66,8 +70,6 @@ public class PianoKey extends Button
 		{
 			e.printStackTrace();
 		}
-
-		return channel;
 	}
 
 	@Override
