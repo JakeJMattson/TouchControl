@@ -92,53 +92,33 @@ public class PianoKey extends Button
 	private void playNote()
 	{
 		//Create thread to play note
-		MusicPlayer player = new MusicPlayer(channel, key);
-		Thread thread = new Thread(player);
-		thread.start();
+		new Thread()
+		{
+			@Override
+			public void run()
+			{
+				//Start playing note
+				channel.noteOn(key, 100);
+
+				try
+				{
+					//Duration of note
+					Thread.sleep(1000);
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+
+				//Stop playing note
+				channel.noteOff(key);
+			}
+		}.start();
 	}
 
 	@Override
 	public String toString()
 	{
 		return super.toString() + format("Key (note):", key);
-	}
-}
-
-//Thread class to play note
-class MusicPlayer implements Runnable
-{
-	private final MidiChannel channel;
-	private final int key;
-
-	//Constructors
-	public MusicPlayer(MidiChannel channel, int key)
-	{
-		this.channel = channel;
-		this.key = key;
-	}
-
-	//Setters
-
-	//Getters
-
-	//Class methods
-	@Override
-	public void run()
-	{
-		//Start playing note
-		channel.noteOn(key, 100);
-
-		try
-		{
-			//Duration of note
-			Thread.sleep(1000);
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-
-		//Stop playing note
-		channel.noteOff(key);
 	}
 }

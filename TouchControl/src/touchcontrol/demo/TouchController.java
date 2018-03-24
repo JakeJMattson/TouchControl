@@ -12,12 +12,15 @@
 
 package touchcontrol.demo;
 
+import javax.swing.JOptionPane;
+
 import org.opencv.core.*;
 import org.opencv.videoio.*;
 
 import touchcontrol.display.ImageFrame;
 import touchcontrol.filter.ImageHandler;
 import touchcontrol.touchables.*;
+import touchcontrol.utils.LibLoader;
 
 public class TouchController
 {
@@ -30,10 +33,11 @@ public class TouchController
 	private void start()
 	{
 		//Load OpenCV
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		boolean isLoaded = LibLoader.loadLibrary(LibLoader.IDE);
 
 		//Run program
-		capture();
+		if (isLoaded)
+			capture();
 
 		//Force exit
 		System.out.print("Program terminated.");
@@ -48,7 +52,7 @@ public class TouchController
 		//Do not start if no camera is available
 		if (!camera.isOpened())
 		{
-			System.out.println("No camera detected!");
+			JOptionPane.showMessageDialog(null, "No camera detected!", "Fatal Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
@@ -114,6 +118,7 @@ public class TouchController
 		camera.release();
 	}
 
+	@SuppressWarnings("unused")
 	private TouchableGroup createBasicDemo(double cameraWidth, double cameraHeight)
 	{
 		//Create component dimensions
