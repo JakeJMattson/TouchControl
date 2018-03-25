@@ -3,12 +3,14 @@ Touch screen without the screen. Position a camera above a dark surface. Move yo
 Current demos include: MousePad, VolumeSlider, and PianoKey.
 
 ## Prerequisites
-### Operating Systems supported
+### Operating Systems Supported
 * Windows
+* Mac OS
 ### Java Development Kit (minimum)
 * [Java SE Development Kit 9](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)
 ### Libraries
 * [OpenCV 3.4.1](https://opencv.org/releases.html)
 
 ## Acknowledgments
+* [Installing OpenCV for Java](https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst)
 * [NirCmd](http://www.nirsoft.net/utils/nircmd.html)
