@@ -14,13 +14,12 @@ import javax.swing.JFrame;
 public class ImageFrame extends JFrame
 {
 	private boolean isOpen;
-	private final ImagePanel imagePanel;
+	private ImagePanel imagePanel;
 
 	//Constructors
 	public ImageFrame()
 	{
 		super();
-		imagePanel = new ImagePanel();
 		buildGUI();
 	}
 
@@ -38,7 +37,8 @@ public class ImageFrame extends JFrame
 		//Create frame
 		setTitle("Touch Control");
 		addWindowListener(createWindowListener());
-		this.add(imagePanel);
+		imagePanel = new ImagePanel();
+		add(imagePanel);
 		setVisible(true);
 		isOpen = true;
 	}

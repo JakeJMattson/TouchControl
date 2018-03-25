@@ -61,7 +61,7 @@ public class TouchController
 		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 
 		//Create display
-		ImageFrame filteredDisplay = new ImageFrame();
+		//ImageFrame filteredDisplay = new ImageFrame();
 		ImageFrame rawDisplay = new ImageFrame();
 
 		//Create demo groups
@@ -75,12 +75,18 @@ public class TouchController
 		//Create image modifier
 		ImageHandler handler = new ImageHandler();
 
-		//Give sample background images to subtractor
 		for (int i = 0; i < 5; i++)
 		{
+			//Create matrix
 			Mat background = new Mat();
+
+			//Read image from camera
 			camera.read(background);
+
+			//Flip image 180 degrees
 			Core.flip(background, background, -1);
+
+			//Give sample background image to subtractor
 			handler.trainSubtractor(background);
 		}
 
@@ -110,7 +116,7 @@ public class TouchController
 			group.performAction();
 
 			//Display components
-			filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
+			//filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
 			rawDisplay.showImage(handler.convertMatToImage(cameraImage));
 		}
 
@@ -121,12 +127,16 @@ public class TouchController
 	@SuppressWarnings("unused")
 	private TouchableGroup createBasicDemo(double cameraWidth, double cameraHeight)
 	{
-		//Create component dimensions
+		//Dimension variables
 		int padding = 10;
-		Point topLeft = new Point(padding, padding);
-		Point bottomRight = new Point(0.75 * cameraWidth - padding, cameraHeight - padding);
+		Point topLeft, bottomRight;
+
+		//Create component dimensions
+		topLeft = new Point(padding, padding);
+		bottomRight = new Point(0.75 * cameraWidth - padding, cameraHeight - padding);
 		Rect mousePadRect = new Rect(topLeft, bottomRight);
 
+		//Create component dimensions
 		topLeft = new Point(0.75 * cameraWidth, padding);
 		bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
 		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
