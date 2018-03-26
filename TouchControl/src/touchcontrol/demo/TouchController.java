@@ -32,19 +32,25 @@ public class TouchController
 
 	private void start()
 	{
+		//Debug mode switch
+		boolean debugMode = true;
+
 		//Load OpenCV
 		boolean isLoaded = LibLoader.loadLibrary(LibLoader.IDE);
 
 		//Run program
 		if (isLoaded)
-			capture();
+			capture(debugMode);
+		else
+			JOptionPane.showMessageDialog(null, "Failed to load OpenCV!", "Fatal Error", JOptionPane.ERROR_MESSAGE);
 
 		//Force exit
 		System.out.print("Program terminated.");
 		System.exit(0);
 	}
 
-	private void capture()
+	@SuppressWarnings("null")
+	private void capture(boolean debugMode)
 	{
 		//Start camera
 		VideoCapture camera = new VideoCapture(0);
@@ -61,8 +67,11 @@ public class TouchController
 		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 
 		//Create display
-		//ImageFrame filteredDisplay = new ImageFrame();
 		ImageFrame rawDisplay = new ImageFrame();
+		ImageFrame filteredDisplay = null;
+
+		if (debugMode)
+			filteredDisplay = new ImageFrame();
 
 		//Create demo groups
 		//TouchableGroup group = new TouchableGroup();
@@ -70,7 +79,8 @@ public class TouchController
 		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight);
 
 		//Print objects in group
-		System.out.print(group);
+		if (debugMode)
+			System.out.print(group);
 
 		//Create image modifier
 		ImageHandler handler = new ImageHandler();
@@ -116,8 +126,10 @@ public class TouchController
 			group.performAction();
 
 			//Display components
-			//filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
 			rawDisplay.showImage(handler.convertMatToImage(cameraImage));
+
+			if (debugMode)
+				filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
 		}
 
 		//Return camera control to OS

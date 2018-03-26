@@ -14,7 +14,9 @@ public abstract class Touchable
 	protected Scalar color;
 	protected Point detectionPoint;
 
-	private final String TO_STRING_FORMAT = "   %-17s %-1s%n";
+	//Class constants
+	private static final String NEWLINE = System.lineSeparator();
+	private static final String TO_STRING_FORMAT = "   %-17s %-1s%n";
 	protected static Scalar DEFAULT_COLOR = new Scalar(0, 255, 0);
 
 	//Constructors
@@ -63,12 +65,12 @@ public abstract class Touchable
 				double[] pixelColor = filteredImage.get(y, x);
 
 				//Check pixel for non-background coloring
-				if (pixelColor[0] != 255.0)
+				if (pixelColor[0] == 0.0)
 				{
 					farthestPoint.x = x;
 					farthestPoint.y = y;
-					doneSearching = true;
 
+					doneSearching = true;
 					break;
 				}
 			}
@@ -130,7 +132,7 @@ public abstract class Touchable
 	public String toString()
 	{
 		return this.getClass().getSimpleName()
-				+ " (" + super.toString() + "):\n"
+				+ " (" + super.toString() + "):" + NEWLINE
 				+ format("Dimensions:", dimensions)
 				+ format("Color:", color);
 	}

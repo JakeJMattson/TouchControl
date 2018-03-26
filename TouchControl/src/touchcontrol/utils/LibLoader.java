@@ -13,87 +13,101 @@ import org.opencv.core.Core;
 
 public final class LibLoader
 {
-	//Class constants (load types)
+	//Class constants
+	//(load types)
 	public static final int IDE = 0;
 	public static final int JAR = 1;
+
+	//(String constants)
+	private static final String NEWLINE = System.lineSeparator();
+	private static final String INTERNAL_ERROR = "Internal Error";
+	private static final String USER_ERROR = "Try that again...";
 
 	public static boolean loadLibrary(int loadType)
 	{
 		//Control flow
 		boolean isSuccessful = false;
 
-		try
+		if (loadType == IDE)
 		{
-			if (loadType == IDE)
-			{
-				//Load OpenCV from user library
-				System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+			//Load library from user library
+			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-				//Mark load as successful
-				isSuccessful = true;
-			}
-			else if (loadType == JAR)
-			{
-				//Path to library
-				String resourcePath;
-
-				//File to store OpenCV path
-				File pathFile = new File("OpenCV Path.txt");
-
-				if (pathFile.exists())
-					//Get path from file
-					resourcePath = readFile(pathFile);
-				else
-				{
-					//Get path
-					resourcePath = getLibraryPath();
-
-					//Create file with path
-					if (resourcePath != null)
-						createFile(pathFile, resourcePath);
-				}
-
-				if (resourcePath != null)
-				{
-					//Load resource from file
-					loadResource(resourcePath);
-
-					//Mark load as successful
-					isSuccessful = true;
-				}
-			}
+			//Mark load as successful
+			isSuccessful = true;
 		}
-		catch (Exception e)
+		else if (loadType == JAR)
 		{
-			//Report error
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Failed to load OpenCV!", "Fatal Error", JOptionPane.ERROR_MESSAGE);
+			//Path to library
+			String libraryPath;
+
+			//File to store library path
+			File pathFile = new File("Library Path.txt");
+
+			if (pathFile.exists())
+				//Get path from file
+				libraryPath = readFile(pathFile);
+			else
+			{
+				//Get path to library
+				libraryPath = getLibraryPath();
+
+				//Create file with path
+				if (libraryPath != null)
+					createFile(pathFile, libraryPath);
+			}
+
+			if (libraryPath != null)
+				//Load library from file
+				isSuccessful = load(libraryPath);
 		}
+		else
+			System.out.println("Unrecognized load type!");
 
 		return isSuccessful;
 	}
 
-	private static String readFile(File pathFile) throws IOException
+	private static String readFile(File pathFile)
 	{
-		//Create reader
-		BufferedReader reader = new BufferedReader(new FileReader(pathFile));
+		//Path to library
+		String libraryPath = null;
+		
+		try
+		{
+			//Create reader
+			BufferedReader reader = new BufferedReader(new FileReader(pathFile));
 
-		//Get path from file
-		String opencvPath = reader.readLine().trim();
+			//Get path from file
+			libraryPath = reader.readLine().trim();
+			
+			//Close reader
+			reader.close();
+		}
+		catch (IOException e)
+		{
+			//Construct error
+			String title = INTERNAL_ERROR + " (BufferedReader Error)";
+			String message = "Failed read path from file:" + NEWLINE
+					+ pathFile.getAbsolutePath();
 
-		//Close reader
-		reader.close();
+			displayError(title, message, e);
+		}
 
-		return opencvPath;
+		return libraryPath;
 	}
 
 	private static String getLibraryPath()
 	{
-		//Get OpenCV path from user
+		String libraryPath = null;
+
+		//Get library path from user
 		String opencvPath = createChooser();
 
+		if (opencvPath == null)
+			return libraryPath;
+
 		//OS-specific variables
-		String libraryPath = null, javaDir = "", extension = "";
+		String javaDir = "", extension = "";
 		boolean isValidOS = false;
 
 		//Get name of operating system
@@ -127,18 +141,57 @@ public final class LibLoader
 			//Mark OS as valid
 			isValidOS = true;
 		}
+		else if (osName.contains("nix") || osName.contains("nux") || osName.contains("aix"))
+		{
+			//Get library path
+			javaDir = opencvPath + "/build/lib/";
+
+			//Set OS-specific library extension
+			extension = ".so";
+
+			//Mark OS as valid
+			isValidOS = true;
+		}
 		else
-			JOptionPane.showMessageDialog(null, "Unsupported OS!", "Fatal Error", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Unsupported Operating System", "Sorry...",
+					JOptionPane.INFORMATION_MESSAGE);
 
 		if (isValidOS)
 		{
-			//Get library file
-			File[] resources = new File(javaDir).listFiles();
+			File directory = new File(javaDir);
 
-			//Get file with extension
-			for (File file : resources)
-				if (file.getName().endsWith(extension))
-					libraryPath = file.getAbsolutePath();
+			if (directory.exists())
+			{
+				//Get all files in directory
+				File[] files = directory.listFiles();
+
+				//Find library file by extension
+				for (File file : files)
+					if (file.getName().endsWith(extension))
+						libraryPath = file.getAbsolutePath();
+				
+				if (libraryPath == null)
+				{
+					//Construct error
+					String title = USER_ERROR + " (Selection Error)";
+					String message = 
+							"Could not find library file in directory:" + NEWLINE
+							+ directory.getAbsolutePath() + NEWLINE 
+							+ "that contained the proper extension ("
+							+ extension + ")";
+					
+					displayError(title, message, new Exception());
+				}
+			}
+			else
+			{
+				//Construct error
+				String title = USER_ERROR + " (Selection Error)";
+				String message = "Failed to find directory:" + NEWLINE
+						+ directory.getAbsolutePath();
+				
+				displayError(title, message, new Exception());
+			}
 		}
 
 		return libraryPath;
@@ -150,52 +203,107 @@ public final class LibLoader
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setDialogTitle("Select the OpenCV folder");
+		
+		//Display file chooser
+		int buttonPressed = chooser.showOpenDialog(null);
 
-		//Ask for directory until one is selected
-		while (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
-			;
+		//Get selected path
+		String path = null;
+		if (buttonPressed == JFileChooser.APPROVE_OPTION)
+			path = chooser.getSelectedFile().getAbsolutePath();
 
-		//Return selected path
-		return chooser.getSelectedFile().getAbsolutePath();
+		return path;
 	}
 
-	private static void createFile(File pathFile, String resourcePath)
-			throws FileNotFoundException, UnsupportedEncodingException
+	private static void createFile(File pathFile, String libraryPath)
 	{
-		//Create file writer
-		PrintWriter writer = new PrintWriter(pathFile, "UTF-8");
+		try
+		{
+			//Create file writer
+			PrintWriter writer = new PrintWriter(pathFile, "UTF-8");
 
-		//Write path to file
-		writer.println(resourcePath);
+			//Write path to file
+			writer.println(libraryPath);
 
-		//Save file and stop writing
-		writer.close();
+			//Save file and stop writing
+			writer.close();
+		}
+		catch (FileNotFoundException | UnsupportedEncodingException e)
+		{
+			//Construct error
+			String title = INTERNAL_ERROR + " (PrintWriter Error)";
+			String message = "Failed write path to file:" + NEWLINE
+					+ pathFile.getAbsolutePath();
+			
+			displayError(title, message, e);
+		}
 	}
 
-	private static String loadResource(String resourcePath) throws IOException
+	private static boolean load(String libraryPath)
 	{
-		//Get resource file
-		File resource = new File(resourcePath);
+		//Get library file
+		File libraryFile = new File(libraryPath);
+		
+		File tempFile = null;
+		try
+		{
+			//Create temporary file
+			String name = libraryFile.getName();
+			String extension = name.substring(name.indexOf("."));
+			tempFile = File.createTempFile("lib", extension);
+		}
+		catch (IOException e)
+		{
+			//Construct error
+			String title = INTERNAL_ERROR + " (File Error)";
+			String message = "Failed to create temporary file!";
 
-		//Create temporary file
-		String name = resource.getName();
-		String extension = name.substring(name.indexOf("."));
-		File fileOut = File.createTempFile("lib", extension);
+			displayError(title, message, e);
 
-		//Create streams
-		FileInputStream in = new FileInputStream(resource.getAbsolutePath());
-		OutputStream out = new FileOutputStream(fileOut);
+			//Stop processing
+			return false;
+		}
+		
+		try
+		{
+			//Create streams
+			FileInputStream in = new FileInputStream(libraryFile.getAbsolutePath());
+			OutputStream out = new FileOutputStream(tempFile);
 
-		//Write resource data to file
-		in.transferTo(out);
+			//Write library data to file
+			in.transferTo(out);
 
-		//Close streams
-		in.close();
-		out.close();
+			//Close streams
+			in.close();
+			out.close();
+		}
+		catch (IOException e)
+		{
+			//Construct error
+			String title = INTERNAL_ERROR + " (Stream Error)";
+			String message = "Failed to transfer library ("
+					+ libraryFile.getAbsolutePath()
+					+ ") to temporary file ("
+					+ tempFile.getAbsolutePath()
+					+ ")";
+
+			displayError(title, message, e);
+
+			//Stop processing
+			return false;
+		}
 
 		//Load library
-		System.load(fileOut.toString());
+		System.load(tempFile.toString());
 
-		return fileOut.toString();
+		//Assume successful load if statement reached
+		return true;
+	}
+
+	private static void displayError(String title, String message, Exception e)
+	{
+		//Create dialog box
+		JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
+		e.printStackTrace();
 	}
 }
