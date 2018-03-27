@@ -1,5 +1,5 @@
 # TouchController
-This project is intended to be a touch screen without the screen by using only a camera and some code.
+This project is intended to be a touch screen without the screen by using only a camera and some code. 
 Current demos include: MousePad, PianoKey, and VolumeSlider.
 
 ## Prerequisites
@@ -20,10 +20,11 @@ Installing the Java Development Kit is only a requirement for developers. Users 
 
 ## Getting Started (Hardware)
 ### Camera
-Position a camera above a dark surface. The camera should remain stationary while using the program and the background should remain unchanged. A darker surface will lead to better detection. 
+Position a camera (rotated at 180 degrees) above a dark surface. The camera should remain stationary while using the program and the background should remain unchanged. A darker surface will lead to better detection.
 ### Operation
 Move your finger (or any object) through the area covered by the camera. The program will detect the location of the object and perform an action depending on the Touchable object being used.
 
 ## Acknowledgments
 * [OS Compatibility](https://stackoverflow.com/a/18780559)
+* [Foreground Extraction](https://stackoverflow.com/a/27036614)
 * [Volume Control](http://www.nirsoft.net/utils/nircmd.html) (Windows only)
