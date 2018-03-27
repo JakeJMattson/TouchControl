@@ -71,7 +71,7 @@ public final class LibLoader
 	{
 		//Path to library
 		String libraryPath = null;
-		
+
 		try
 		{
 			//Create reader
@@ -79,7 +79,7 @@ public final class LibLoader
 
 			//Get path from file
 			libraryPath = reader.readLine().trim();
-			
+
 			//Close reader
 			reader.close();
 		}
@@ -98,20 +98,16 @@ public final class LibLoader
 
 	private static String getLibraryPath()
 	{
-		String libraryPath = null;
-
 		//Get library path from user
 		String opencvPath = createChooser();
 
 		if (opencvPath == null)
-			return libraryPath;
+			return null;
 
 		//OS-specific variables
+		String osName = System.getProperty("os.name");
 		String javaDir = "", extension = "";
 		boolean isValidOS = false;
-
-		//Get name of operating system
-		String osName = System.getProperty("os.name");
 
 		if (osName.startsWith("Windows"))
 		{
@@ -130,7 +126,7 @@ public final class LibLoader
 		else if (osName.equals("Mac OS X"))
 		{
 			//OpenCV version folder
-			String verison = new File(opencvPath).listFiles()[1].getAbsolutePath(); //Ignore .DS_Store
+			String verison = new File(opencvPath).listFiles()[1].getAbsolutePath(); //Ignore .DS_Store at [0]
 
 			//Get library path
 			javaDir = verison + "/Share/OpenCV/Java/";
@@ -156,6 +152,9 @@ public final class LibLoader
 			JOptionPane.showMessageDialog(null, "Unsupported Operating System", "Sorry...",
 					JOptionPane.INFORMATION_MESSAGE);
 
+		//Path determined to be library file
+		String libraryPath = null;
+
 		if (isValidOS)
 		{
 			File directory = new File(javaDir);
@@ -168,18 +167,20 @@ public final class LibLoader
 				//Find library file by extension
 				for (File file : files)
 					if (file.getName().endsWith(extension))
+					{
 						libraryPath = file.getAbsolutePath();
-				
+						break;
+					}
+
 				if (libraryPath == null)
 				{
 					//Construct error
 					String title = USER_ERROR + " (Selection Error)";
-					String message = 
-							"Could not find library file in directory:" + NEWLINE
-							+ directory.getAbsolutePath() + NEWLINE 
+					String message = "Could not find library file in directory:" + NEWLINE
+							+ directory.getAbsolutePath() + NEWLINE
 							+ "that contained the proper extension ("
 							+ extension + ")";
-					
+
 					displayError(title, message, new Exception());
 				}
 			}
@@ -189,7 +190,7 @@ public final class LibLoader
 				String title = USER_ERROR + " (Selection Error)";
 				String message = "Failed to find directory:" + NEWLINE
 						+ directory.getAbsolutePath();
-				
+
 				displayError(title, message, new Exception());
 			}
 		}
@@ -203,7 +204,7 @@ public final class LibLoader
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setDialogTitle("Select the OpenCV folder");
-		
+
 		//Display file chooser
 		int buttonPressed = chooser.showOpenDialog(null);
 
@@ -234,16 +235,15 @@ public final class LibLoader
 			String title = INTERNAL_ERROR + " (PrintWriter Error)";
 			String message = "Failed write path to file:" + NEWLINE
 					+ pathFile.getAbsolutePath();
-			
+
 			displayError(title, message, e);
 		}
 	}
 
 	private static boolean load(String libraryPath)
 	{
-		//Get library file
 		File libraryFile = new File(libraryPath);
-		
+
 		File tempFile = null;
 		try
 		{
@@ -263,7 +263,7 @@ public final class LibLoader
 			//Stop processing
 			return false;
 		}
-		
+
 		try
 		{
 			//Create streams

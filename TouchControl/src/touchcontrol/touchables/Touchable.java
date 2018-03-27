@@ -51,7 +51,7 @@ public abstract class Touchable
 	public void updateDetectionPoint(Mat filteredImage)
 	{
 		//Point of possible detection
-		Point farthestPoint = new Point();
+		Point farthestPoint = null;
 
 		//Control flow
 		boolean doneSearching = false;
@@ -65,11 +65,9 @@ public abstract class Touchable
 				double[] pixelColor = filteredImage.get(y, x);
 
 				//Check pixel for non-background coloring
-				if (pixelColor[0] == 0.0)
+				if (pixelColor[0] != 0.0)
 				{
-					farthestPoint.x = x;
-					farthestPoint.y = y;
-
+					farthestPoint = new Point(x, y);
 					doneSearching = true;
 					break;
 				}
@@ -77,10 +75,6 @@ public abstract class Touchable
 			if (doneSearching)
 				break;
 		}
-
-		//No detections
-		if (farthestPoint.y == 0)
-			farthestPoint = null;
 
 		//Save detection
 		detectionPoint = farthestPoint;

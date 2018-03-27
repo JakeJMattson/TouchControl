@@ -30,27 +30,35 @@ public class ImageHandler
 	public void trainSubtractor(Mat image)
 	{
 		//Average samples to create background model
-		subtractor.apply(image, new Mat(), 0.5);
+		subtractor.apply(image, new Mat(), 0.2);
 	}
 
 	public Mat filterImage(Mat image)
 	{
-		//Filters
-		Scalar backgroundColor = new Scalar(0, 0, 0);
-		Scalar rangeColor = new Scalar(128, 128, 128);
-
-		//Create matricies
-		Mat filteredImage = new Mat();
-		Mat background = new Mat();
+		//Create an empty matrix the same size as the current frame
+		Mat filteredImage = new Mat(image.rows(), image.cols(), CvType.CV_8UC1, Scalar.all(0));
 
 		//Get background model
+		Mat background = new Mat();
 		subtractor.getBackgroundImage(background);
 
-		//Remove background
-		Core.subtract(image, background, filteredImage);
+		//Calculate absolute difference between background model and current frame
+		Mat diffImage = new Mat();
+		Core.absdiff(background, image, diffImage);
 
-		//Apply filters
-		Core.inRange(filteredImage, backgroundColor, rangeColor, filteredImage);
+		//Extract foreground
+		float threshold = 128.0f;
+		for (int j = 0; j < diffImage.rows(); ++j)
+			for (int i = 0; i < diffImage.cols(); ++i)
+			{
+				double[] pixel = diffImage.get(j, i);
+
+				float dist = (float) (pixel[0] * pixel[0] + pixel[1] * pixel[1] + pixel[2] * pixel[2]);
+				dist = (float) Math.sqrt(dist);
+
+				if (dist > threshold)
+					filteredImage.put(j, i, 255);
+			}
 
 		return filteredImage;
 	}

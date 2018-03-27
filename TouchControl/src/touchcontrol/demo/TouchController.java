@@ -3,8 +3,11 @@
  * This project is designed to be a touch screen without the screen.
  *
  * Current configuration:
- * Object to detect should be lighter than background (darker is better)
+ * Required:
  * Camera should be rotated 180 degrees
+ *
+ * Optimal:
+ * Object to detect should be lighter than background (darker background is better)
  *
  * Class Description:
  * Demo (main) class to run functions
