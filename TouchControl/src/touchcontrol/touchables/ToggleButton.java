@@ -31,7 +31,7 @@ public abstract class ToggleButton extends Button
 
 	//Class methods
 	@Override
-	public void updateDetectionPoint(Mat filteredImage)
+	public Point updateDetectionPoint(Mat filteredImage)
 	{
 		//Save previous state
 		boolean wasClicked = isBeingClicked;
@@ -50,6 +50,8 @@ public abstract class ToggleButton extends Button
 		}
 		else
 			hasSwitched = false;
+
+		return detectionPoint;
 	}
 
 	@Override

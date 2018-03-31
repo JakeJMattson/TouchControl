@@ -29,7 +29,7 @@ public abstract class Button extends Touchable
 
 	//Class methods
 	@Override
-	public void updateDetectionPoint(Mat filteredImage)
+	public Point updateDetectionPoint(Mat filteredImage)
 	{
 		//Update state
 		super.updateDetectionPoint(filteredImage);
@@ -39,6 +39,8 @@ public abstract class Button extends Touchable
 			isBeingClicked = true;
 		else if (!hasDetection() && isBeingClicked)
 			isBeingClicked = false;
+
+		return detectionPoint;
 	}
 
 	@Override

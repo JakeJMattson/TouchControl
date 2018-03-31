@@ -75,13 +75,15 @@ public abstract class Slider extends Touchable
 	}
 
 	@Override
-	public void updateDetectionPoint(Mat filteredImage)
+	public Point updateDetectionPoint(Mat filteredImage)
 	{
 		//Update state
 		super.updateDetectionPoint(filteredImage);
 
 		if (hasDetection())
 			division = (int) Math.ceil((detectionPoint.y - dimensions.y) / divisionSize);
+
+		return detectionPoint;
 	}
 
 	@Override

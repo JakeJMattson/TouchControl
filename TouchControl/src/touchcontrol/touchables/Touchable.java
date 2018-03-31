@@ -1,31 +1,35 @@
-/**
- * Class Description:
- * Abstract Touchable - contains fundamental functions for a Touchable object of any kind
- */
-
 package touchcontrol.touchables;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
+/**
+ * Contains fundamental functions for a Touchable object of any kind
+ * 
+ * @author mattson543
+ */
+
 public abstract class Touchable
 {
+	/**
+	 * Location and size of Touchable
+	 */
 	protected Rect dimensions;
+	/**
+	 * Color that the Touchable will be drawn in
+	 */
 	protected Scalar color;
+	/**
+	 * Farthest non-background pixel found within range
+	 */
 	protected Point detectionPoint;
 
-	//Class constants
-	private static final String NEWLINE = System.lineSeparator();
-	private static final String TO_STRING_FORMAT = "   %-17s %-1s%n";
-
-	//Constructors
 	protected Touchable(Rect dimensions, Scalar color)
 	{
 		this.dimensions = dimensions;
 		this.color = color;
 	}
 
-	//Setters
 	public void setDimensions(Rect dimensions)
 	{
 		this.dimensions = dimensions;
@@ -36,7 +40,6 @@ public abstract class Touchable
 		this.color = color;
 	}
 
-	//Getters
 	public Rect getDimensions()
 	{
 		return dimensions;
@@ -47,7 +50,15 @@ public abstract class Touchable
 		return color;
 	}
 
-	public void updateDetectionPoint(Mat filteredImage)
+	/**
+	 * Search through the range of the Touchable and find the first occurrence
+	 * of a non-background pixel
+	 * 
+	 * @param filteredImage
+	 *            Binary image
+	 * @return Detection point (for external use)
+	 */
+	public Point updateDetectionPoint(Mat filteredImage)
 	{
 		//Point of possible detection
 		Point farthestPoint = null;
@@ -77,19 +88,32 @@ public abstract class Touchable
 
 		//Save detection
 		detectionPoint = farthestPoint;
+
+		return detectionPoint;
 	}
 
+	/**
+	 * Determine whether or not the current detection point is null
+	 * 
+	 * @return Detection status
+	 */
 	protected boolean hasDetection()
 	{
-		boolean isValid = false;
+		boolean isDetected = false;
 
 		//Validate detection
 		if (detectionPoint != null)
-			isValid = true;
+			isDetected = true;
 
-		return isValid;
+		return isDetected;
 	}
 
+	/**
+	 * Draw Touchable onto image
+	 * 
+	 * @param image
+	 *            Matrix to draw the Touchable object onto
+	 */
 	public void drawOnto(Mat image)
 	{
 		if (image != null)
@@ -106,26 +130,49 @@ public abstract class Touchable
 		}
 	}
 
+	/**
+	 * Draw a circle around the current detection point
+	 * 
+	 * @param image
+	 *            Matrix to draw the detection onto
+	 */
 	private void drawDetection(Mat image)
 	{
 		if (hasDetection())
 			Imgproc.circle(image, detectionPoint, 10, color);
 	}
 
-	//Enforce method
+	/**
+	 * Enforce method requirement on subclasses
+	 */
 	public abstract void performAction();
 
-	protected <T> String format(String label, T data)
+	/**
+	 * Formatter to create a uniform toString() for all Touchable objects
+	 * 
+	 * @param name
+	 *            Name of field being formatted
+	 * @param data
+	 *            Data of field being formatted
+	 * @return Formatted string
+	 */
+	protected <T> String format(String name, T data)
 	{
+		final String TO_STRING_FORMAT = "   %-17s %-1s%n";
+
 		//Generic toString formatter
-		return String.format(TO_STRING_FORMAT, label, data);
+		return String.format(TO_STRING_FORMAT, name, data);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		return this.getClass().getSimpleName()
-				+ " (" + super.toString() + "):" + NEWLINE
+				+ " (" + super.toString() + "):" + System.lineSeparator()
 				+ format("Dimensions:", dimensions)
 				+ format("Color:", color);
 	}
