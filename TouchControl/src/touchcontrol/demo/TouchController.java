@@ -23,7 +23,7 @@ import org.opencv.videoio.*;
 import touchcontrol.display.ImageFrame;
 import touchcontrol.filter.ImageHandler;
 import touchcontrol.touchables.*;
-import touchcontrol.utils.LibLoader;
+import touchcontrol.utils.*;
 
 public class TouchController
 {
@@ -52,7 +52,6 @@ public class TouchController
 		System.exit(0);
 	}
 
-	@SuppressWarnings("null")
 	private void capture(boolean debugMode)
 	{
 		//Start camera
@@ -77,9 +76,10 @@ public class TouchController
 			filteredDisplay = new ImageFrame();
 
 		//Create demo groups
+		Scalar color = new Scalar(0, 255, 0);
 		//TouchableGroup group = new TouchableGroup();
-		//TouchableGroup group = createBasicDemo(cameraWidth, cameraHeight);
-		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight);
+		//TouchableGroup group = createBasicDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight, color);
 
 		//Print objects in group
 		if (debugMode)
@@ -140,7 +140,7 @@ public class TouchController
 	}
 
 	@SuppressWarnings("unused")
-	private TouchableGroup createBasicDemo(double cameraWidth, double cameraHeight)
+	private TouchableGroup createBasicDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
 		//Dimension variables
 		int padding = 10;
@@ -157,8 +157,8 @@ public class TouchController
 		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
 
 		//Create components
-		MousePad mousePad = new MousePad(mousePadRect);
-		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect);
+		MousePad mousePad = new MousePad(mousePadRect, color);
+		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect, color);
 
 		//Create group of Touchable objects
 		TouchableGroup group = new TouchableGroup(mousePad, volumeSlider);
@@ -166,7 +166,7 @@ public class TouchController
 		return group;
 	}
 
-	private TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight)
+	private TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
 		//Create group of Touchable objects
 		TouchableGroup group = new TouchableGroup();
@@ -190,7 +190,7 @@ public class TouchController
 			Rect keyRect = new Rect(topLeft, bottomRight);
 
 			//Create piano key
-			PianoKey key = new PianoKey(keyRect, notes[i]);
+			PianoKey key = new PianoKey(keyRect, color, notes[i]);
 
 			//Add current key to group
 			group.addComponent(key);

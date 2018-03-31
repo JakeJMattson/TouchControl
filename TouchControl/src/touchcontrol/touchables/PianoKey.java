@@ -17,11 +17,6 @@ public class PianoKey extends Button
 	private MidiChannel channel;
 
 	//Constructors
-	public PianoKey(Rect dimensions, char note)
-	{
-		this(dimensions, DEFAULT_COLOR, note);
-	}
-
 	public PianoKey(Rect dimensions, Scalar color, char note)
 	{
 		super(dimensions, color);

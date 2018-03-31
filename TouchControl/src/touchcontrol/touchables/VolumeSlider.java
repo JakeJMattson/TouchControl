@@ -15,11 +15,6 @@ public class VolumeSlider extends Slider
 	private int volume;
 
 	//Constructors
-	public VolumeSlider(Rect dimensions)
-	{
-		this(dimensions, DEFAULT_COLOR);
-	}
-
 	public VolumeSlider(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);

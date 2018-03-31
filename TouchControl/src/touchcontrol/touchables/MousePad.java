@@ -19,11 +19,6 @@ public class MousePad extends Pad
 	private Robot mouseMover;
 
 	//Constructors
-	public MousePad(Rect dimensions)
-	{
-		this(dimensions, DEFAULT_COLOR);
-	}
-
 	public MousePad(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);

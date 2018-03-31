@@ -15,16 +15,17 @@ public abstract class Button extends Touchable
 	protected Button(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
+		init();
+	}
+
+	private void init()
+	{
 		isBeingClicked = false;
 	}
 
 	//Setters
 
 	//Getters
-	protected boolean isBeingClicked()
-	{
-		return isBeingClicked;
-	}
 
 	//Class methods
 	@Override

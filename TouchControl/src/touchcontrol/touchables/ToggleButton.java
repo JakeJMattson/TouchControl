@@ -16,6 +16,11 @@ public abstract class ToggleButton extends Button
 	protected ToggleButton(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
+		init();
+	}
+
+	private void init()
+	{
 		isOn = false;
 		hasSwitched = false;
 	}

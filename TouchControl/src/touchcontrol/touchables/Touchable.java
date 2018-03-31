@@ -17,7 +17,6 @@ public abstract class Touchable
 	//Class constants
 	private static final String NEWLINE = System.lineSeparator();
 	private static final String TO_STRING_FORMAT = "   %-17s %-1s%n";
-	protected static Scalar DEFAULT_COLOR = new Scalar(0, 255, 0);
 
 	//Constructors
 	protected Touchable(Rect dimensions, Scalar color)
