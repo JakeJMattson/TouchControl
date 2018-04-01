@@ -15,3 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Fix incorrect language labeling
+* linguist-vendored
+*.java linguist-vendored=false
