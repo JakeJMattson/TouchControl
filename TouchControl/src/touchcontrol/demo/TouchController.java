@@ -18,7 +18,6 @@ package touchcontrol.demo;
 import javax.swing.JOptionPane;
 
 import org.opencv.core.*;
-import org.opencv.videoio.*;
 
 import touchcontrol.display.ImageFrame;
 import touchcontrol.filter.ImageHandler;
@@ -55,7 +54,7 @@ public class TouchController
 	private void capture(boolean debugMode)
 	{
 		//Start camera
-		VideoCapture camera = new VideoCapture(0);
+		Camera camera = new Camera(0, -1);
 
 		//Do not start if no camera is available
 		if (!camera.isOpened())
@@ -65,8 +64,8 @@ public class TouchController
 		}
 
 		//Get camera properties
-		double cameraWidth = camera.get(Videoio.CAP_PROP_FRAME_WIDTH);
-		double cameraHeight = camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
+		double cameraWidth = camera.getWidth();
+		double cameraHeight = camera.getHeight();
 
 		//Create display
 		ImageFrame rawDisplay = new ImageFrame();
@@ -90,14 +89,8 @@ public class TouchController
 
 		for (int i = 0; i < 5; i++)
 		{
-			//Create matrix
-			Mat background = new Mat();
-
 			//Read image from camera
-			camera.read(background);
-
-			//Flip image 180 degrees
-			Core.flip(background, background, -1);
+			Mat background = camera.getFrame();
 
 			//Give sample background image to subtractor
 			handler.trainSubtractor(background);
@@ -106,18 +99,11 @@ public class TouchController
 		//While frame is open and camera is detected
 		while (rawDisplay.isOpen() && camera.isOpened())
 		{
-			//Create matrices
-			Mat cameraImage = new Mat();
-			Mat filteredImage = new Mat();
-
 			//Read image from camera
-			camera.read(cameraImage);
-
-			//Flip image 180 degrees
-			Core.flip(cameraImage, cameraImage, -1);
+			Mat cameraImage = camera.getFrame();
 
 			//Filter image for processing
-			filteredImage = handler.filterImage(cameraImage);
+			Mat filteredImage = handler.filterImage(cameraImage);
 
 			//Find the farthest point that is not background
 			group.updateDetectionPoint(filteredImage);

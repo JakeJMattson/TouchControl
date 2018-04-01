@@ -99,13 +99,7 @@ public abstract class Touchable
 	 */
 	protected boolean hasDetection()
 	{
-		boolean isDetected = false;
-
-		//Validate detection
-		if (detectionPoint != null)
-			isDetected = true;
-
-		return isDetected;
+		return detectionPoint != null;
 	}
 
 	/**
