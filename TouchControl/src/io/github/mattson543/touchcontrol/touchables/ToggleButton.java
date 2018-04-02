@@ -3,7 +3,7 @@
  * Abstract Button - contains general (toggle) button behavior
  */
 
-package touchcontrol.touchables;
+package io.github.mattson543.touchcontrol.touchables;
 
 import org.opencv.core.*;
 

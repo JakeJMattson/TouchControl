@@ -3,7 +3,7 @@
  * Load the OpenCV library (used when program is run as JAR)
  */
 
-package touchcontrol.utils;
+package io.github.mattson543.touchcontrol.utils;
 
 import java.io.*;
 
@@ -11,7 +11,7 @@ import javax.swing.*;
 
 import org.opencv.core.Core;
 
-public final class LibLoader
+public final class LibraryLoader
 {
 	//Class constants
 	//(load types)

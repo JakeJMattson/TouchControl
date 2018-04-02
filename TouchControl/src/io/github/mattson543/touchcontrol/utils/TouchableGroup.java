@@ -3,13 +3,13 @@
  * Apply the same function over many Touchable objects
  */
 
-package touchcontrol.utils;
+package io.github.mattson543.touchcontrol.utils;
 
 import java.util.ArrayList;
 
 import org.opencv.core.*;
 
-import touchcontrol.touchables.Touchable;
+import io.github.mattson543.touchcontrol.touchables.Touchable;
 
 public class TouchableGroup
 {

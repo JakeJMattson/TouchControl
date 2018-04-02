@@ -1,4 +1,4 @@
-package touchcontrol.utils;
+package io.github.mattson543.touchcontrol.utils;
 
 import org.opencv.core.*;
 import org.opencv.videoio.*;

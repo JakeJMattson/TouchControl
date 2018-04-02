@@ -3,7 +3,7 @@
  * Handler - performs image (matrix) operations such as filtering and converting
  */
 
-package touchcontrol.filter;
+package io.github.mattson543.touchcontrol.utils;
 
 import java.awt.image.BufferedImage;
 

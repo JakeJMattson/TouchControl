@@ -4,7 +4,7 @@
  * Controls system volume
  */
 
-package touchcontrol.touchables;
+package io.github.mattson543.touchcontrol.touchables;
 
 import java.io.*;
 

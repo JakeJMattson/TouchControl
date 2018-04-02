@@ -13,16 +13,14 @@
  * Demo (main) class to run functions
  */
 
-package touchcontrol.demo;
+package io.github.mattson543.touchcontrol.demo;
 
 import javax.swing.JOptionPane;
 
 import org.opencv.core.*;
 
-import touchcontrol.display.ImageFrame;
-import touchcontrol.filter.ImageHandler;
-import touchcontrol.touchables.*;
-import touchcontrol.utils.*;
+import io.github.mattson543.touchcontrol.touchables.*;
+import io.github.mattson543.touchcontrol.utils.*;
 
 public class TouchController
 {
@@ -38,7 +36,7 @@ public class TouchController
 		boolean debugMode = true;
 
 		//Load OpenCV
-		boolean isLoaded = LibLoader.loadLibrary(LibLoader.IDE);
+		boolean isLoaded = LibraryLoader.loadLibrary(LibraryLoader.IDE);
 
 		//Run program
 		if (isLoaded)

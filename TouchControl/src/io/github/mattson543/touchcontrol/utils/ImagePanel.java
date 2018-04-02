@@ -3,7 +3,7 @@
  * Panel - holds image to display in GUI
  */
 
-package touchcontrol.display;
+package io.github.mattson543.touchcontrol.utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

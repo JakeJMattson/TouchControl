@@ -4,7 +4,7 @@
  * Controls mouse pointer position
  */
 
-package touchcontrol.touchables;
+package io.github.mattson543.touchcontrol.touchables;
 
 import java.awt.*;
 

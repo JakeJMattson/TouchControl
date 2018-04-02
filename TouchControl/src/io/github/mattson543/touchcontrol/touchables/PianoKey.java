@@ -4,7 +4,7 @@
  * Plays note when touched
  */
 
-package touchcontrol.touchables;
+package io.github.mattson543.touchcontrol.touchables;
 
 import javax.sound.midi.*;
 

@@ -3,7 +3,7 @@
  * Abstract Pad - contains general pad behavior
  */
 
-package touchcontrol.touchables;
+package io.github.mattson543.touchcontrol.touchables;
 
 import org.opencv.core.*;
 
