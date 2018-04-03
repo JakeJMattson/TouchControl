@@ -1,4 +1,4 @@
-# TouchController
+# TouchControl
 This project is intended to be a touch screen without the screen by using only a camera and some code. 
 Current demos include: MousePad, PianoKey, and VolumeSlider.
 
