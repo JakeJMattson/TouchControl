@@ -17,8 +17,11 @@ Current demos include: MousePad, PianoKey, and VolumeSlider.
 
 ## Getting Started (Software)
 
-### Installing the JDK
-Installing the Java Development Kit is only a requirement for developers. Users who only wish to run the JAR file can download the Java Runtime Environment (JRE) instead. If you are unsure how to do this, follow the tutorial for your operating system [here](https://docs.oracle.com/javase/9/install/overview-jdk-9-and-jre-9-installation.htm#JSJIG-GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+### Installing Java
+Installing the Java Development Kit (JDK) is only a requirement for developers. Users who plan to solely use the program (run the pre-built JAR file) are only required to install the Java Runtime Environment (JRE). The minimum compiler compliance is Java 9, meaning that systems with installations of Java 9 and above can run the JAR. Simply install the version of your choice from the link above and run the installer.
+
+### NirCmd
+"[NirCmd](http://www.nirsoft.net/utils/nircmd.html) is a small command-line utility that allows you to do some useful tasks without displaying any user interface." This program is used to control system volume. It is used in the VolumeSlider demo and is only for Windows operating systems. As there are no runnable versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with the VolumeSlider demo.
 
 ### Building OpenCV
 [OpenCV](https://opencv.org/) is required for both developers and users in order to run this code. Please read the tutorial on [Installing OpenCV for Java](https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst) in order to correctly build OpenCV for your operating system.
@@ -34,4 +37,3 @@ Move your finger (or any object) through the area covered by the camera. The pro
 ## Acknowledgments
 * [OS Compatibility](https://stackoverflow.com/a/18780559)
 * [Foreground Extraction](https://stackoverflow.com/a/27036614)
-* [Volume Control](http://www.nirsoft.net/utils/nircmd.html) (Windows only)
