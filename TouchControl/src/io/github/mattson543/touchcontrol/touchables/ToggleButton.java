@@ -1,35 +1,36 @@
-/**
- * Class Description:
- * Abstract Button - contains general (toggle) button behavior
- */
-
 package io.github.mattson543.touchcontrol.touchables;
 
 import org.opencv.core.*;
 
+/**
+ * Abstract Button - contains general (toggle) button behavior
+ *
+ * @author mattson543
+ */
 public abstract class ToggleButton extends Button
 {
-	protected boolean isOn;
+	/**
+	 * The current state of the button
+	 */
+	protected boolean isToggledOn;
+	/**
+	 * Whether or not the button has already switched states internally
+	 */
 	private boolean hasSwitched;
 
-	//Constructors
 	protected ToggleButton(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
-		init();
-	}
-
-	private void init()
-	{
-		isOn = false;
+		isToggledOn = false;
 		hasSwitched = false;
 	}
 
-	//Setters
-
-	//Getters
-
-	//Class methods
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * io.github.mattson543.touchcontrol.touchables.Button#updateDetectionPoint(
+	 * org.opencv.core.Mat)
+	 */
 	@Override
 	public Point updateDetectionPoint(Mat filteredImage)
 	{
@@ -44,7 +45,7 @@ public abstract class ToggleButton extends Button
 		{
 			if (!hasSwitched)
 			{
-				isOn = !isOn;
+				isToggledOn = !isToggledOn;
 				hasSwitched = true;
 			}
 		}
@@ -54,9 +55,13 @@ public abstract class ToggleButton extends Button
 		return detectionPoint;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Button#toString()
+	 */
 	@Override
 	public String toString()
 	{
-		return super.toString() + format("Toggled on:", isOn);
+		return super.toString() + format("Toggled on:", isToggledOn);
 	}
 }

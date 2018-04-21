@@ -3,7 +3,7 @@
  * Frame - GUI container for components (holds ImagePanel)
  */
 
-package io.github.mattson543.touchcontrol.utils;
+package io.github.mattson543.touchcontrol.display;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;

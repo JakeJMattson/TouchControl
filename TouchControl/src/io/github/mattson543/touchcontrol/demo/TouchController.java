@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 
 import org.opencv.core.*;
 
+import io.github.mattson543.touchcontrol.display.ImageFrame;
 import io.github.mattson543.touchcontrol.touchables.*;
 import io.github.mattson543.touchcontrol.utils.*;
 
@@ -42,7 +43,7 @@ public class TouchController
 		if (isLoaded)
 			capture(debugMode);
 		else
-			JOptionPane.showMessageDialog(null, "Failed to load OpenCV!", "Fatal Error", JOptionPane.ERROR_MESSAGE);
+			displayFatalError("Failed to load OpenCV!");
 
 		//Force exit
 		System.out.print("Program terminated.");
@@ -52,12 +53,12 @@ public class TouchController
 	private void capture(boolean debugMode)
 	{
 		//Start camera
-		Camera camera = new Camera(0, -1);
+		Camera camera = new Camera(-1);
 
 		//Do not start if no camera is available
 		if (!camera.isOpened())
 		{
-			JOptionPane.showMessageDialog(null, "No camera detected!", "Fatal Error", JOptionPane.ERROR_MESSAGE);
+			displayFatalError("No camera detected!");
 			return;
 		}
 
@@ -123,6 +124,11 @@ public class TouchController
 		camera.release();
 	}
 
+	private void displayFatalError(String message)
+	{
+		JOptionPane.showMessageDialog(null, message, "Fatal Error", JOptionPane.ERROR_MESSAGE);
+	}
+
 	@SuppressWarnings("unused")
 	private TouchableGroup createBasicDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
@@ -140,7 +146,6 @@ public class TouchController
 		bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
 		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
 
-		//Create components
 		MousePad mousePad = new MousePad(mousePadRect, color);
 		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect, color);
 

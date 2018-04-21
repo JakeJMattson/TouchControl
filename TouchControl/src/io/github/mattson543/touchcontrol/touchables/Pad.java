@@ -1,25 +1,23 @@
-/**
- * Class Description:
- * Abstract Pad - contains general pad behavior
- */
-
 package io.github.mattson543.touchcontrol.touchables;
 
 import org.opencv.core.*;
 
+/**
+ * Abstract Pad - contains general pad behavior
+ *
+ * @author mattson543
+ */
 public abstract class Pad extends Touchable
 {
-	//Constructors
 	protected Pad(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
 	}
 
-	//Setters
-
-	//Getters
-
-	//Class methods
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#toString()
+	 */
 	@Override
 	public String toString()
 	{

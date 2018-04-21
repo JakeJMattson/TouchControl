@@ -15,9 +15,6 @@ public class TouchableGroup
 {
 	private final ArrayList<Touchable> components;
 
-	//Class constants
-	private static final String NEWLINE = System.lineSeparator();
-
 	//Constructors
 	public TouchableGroup(Touchable...components)
 	{
@@ -76,6 +73,8 @@ public class TouchableGroup
 	@Override
 	public String toString()
 	{
+		final String NEWLINE = System.lineSeparator();
+
 		String groupData = "Touchable objects in group (" + super.toString() + "): "
 				+ components.size() + NEWLINE + NEWLINE;
 

@@ -53,7 +53,6 @@ public class PianoKey extends Button
 		try
 		{
 			//Set up environment to play audio
-			@SuppressWarnings("resource")
 			Synthesizer midiSynth = MidiSystem.getSynthesizer();
 			Instrument[] instr = midiSynth.getDefaultSoundbank().getInstruments();
 			midiSynth.loadInstrument(instr[0]);

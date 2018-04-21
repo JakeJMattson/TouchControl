@@ -1,39 +1,45 @@
-/**
- * Class Description:
- * Abstract Slider - contains general slider behavior
- */
-
 package io.github.mattson543.touchcontrol.touchables;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
+/**
+ * Abstract Slider - contains general slider behavior
+ *
+ * @author mattson543
+ */
 public abstract class Slider extends Touchable
 {
+	/**
+	 * Number of sectors that the slider is divided into
+	 */
 	protected int numOfDivisions;
-	protected int division;
-	private boolean percentageVisible;
+	/**
+	 * The size of a single division sector
+	 */
 	private double divisionSize;
+	/**
+	 * The division in which the detection point is located in
+	 */
+	protected int division;
+	/**
+	 * Whether or not the location line should have a label
+	 */
+	private boolean shouldLabel;
 
 	private static int DEFAULT_DIVISIONS = 100;
 	private static boolean DEFAULT_VISIBILITY = true;
 
-	//Constructors
 	protected Slider(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
-		init();
-	}
 
-	private void init()
-	{
 		numOfDivisions = DEFAULT_DIVISIONS;
-		percentageVisible = DEFAULT_VISIBILITY;
+		shouldLabel = DEFAULT_VISIBILITY;
 
 		calculateDivisionSize();
 	}
 
-	//Setters
 	protected void setNumOfDivisions(int numOfDivisions)
 	{
 		this.numOfDivisions = validateDivisions(numOfDivisions);
@@ -41,29 +47,37 @@ public abstract class Slider extends Touchable
 		calculateDivisionSize();
 	}
 
-	protected void setPercentageVisible(boolean percentageVisible)
+	protected void showLabel(boolean shouldLabel)
 	{
-		this.percentageVisible = percentageVisible;
+		this.shouldLabel = shouldLabel;
 	}
 
-	//Getters
 	protected int getNumOfDivisions()
 	{
 		return numOfDivisions;
 	}
 
-	protected boolean isPercentageVisible()
+	protected boolean isLabeled()
 	{
-		return percentageVisible;
+		return shouldLabel;
 	}
 
-	//Class methods
+	/**
+	 * Determine the size of each division sector
+	 */
 	private void calculateDivisionSize()
 	{
 		//Calculate the size of a single slider sector
 		divisionSize = (double) dimensions.height / numOfDivisions;
 	}
 
+	/**
+	 * Confine number of divisions to range
+	 *
+	 * @param divisions
+	 *            Attempted value
+	 * @return Value within range
+	 */
 	private int validateDivisions(int divisions)
 	{
 		if (divisions < 0)
@@ -74,6 +88,11 @@ public abstract class Slider extends Touchable
 		return divisions;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#
+	 * updateDetectionPoint(org.opencv.core.Mat)
+	 */
 	@Override
 	public Point updateDetectionPoint(Mat filteredImage)
 	{
@@ -86,6 +105,11 @@ public abstract class Slider extends Touchable
 		return detectionPoint;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#drawOnto(org.
+	 * opencv.core.Mat)
+	 */
 	@Override
 	public void drawOnto(Mat image)
 	{
@@ -94,16 +118,22 @@ public abstract class Slider extends Touchable
 		setSliderStatus(image);
 	}
 
-	private void setSliderStatus(Mat rawImage)
+	/**
+	 * Draw status line and label
+	 *
+	 * @param image
+	 *            Matrix
+	 */
+	private void setSliderStatus(Mat image)
 	{
 		//Calculate position of line
 		double linePosition = divisionSize * division + dimensions.y;
 
 		//Draw status line
-		Imgproc.line(rawImage, new Point(dimensions.x, linePosition),
+		Imgproc.line(image, new Point(dimensions.x, linePosition),
 				new Point(dimensions.x + dimensions.width, linePosition), color, 3);
 
-		if (percentageVisible)
+		if (shouldLabel)
 		{
 			//Offset text to avoid collision with line and slider
 			int textShift = numOfDivisions - division >= numOfDivisions / 2.0 ? 18 : -8;
@@ -117,16 +147,20 @@ public abstract class Slider extends Touchable
 				unit = "%";
 
 			//Draw text
-			Imgproc.putText(rawImage, percent + unit, new Point(dimensions.x + 5, linePosition + textShift),
+			Imgproc.putText(image, percent + unit, new Point(dimensions.x + 5, linePosition + textShift),
 					Core.FONT_HERSHEY_COMPLEX, 0.5, color);
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#toString()
+	 */
 	@Override
 	public String toString()
 	{
 		return super.toString()
 				+ format("Divisions:", numOfDivisions)
-				+ format("Percent visible:", percentageVisible);
+				+ format("Is Labeled:", shouldLabel);
 	}
 }

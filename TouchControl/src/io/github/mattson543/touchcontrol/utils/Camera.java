@@ -5,25 +5,25 @@ import org.opencv.videoio.*;
 
 public class Camera
 {
-	private VideoCapture camera;
-	private Integer rotation;
+	private final VideoCapture camera;
+	private final Integer rotation;
 
 	private static final int DEFAULT_CAMERA = 0;
 
 	public Camera()
 	{
-		this(DEFAULT_CAMERA);
+		this(null, DEFAULT_CAMERA);
 	}
 
-	public Camera(int cameraIndex)
+	public Camera(Integer rotation)
 	{
-		this(cameraIndex, null);
+		this(rotation, DEFAULT_CAMERA);
 	}
 
-	public Camera(int cameraIndex, Integer rotation)
+	public Camera(Integer rotation, int cameraIndex)
 	{
-		this.camera = new VideoCapture(cameraIndex);
 		this.rotation = rotation;
+		camera = new VideoCapture(cameraIndex);
 	}
 
 	public double getWidth()

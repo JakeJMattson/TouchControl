@@ -1,33 +1,30 @@
-/**
- * Class Description:
- * Abstract Button - contains general (clickable) button behavior
- */
-
 package io.github.mattson543.touchcontrol.touchables;
 
 import org.opencv.core.*;
 
+/**
+ * Abstract Button - contains general (clickable) button behavior
+ *
+ * @author mattson543
+ */
 public abstract class Button extends Touchable
 {
+	/**
+	 * Whether or not a non-background pixel is currently being detected
+	 */
 	protected boolean isBeingClicked;
 
-	//Constructors
 	protected Button(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
-		init();
-	}
-
-	private void init()
-	{
 		isBeingClicked = false;
 	}
 
-	//Setters
-
-	//Getters
-
-	//Class methods
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#
+	 * updateDetectionPoint(org.opencv.core.Mat)
+	 */
 	@Override
 	public Point updateDetectionPoint(Mat filteredImage)
 	{
@@ -43,6 +40,10 @@ public abstract class Button extends Touchable
 		return detectionPoint;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#toString()
+	 */
 	@Override
 	public String toString()
 	{

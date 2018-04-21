@@ -5,7 +5,7 @@ import org.opencv.imgproc.Imgproc;
 
 /**
  * Contains fundamental functions for a Touchable object of any kind
- * 
+ *
  * @author mattson543
  */
 
@@ -53,7 +53,7 @@ public abstract class Touchable
 	/**
 	 * Search through the range of the Touchable and find the first occurrence
 	 * of a non-background pixel
-	 * 
+	 *
 	 * @param filteredImage
 	 *            Binary image
 	 * @return Detection point (for external use)
@@ -94,7 +94,7 @@ public abstract class Touchable
 
 	/**
 	 * Determine whether or not the current detection point is null
-	 * 
+	 *
 	 * @return Detection status
 	 */
 	protected boolean hasDetection()
@@ -104,7 +104,7 @@ public abstract class Touchable
 
 	/**
 	 * Draw Touchable onto image
-	 * 
+	 *
 	 * @param image
 	 *            Matrix to draw the Touchable object onto
 	 */
@@ -120,20 +120,9 @@ public abstract class Touchable
 			Imgproc.rectangle(image, upperLeft, lowerRight, color, 3);
 
 			//Draw circle around detection
-			drawDetection(image);
+			if (hasDetection())
+				Imgproc.circle(image, detectionPoint, 10, color);
 		}
-	}
-
-	/**
-	 * Draw a circle around the current detection point
-	 * 
-	 * @param image
-	 *            Matrix to draw the detection onto
-	 */
-	private void drawDetection(Mat image)
-	{
-		if (hasDetection())
-			Imgproc.circle(image, detectionPoint, 10, color);
 	}
 
 	/**
@@ -143,7 +132,7 @@ public abstract class Touchable
 
 	/**
 	 * Formatter to create a uniform toString() for all Touchable objects
-	 * 
+	 *
 	 * @param name
 	 *            Name of field being formatted
 	 * @param data
