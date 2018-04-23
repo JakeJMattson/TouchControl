@@ -1,30 +1,31 @@
-/**
- * Class Description:
- * Demo Slider - example application of abstract slider
- * Controls system volume
- */
-
 package io.github.mattson543.touchcontrol.touchables;
 
 import java.io.*;
 
 import org.opencv.core.*;
 
+/**
+ * Demo Slider - Example application of abstract slider; Controls system volume
+ *
+ * @author mattson543
+ */
 public class VolumeSlider extends Slider
 {
-	private int volume;
+	/**
+	 * Internal representation of current system volume
+	 */
+	private int previousVolume;
 
-	//Constructors
 	public VolumeSlider(Rect dimensions, Scalar color)
 	{
 		super(dimensions, color);
 	}
 
-	//Setters
-
-	//Getters
-
-	//Class methods
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * io.github.mattson543.touchcontrol.touchables.Touchable#performAction()
+	 */
 	@Override
 	public void performAction()
 	{
@@ -34,11 +35,17 @@ public class VolumeSlider extends Slider
 			int newVolume = (numOfDivisions - division) * (100 / numOfDivisions);
 
 			//Avoid unnecessary calls
-			if (volume != newVolume)
+			if (previousVolume != newVolume)
 				setVolume(newVolume);
 		}
 	}
 
+	/**
+	 * Set system volume
+	 *
+	 * @param volume
+	 *            New target system volume
+	 */
 	private void setVolume(int volume)
 	{
 		//Nircmd allows volume changing
@@ -52,13 +59,19 @@ public class VolumeSlider extends Slider
 		String command = nircmdPath + " setsysvolume " + nircmdVolume;
 
 		//Set volume
-		this.volume = volume;
+		previousVolume = volume;
 		executeCommand(command);
 
 		//Display message for debugging
 		System.out.println("Volume set to: " + volume);
 	}
 
+	/**
+	 * Execute a system command (Calls nircmd from command line)
+	 *
+	 * @param command
+	 *            System command
+	 */
 	private void executeCommand(String command)
 	{
 		try
@@ -71,6 +84,10 @@ public class VolumeSlider extends Slider
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Slider#toString()
+	 */
 	@Override
 	public String toString()
 	{

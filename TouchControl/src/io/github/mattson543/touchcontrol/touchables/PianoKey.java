@@ -1,28 +1,41 @@
-/**
- * Class Description:
- * Demo Button - example application of abstract button
- * Plays note when touched
- */
-
 package io.github.mattson543.touchcontrol.touchables;
 
 import javax.sound.midi.*;
 
 import org.opencv.core.*;
 
+/**
+ * Demo Button - Example application of abstract button; Plays note when touched
+ *
+ * @author mattson543
+ */
 public class PianoKey extends Button
 {
+	/**
+	 * Whether or not the key has already been played on a given touch
+	 */
 	private boolean hasPlayed;
+	/**
+	 * Sound to be played
+	 */
 	private int key;
+	/**
+	 * Audio player
+	 */
 	private MidiChannel channel;
 
-	//Constructors
 	public PianoKey(Rect dimensions, Scalar color, char note)
 	{
 		super(dimensions, color);
 		init(note);
 	}
 
+	/**
+	 * Initialize fields
+	 *
+	 * @param note
+	 *            Character representation of the note
+	 */
 	private void init(char note)
 	{
 		//Determine key to play based on note
@@ -32,11 +45,13 @@ public class PianoKey extends Button
 		setupMidi();
 	}
 
-	//Setters
-
-	//Getters
-
-	//Class methods
+	/**
+	 * Determine the key of the note based on the character input
+	 *
+	 * @param note
+	 *            Character representation of the note
+	 * @return Key
+	 */
 	private int determineKey(char note)
 	{
 		//Offset from char (A B C D E F G)
@@ -48,6 +63,9 @@ public class PianoKey extends Button
 		return key;
 	}
 
+	/**
+	 * Create the audio player
+	 */
 	private void setupMidi()
 	{
 		try
@@ -66,6 +84,11 @@ public class PianoKey extends Button
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * io.github.mattson543.touchcontrol.touchables.Touchable#performAction()
+	 */
 	@Override
 	public void performAction()
 	{
@@ -74,7 +97,7 @@ public class PianoKey extends Button
 		{
 			if (!hasPlayed)
 			{
-				playNote();
+				playNote(1000);
 
 				hasPlayed = true;
 			}
@@ -83,7 +106,13 @@ public class PianoKey extends Button
 			hasPlayed = false;
 	}
 
-	private void playNote()
+	/**
+	 * Play the note that was assigned to the key
+	 *
+	 * @param duration
+	 *            The amount of ms that the note should be held for
+	 */
+	private void playNote(int duration)
 	{
 		//Create thread to play note
 		new Thread()
@@ -96,8 +125,8 @@ public class PianoKey extends Button
 
 				try
 				{
-					//Duration of note
-					Thread.sleep(1000);
+					//Hold the note for x milliseconds
+					Thread.sleep(duration);
 				}
 				catch (InterruptedException e)
 				{
@@ -110,6 +139,10 @@ public class PianoKey extends Button
 		}.start();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see io.github.mattson543.touchcontrol.touchables.Button#toString()
+	 */
 	@Override
 	public String toString()
 	{
