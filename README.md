@@ -1,6 +1,10 @@
 # TouchControl
-This project is intended to be a touch screen without the screen by using only a camera and some code. 
-Current demos include: MousePad, PianoKey, and VolumeSlider.
+This project is intended to be a touch screen without the screen by using only a camera and some code.
+
+## Demos
+* MousePad
+* PianoKey
+* VolumeSlider
 
 ## Prerequisites
 
@@ -18,21 +22,31 @@ Current demos include: MousePad, PianoKey, and VolumeSlider.
 ## Getting Started (Software)
 
 ### Installing Java
+<p align="justify">
 Installing the Java Development Kit (JDK) is only a requirement for developers. Users who plan to solely use the program (run the pre-built JAR file) are only required to install the Java Runtime Environment (JRE). The minimum compiler compliance is Java 9, meaning that systems with installations of Java 9 and above can run the JAR. Simply install the version of your choice from the link above and run the installer.
+</p>
 
 ### Building OpenCV
-[OpenCV](https://opencv.org/) is required for both developers and users in order to run this code. Please read the tutorial on [Installing OpenCV for Java](https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst) in order to correctly build OpenCV for your operating system.
+<p align="justify">
+<a href="https://opencv.org/">OpenCV</a> is required for both developers and users in order to run this code. Please read the tutorial on <a href="https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst">Installing OpenCV for Java</a> in order to correctly build OpenCV for your operating system.
+</p>
 
 ### Downloading NirCmd
-"[NirCmd](http://www.nirsoft.net/utils/nircmd.html) is a small command-line utility that allows you to do some useful tasks without displaying any user interface." This program is used by the VolumeSlider demo to control system volume on Windows. As there are no runnable versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code.
+<p align="justify">
+"<a href="http://www.nirsoft.net/utils/nircmd.html">NirCmd</a> is a small command-line utility that allows you to do some useful tasks without displaying any user interface." This program is used by the VolumeSlider demo to control system volume on Windows. As there are no runnable versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code.
+</p>
 
 ## Getting Started (Hardware)
 
 ### Camera
+<p align="justify">
 Position a camera (rotated at 180 degrees) above a dark surface. The camera should remain stationary while using the program and the background should remain unchanged. A darker surface will lead to better detection.
+</p>
 
 ### Operation
+<p align="justify">
 Move your finger (or any object) through the area covered by the camera. The program will detect the location of the object and perform an action depending on the Touchable object being used.
+</p>
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
