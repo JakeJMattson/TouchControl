@@ -6,7 +6,8 @@ import org.opencv.core.*;
 import org.opencv.core.Point;
 
 /**
- * Demo Pad - Example application of abstract pad; Controls mouse pointer position
+ * Demo Pad - Example application of abstract pad;
+ * Controls mouse pointer position
  *
  * @author mattson543
  */

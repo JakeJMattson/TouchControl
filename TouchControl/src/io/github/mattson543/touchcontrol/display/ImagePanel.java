@@ -28,11 +28,7 @@ public class ImagePanel extends JPanel
 	//Class methods
 	public void setImage(BufferedImage image)
 	{
-		//Save image
 		this.image = image;
-
-		//Draw image onto panel
-		this.repaint();
 	}
 
 	@Override

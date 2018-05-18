@@ -5,7 +5,8 @@ import java.io.*;
 import org.opencv.core.*;
 
 /**
- * Demo Slider - Example application of abstract slider; Controls system volume
+ * Demo Slider - Example application of abstract slider;
+ * Controls system volume
  *
  * @author mattson543
  */

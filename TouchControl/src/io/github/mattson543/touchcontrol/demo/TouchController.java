@@ -1,14 +1,12 @@
-/**
+/*
  * Project Description:
  * This project is designed to be a touch screen without the screen.
- *
  * Current configuration:
  * Required:
  * Camera should be rotated 180 degrees
- *
  * Optimal:
- * Object to detect should be lighter than background (darker background is better)
- *
+ * Object to detect should be lighter than background
+ * (darker background is better)
  * Class Description:
  * Demo (main) class to run functions
  */
@@ -34,7 +32,7 @@ public class TouchController
 	private void start()
 	{
 		//Debug mode switch
-		boolean debugMode = true;
+		boolean debugMode = false;
 
 		//Load OpenCV
 		boolean isLoaded = LibraryLoader.loadLibrary(LibraryLoader.IDE);
@@ -75,9 +73,10 @@ public class TouchController
 
 		//Create demo groups
 		Scalar color = new Scalar(0, 255, 0);
-		//TouchableGroup group = new TouchableGroup();
-		//TouchableGroup group = createBasicDemo(cameraWidth, cameraHeight, color);
-		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup mouse = createMouseDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup piano = createPianoDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup volume = createVolumeDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup group = piano;
 
 		//Print objects in group
 		if (debugMode)
@@ -129,35 +128,26 @@ public class TouchController
 		JOptionPane.showMessageDialog(null, message, "Fatal Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-	@SuppressWarnings("unused")
-	private TouchableGroup createBasicDemo(double cameraWidth, double cameraHeight, Scalar color)
+	private TouchableGroup createMouseDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
-		//Dimension variables
-		int padding = 10;
-		Point topLeft, bottomRight;
-
 		//Create component dimensions
-		topLeft = new Point(padding, padding);
-		bottomRight = new Point(0.75 * cameraWidth - padding, cameraHeight - padding);
+		int padding = 10;
+		Point topLeft = new Point(padding, padding);
+		Point bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
 		Rect mousePadRect = new Rect(topLeft, bottomRight);
 
-		//Create component dimensions
-		topLeft = new Point(0.75 * cameraWidth, padding);
-		bottomRight = new Point(cameraWidth - padding, cameraHeight - padding);
-		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
-
+		//Create component
 		MousePad mousePad = new MousePad(mousePadRect, color);
-		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect, color);
 
-		//Create group of Touchable objects
-		TouchableGroup group = new TouchableGroup(mousePad, volumeSlider);
+		//Create group
+		TouchableGroup group = new TouchableGroup(mousePad);
 
 		return group;
 	}
 
 	private TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
-		//Create group of Touchable objects
+		//Create group
 		TouchableGroup group = new TouchableGroup();
 
 		//Keys for demo piano
@@ -178,12 +168,29 @@ public class TouchController
 			Point bottomRight = new Point(x2 - padding, y2 - padding);
 			Rect keyRect = new Rect(topLeft, bottomRight);
 
-			//Create piano key
+			//Create component
 			PianoKey key = new PianoKey(keyRect, color, notes[i]);
 
-			//Add current key to group
+			//Add component to group
 			group.addComponent(key);
 		}
+
+		return group;
+	}
+
+	private TouchableGroup createVolumeDemo(double cameraWidth, double cameraHeight, Scalar color)
+	{
+		//Create component dimensions
+		int padding = 10;
+		Point topLeft = new Point(0.4 * cameraWidth, padding);
+		Point bottomRight = new Point(0.6 * cameraWidth - padding, cameraHeight - padding);
+		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
+
+		//Create component
+		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect, color);
+
+		//Create group
+		TouchableGroup group = new TouchableGroup(volumeSlider);
 
 		return group;
 	}

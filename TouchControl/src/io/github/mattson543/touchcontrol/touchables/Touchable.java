@@ -12,7 +12,7 @@ import org.opencv.imgproc.Imgproc;
 public abstract class Touchable
 {
 	/**
-	 * Location and size of Touchable
+	 * Location and size of the Touchable
 	 */
 	protected Rect dimensions;
 	/**
