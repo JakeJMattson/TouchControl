@@ -65,11 +65,11 @@ public class TouchController
 		double cameraHeight = camera.getHeight();
 
 		//Create display
-		ImageFrame rawDisplay = new ImageFrame();
+		ImageFrame rawDisplay = new ImageFrame("Touch Control");
 		ImageFrame filteredDisplay = null;
 
 		if (debugMode)
-			filteredDisplay = new ImageFrame();
+			filteredDisplay = new ImageFrame("Debug frame");
 
 		//Create demo groups
 		Scalar color = new Scalar(0, 255, 0);
@@ -151,7 +151,7 @@ public class TouchController
 		TouchableGroup group = new TouchableGroup();
 
 		//Keys for demo piano
-		char[] notes = {'C', 'D', 'E', 'F', 'G', 'A', 'B'};
+		char[] notes = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
 
 		//Create keys
 		for (int i = 0; i < notes.length; i++)

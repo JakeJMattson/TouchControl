@@ -22,10 +22,10 @@ public class ImageFrame extends JFrame
 	 */
 	private ImagePanel imagePanel;
 
-	public ImageFrame()
+	public ImageFrame(String title)
 	{
 		super();
-		buildGUI();
+		buildGUI(title);
 	}
 
 	/**
@@ -39,12 +39,15 @@ public class ImageFrame extends JFrame
 	}
 
 	/**
-	 * Construct the display and its children
+	 * Construct the display and its children.
+	 *
+	 * @param title
+	 *            Title of the frame
 	 */
-	private void buildGUI()
+	private void buildGUI(String title)
 	{
 		//Create frame
-		setTitle("Touch Control");
+		setTitle(title);
 		addWindowListener(createWindowListener());
 		imagePanel = new ImagePanel();
 		add(imagePanel);

@@ -15,18 +15,12 @@ public class ImageHandler
 {
 	private final BackgroundSubtractorMOG2 subtractor;
 
-	//Constructors
 	public ImageHandler()
 	{
 		//Create subtractor
 		subtractor = Video.createBackgroundSubtractorMOG2();
 	}
 
-	//Setters
-
-	//Getters
-
-	//Class methods
 	public void trainSubtractor(Mat image)
 	{
 		//Average samples to create background model
