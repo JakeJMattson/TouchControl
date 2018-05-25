@@ -1,8 +1,3 @@
-/**
- * Class Description:
- * Apply the same function over many Touchable objects
- */
-
 package io.github.mattson543.touchcontrol.utils;
 
 import java.util.ArrayList;
@@ -11,11 +6,18 @@ import org.opencv.core.*;
 
 import io.github.mattson543.touchcontrol.touchables.Touchable;
 
+/**
+ * Apply the same function over many Touchable objects.
+ *
+ * @author mattson543
+ */
 public class TouchableGroup
 {
+	/**
+	 * A List of all components in the group
+	 */
 	private final ArrayList<Touchable> components;
 
-	//Constructors
 	public TouchableGroup(Touchable...components)
 	{
 		this.components = new ArrayList<>();
@@ -26,7 +28,6 @@ public class TouchableGroup
 		checkCollision();
 	}
 
-	//Setters
 	public void setColor(Scalar color)
 	{
 		for (Touchable component : components)
@@ -45,13 +46,11 @@ public class TouchableGroup
 		components.remove(component);
 	}
 
-	//Getters
 	public ArrayList<Touchable> getComponents()
 	{
 		return components;
 	}
 
-	//Class actions
 	public void updateDetectionPoint(Mat filteredImage)
 	{
 		for (Touchable component : components)
@@ -70,20 +69,11 @@ public class TouchableGroup
 			component.performAction();
 	}
 
-	@Override
-	public String toString()
-	{
-		final String NEWLINE = System.lineSeparator();
-
-		String groupData = "Touchable objects in group (" + super.toString() + "): "
-				+ components.size() + NEWLINE + NEWLINE;
-
-		for (int i = 0; i < components.size(); i++)
-			groupData += "(" + i + ")" + components.get(i).toString() + NEWLINE;
-
-		return groupData;
-	}
-
+	/**
+	 * Check whether or not any of the components in
+	 * the group overlaps (collides) with another.
+	 * Note: This has no return. It is only to print warnings.
+	 */
 	private void checkCollision()
 	{
 		for (int i = 0; i < components.size(); i++)
@@ -104,5 +94,23 @@ public class TouchableGroup
 					System.out.println("Touchable colision warning in " + super.toString() +
 							" between component " + i + " and component " + j);
 			}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		final String NEWLINE = System.lineSeparator();
+
+		String groupData = "Touchable objects in group (" + super.toString() + "): "
+				+ components.size() + NEWLINE + NEWLINE;
+
+		for (int i = 0; i < components.size(); i++)
+			groupData += "(" + i + ")" + components.get(i).toString() + NEWLINE;
+
+		return groupData;
 	}
 }

@@ -1,8 +1,3 @@
-/**
- * Class Description:
- * Handler - performs image (matrix) operations such as filtering and converting
- */
-
 package io.github.mattson543.touchcontrol.utils;
 
 import java.awt.image.BufferedImage;
@@ -11,22 +6,41 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.video.*;
 
+/**
+ * Utility class containing functionality related to image (matrix) operations.
+ *
+ * @author mattson543
+ */
 public class ImageHandler
 {
+	/**
+	 * Background model
+	 */
 	private final BackgroundSubtractorMOG2 subtractor;
 
 	public ImageHandler()
 	{
-		//Create subtractor
 		subtractor = Video.createBackgroundSubtractorMOG2();
 	}
 
+	/**
+	 * Average samples to create a background model.
+	 *
+	 * @param image
+	 *            Sample background
+	 */
 	public void trainSubtractor(Mat image)
 	{
-		//Average samples to create background model
 		subtractor.apply(image, new Mat(), 0.2);
 	}
 
+	/**
+	 * Apply all filtering required to process the image.
+	 *
+	 * @param image
+	 *            Matrix to be filtered
+	 * @return Filtered image
+	 */
 	public Mat filterImage(Mat image)
 	{
 		//Create an empty matrix the same size as the current frame
@@ -57,6 +71,13 @@ public class ImageHandler
 		return filteredImage;
 	}
 
+	/**
+	 * Convert an OpenCV Mat to a Java BufferedImage.
+	 *
+	 * @param matrix
+	 *            OpenCV Mat
+	 * @return BufferedImage
+	 */
 	public BufferedImage convertMatToImage(Mat matrix)
 	{
 		//Get image dimensions
