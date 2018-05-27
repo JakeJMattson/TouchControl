@@ -82,6 +82,8 @@ public class Camera
 	/**
 	 * Whether or not the camera was successfully initialized.
 	 * Returns false if no camera is plugged in.
+	 *
+	 * @return Open status
 	 */
 	public boolean isOpened()
 	{
