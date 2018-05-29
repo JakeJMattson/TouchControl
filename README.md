@@ -1,5 +1,7 @@
 # TouchControl
-This project is intended to be a touch screen without the screen by using only a camera and some code.
+<p align="justify">
+This project is intended to be a touch screen without the screen. By using only a camera and some code, you can perform various actions just by waving around your hand. Below you can find some example applications of this concept.
+</p>
 
 ## Demos
 ### MousePad
