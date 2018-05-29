@@ -2,9 +2,17 @@
 This project is intended to be a touch screen without the screen by using only a camera and some code.
 
 ## Demos
-* MousePad
-* PianoKey
-* VolumeSlider
+### MousePad
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2-ApniOaKHs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+### PianoKey
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-dA1ajjv6EE?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+### VolumeSlider
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Fd5ODeewL9c?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Prerequisites
 
