@@ -6,15 +6,24 @@ This project is intended to be a touch screen without the screen. By using only 
 ## Demos
 ### MousePad
 
-<iframe width="100%" src="https://www.youtube.com/embed/2-ApniOaKHs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div style="position:relative;padding-top:56.25%;">
+  <iframe src="https://www.youtube.com/embed/2-ApniOaKHs?rel=0" frameborder="0" allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+</div>
 
 ### PianoKey
 
-<iframe width="100%" src="https://www.youtube.com/embed/-dA1ajjv6EE?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div style="position:relative;padding-top:56.25%;">
+  <iframe src="https://www.youtube.com/embed/-dA1ajjv6EE?rel=0" frameborder="0" allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+</div>
 
 ### VolumeSlider
 
-<iframe width="100%" src="https://www.youtube.com/embed/Fd5ODeewL9c?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div style="position:relative;padding-top:56.25%;">
+  <iframe src="https://www.youtube.com/embed/Fd5ODeewL9c?rel=0" frameborder="0" allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+</div>
 
 ## Prerequisites
 
