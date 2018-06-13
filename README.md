@@ -1,8 +1,16 @@
 # TouchControl
 
-[![GitHub license](https://img.shields.io/badge/Java-10-blue.svg)](http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html)
-
-[![GitHub license](https://img.shields.io/badge/OpenCV-3.4.1-blue.svg)](https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.1/opencv-3.4.1-vc14_vc15.exe/download)
+<p align="center">
+	<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html">
+    <img src="https://img.shields.io/badge/Java-10-blue.svg" alt="Java 10">
+  </a>
+  <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.1/opencv-3.4.1-vc14_vc15.exe/download">
+    <img src="https://img.shields.io/badge/OpenCV-3.4.1-blue.svg">
+  </a>
+  <a href="LICENSE.md">
+    <img src="https://img.shields.io/github/license/mattson543/TouchControl.svg">
+  </a>
+</p>
 
 <p align="justify">
 This project is intended to be a touch screen without the screen. By using only a camera and some code, you can perform various actions just by waving around your hand. Below you can find some example applications of this concept.
