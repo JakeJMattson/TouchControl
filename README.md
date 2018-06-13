@@ -1,4 +1,9 @@
 # TouchControl
+
+[![GitHub license](https://img.shields.io/badge/Java-10-blue.svg)](http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html)
+
+[![GitHub license](https://img.shields.io/badge/OpenCV-3.4.1-blue.svg)](https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.1/opencv-3.4.1-vc14_vc15.exe/download)
+
 <p align="justify">
 This project is intended to be a touch screen without the screen. By using only a camera and some code, you can perform various actions just by waving around your hand. Below you can find some example applications of this concept.
 </p>
@@ -27,32 +32,37 @@ This project is intended to be a touch screen without the screen. By using only 
 
 ## Prerequisites
 
-### Operating Systems Supported
-* Windows
-* Mac OS
-* Linux
-
-### Java
-* [Java Downloads](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+### Languages
+* [Java](https://go.java/index.html?intcmp=gojava-banner-java-com)
 
 ### Libraries
-* [OpenCV 3.4.1](https://opencv.org/releases.html)
+* [OpenCV](https://opencv.org/about.html)
+* [NirCmd](http://www.nirsoft.net/utils/nircmd.html)
 
 ## Getting Started (Software)
+<p align="justify">
+The minimum version requirements for each additional software are listed in the badges at the top of the readme.
+It is recommended that you install the most updated version at your time of installation.
+</p>
 
 ### Installing Java
 <p align="justify">
-Installing the Java Development Kit (JDK) is only a requirement for developers. Users who plan to solely use the program (run the pre-built JAR file) are only required to install the Java Runtime Environment (JRE). The minimum compiler compliance is Java 9, meaning that systems with installations of Java 9 and above can run the JAR. Simply install the version of your choice from the link above and run the installer.
+Visit the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java Downloads</a> 
+page and select the version of your choice.
+Run the installer and follow the instructions provided.
 </p>
 
 ### Building OpenCV
 <p align="justify">
-<a href="https://opencv.org/">OpenCV</a> is required for both developers and users in order to run this code. Please read the tutorial on <a href="https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst">Installing OpenCV for Java</a> in order to correctly build OpenCV for your operating system.
+Visit the <a href="https://opencv.org/releases.html">OpenCV Releases</a> page and select the version of your choice.
+Note: older versions of this library may work with this code, but this is not gauranteed.
+Please read the tutorial on
+<a href="https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst">Installing OpenCV for Java</a> 
+in order to correctly build OpenCV for your operating system.
 </p>
 
 ### Downloading NirCmd
-<p align="justify">
-"<a href="http://www.nirsoft.net/utils/nircmd.html">NirCmd</a> is a small command-line utility that allows you to do some useful tasks without displaying any user interface." This program is used by the VolumeSlider demo to control system volume on Windows. As there are no runnable versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code.
+This code is used by the VolumeSlider demo to control system volume on Windows. As there are no runnable versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code. You can download either the [64 bit](http://www.nirsoft.net/utils/nircmd-x64.zip) or the [32 bit](http://www.nirsoft.net/utils/nircmd.zip) versions.
 </p>
 
 ## Getting Started (Hardware)
