@@ -1,8 +1,8 @@
 # TouchControl
 
 <p align="center">
-	<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html">
-    <img src="https://img.shields.io/badge/Java-10-blue.svg" alt="Java 10">
+  <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">
+    <img src="https://img.shields.io/badge/Java-8-blue.svg" alt="Java 8">
   </a>
   <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.1/opencv-3.4.1-vc14_vc15.exe/download">
     <img src="https://img.shields.io/badge/OpenCV-3.4.1-blue.svg">
