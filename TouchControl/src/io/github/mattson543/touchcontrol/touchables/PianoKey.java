@@ -5,7 +5,7 @@ import javax.sound.midi.*;
 import org.opencv.core.*;
 
 /**
- * Demo Button - Example application of abstract button;
+ * Demo Button - Example application of abstract button
  * Plays note when touched
  *
  * @author mattson543
