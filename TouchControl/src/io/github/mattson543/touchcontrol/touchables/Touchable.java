@@ -63,13 +63,16 @@ public abstract class Touchable
 		//Point of possible detection
 		Point farthestPoint = null;
 
-		//Control flow
-		boolean doneSearching = false;
+		//Range variables
+		Point tl = dimensions.tl(); //Top left
+		Point br = dimensions.br(); //Bottom right
+		int tlX = (int) tl.x, tlY = (int) tl.y;
+		int brX = (int) br.x, brY = (int) br.y;
 
 		//Search for non-background pixel
-		for (int y = dimensions.y; y < dimensions.y + dimensions.height; y++)
+		for (int y = tlY; y < brY; y++)
 		{
-			for (int x = dimensions.x + dimensions.width; x >= dimensions.x; x--)
+			for (int x = brX; x >= tlX; x--)
 			{
 				//Get pixel at coordinate
 				double[] pixelColor = filteredImage.get(y, x);
@@ -78,11 +81,10 @@ public abstract class Touchable
 				if (pixelColor[0] != 0.0)
 				{
 					farthestPoint = new Point(x, y);
-					doneSearching = true;
 					break;
 				}
 			}
-			if (doneSearching)
+			if (farthestPoint != null)
 				break;
 		}
 
@@ -112,12 +114,8 @@ public abstract class Touchable
 	{
 		if (image != null)
 		{
-			//Determine rectangle points
-			Point upperLeft = new Point(dimensions.x, dimensions.y);
-			Point lowerRight = new Point(dimensions.x + dimensions.width, dimensions.y + dimensions.height);
-
 			//Draw component
-			Imgproc.rectangle(image, upperLeft, lowerRight, color, 3);
+			Imgproc.rectangle(image, dimensions.tl(), dimensions.br(), color, 3);
 
 			//Draw circle around detection
 			if (hasDetection())
