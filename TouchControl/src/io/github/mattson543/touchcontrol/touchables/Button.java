@@ -3,7 +3,7 @@ package io.github.mattson543.touchcontrol.touchables;
 import org.opencv.core.*;
 
 /**
- * Abstract Button - contains general (clickable) button behavior
+ * Abstract Button - contains general (clickable) button behavior.
  *
  * @author mattson543
  */
@@ -22,8 +22,8 @@ public abstract class Button extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#
-	 * updateDetectionPoint(org.opencv.core.Mat)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable
+	 * #updateDetectionPoint(org.opencv.core.Mat)
 	 */
 	@Override
 	public Point updateDetectionPoint(Mat filteredImage)

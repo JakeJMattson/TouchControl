@@ -11,17 +11,17 @@ import org.opencv.videoio.*;
 public class Camera
 {
 	/**
-	 * OpenCV VideoCapture to access physical camera.
+	 * OpenCV VideoCapture to access physical camera
 	 */
 	private final VideoCapture camera;
 	/**
-	 * How each frame will be flipped upon reading.
+	 * How each frame will be flipped upon reading
 	 */
 	private final Integer rotation;
 
 	/**
 	 * When no index is specified, '0' can be used to request
-	 * the default camera available to the operating system.
+	 * the default camera available to the operating system
 	 */
 	private static final int DEFAULT_CAMERA = 0;
 
@@ -81,7 +81,6 @@ public class Camera
 
 	/**
 	 * Whether or not the camera was successfully initialized.
-	 * Returns false if no camera is plugged in.
 	 *
 	 * @return Open status
 	 */

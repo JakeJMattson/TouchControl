@@ -44,10 +44,10 @@ public class TouchController
 			displayFatalError("Failed to load OpenCV!");
 
 		//Force exit
-		System.out.print("Program terminated.");
 		System.exit(0);
 	}
 
+	@SuppressWarnings("unused")
 	private void capture(boolean debugMode)
 	{
 		//Start camera
@@ -61,8 +61,7 @@ public class TouchController
 		}
 
 		//Get camera properties
-		double cameraWidth = camera.getWidth();
-		double cameraHeight = camera.getHeight();
+		double cameraWidth = camera.getWidth(), cameraHeight = camera.getHeight();
 
 		//Create display
 		ImageFrame rawDisplay = new ImageFrame("Touch Control");

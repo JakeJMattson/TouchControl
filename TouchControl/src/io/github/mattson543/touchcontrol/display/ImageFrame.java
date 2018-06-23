@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 /**
- * Frame - GUI container for components (holds ImagePanel)
+ * Frame - GUI container for components (holds ImagePanel).
  *
  * @author mattson543
  */

@@ -4,7 +4,7 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
 /**
- * Abstract Slider - contains general slider behavior
+ * Abstract Slider - contains general slider behavior.
  *
  * @author mattson543
  */
@@ -27,8 +27,8 @@ public abstract class Slider extends Touchable
 	 */
 	private boolean shouldLabel;
 
-	private static int DEFAULT_DIVISIONS = 100;
-	private static boolean DEFAULT_VISIBILITY = true;
+	private static final int DEFAULT_DIVISIONS = 100;
+	private static final boolean DEFAULT_VISIBILITY = true;
 
 	protected Slider(Rect dimensions, Scalar color)
 	{
@@ -63,7 +63,7 @@ public abstract class Slider extends Touchable
 	}
 
 	/**
-	 * Determine the size of each division sector
+	 * Determine the size of each division sector.
 	 */
 	private void calculateDivisionSize()
 	{
@@ -72,7 +72,7 @@ public abstract class Slider extends Touchable
 	}
 
 	/**
-	 * Confine number of divisions to range
+	 * Confine number of divisions to range.
 	 *
 	 * @param divisions
 	 *            Attempted value
@@ -90,8 +90,8 @@ public abstract class Slider extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#
-	 * updateDetectionPoint(org.opencv.core.Mat)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable
+	 * #updateDetectionPoint(org.opencv.core.Mat)
 	 */
 	@Override
 	public Point updateDetectionPoint(Mat filteredImage)
@@ -107,8 +107,8 @@ public abstract class Slider extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#drawOnto(org.
-	 * opencv.core.Mat)
+	 * @see io.github.mattson543.touchcontrol.touchables.Touchable
+	 * #drawOnto(org.opencv.core.Mat)
 	 */
 	@Override
 	public void drawOnto(Mat image)
@@ -119,7 +119,7 @@ public abstract class Slider extends Touchable
 	}
 
 	/**
-	 * Draw status line and label
+	 * Draw status line and label.
 	 *
 	 * @param image
 	 *            Matrix

@@ -6,8 +6,8 @@ import org.opencv.core.*;
 import org.opencv.core.Point;
 
 /**
- * Demo Pad - Example application of abstract pad
- * Controls mouse pointer position
+ * Demo Pad - Example application of abstract pad.
+ * Controls mouse pointer position.
  *
  * @author mattson543
  */
@@ -28,7 +28,7 @@ public class MousePad extends Pad
 	}
 
 	/**
-	 * Initialize fields
+	 * Initialize fields.
 	 */
 	private void init()
 	{
@@ -62,7 +62,7 @@ public class MousePad extends Pad
 
 	/**
 	 * Convert the internal detection point from a point on the Touchable to a
-	 * point on the screen so the mouse can be moved anywhere on the display
+	 * point on the screen so the mouse can be moved anywhere on the display.
 	 *
 	 * @return Adjusted point
 	 */

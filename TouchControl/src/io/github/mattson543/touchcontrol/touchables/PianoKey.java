@@ -5,8 +5,8 @@ import javax.sound.midi.*;
 import org.opencv.core.*;
 
 /**
- * Demo Button - Example application of abstract button
- * Plays note when touched
+ * Demo Button - Example application of abstract button.
+ * Plays note when touched.
  *
  * @author mattson543
  */
@@ -32,7 +32,7 @@ public class PianoKey extends Button
 	}
 
 	/**
-	 * Initialize fields
+	 * Initialize fields.
 	 *
 	 * @param note
 	 *            Character representation of the note
@@ -47,7 +47,7 @@ public class PianoKey extends Button
 	}
 
 	/**
-	 * Determine the key of the note based on the character input
+	 * Determine the key of the note based on the character input.
 	 *
 	 * @param note
 	 *            Character representation of the note
@@ -65,7 +65,7 @@ public class PianoKey extends Button
 	}
 
 	/**
-	 * Create the audio player
+	 * Create the audio player.
 	 */
 	private void setupMidi()
 	{
@@ -99,7 +99,6 @@ public class PianoKey extends Button
 			if (!hasPlayed)
 			{
 				playNote(1000);
-
 				hasPlayed = true;
 			}
 		}
@@ -108,7 +107,7 @@ public class PianoKey extends Button
 	}
 
 	/**
-	 * Play the note that was assigned to the key
+	 * Play the note that was assigned to the key.
 	 *
 	 * @param duration
 	 *            The amount of ms that the note should be held for

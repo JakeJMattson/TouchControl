@@ -5,8 +5,8 @@ import java.io.*;
 import org.opencv.core.*;
 
 /**
- * Demo Slider - Example application of abstract slider
- * Controls system volume
+ * Demo Slider - Example application of abstract slider.
+ * Controls system volume.
  *
  * @author mattson543
  */
@@ -42,7 +42,7 @@ public class VolumeSlider extends Slider
 	}
 
 	/**
-	 * Set system volume
+	 * Set system volume.
 	 *
 	 * @param volume
 	 *            New target system volume
@@ -50,8 +50,7 @@ public class VolumeSlider extends Slider
 	private void setVolume(int volume)
 	{
 		//Nircmd allows volume changing
-		File nircmd = new File("./nircmd/nircmd.exe");
-		String nircmdPath = nircmd.getAbsolutePath();
+		String nircmdPath = new File("nircmd/nircmd.exe").getAbsolutePath();
 
 		//Convert volume to nircmd standard
 		double nircmdVolume = 655.35 * volume;
@@ -68,7 +67,7 @@ public class VolumeSlider extends Slider
 	}
 
 	/**
-	 * Execute a system command (Calls nircmd from command line)
+	 * Execute a system command (Call nircmd from command line).
 	 *
 	 * @param command
 	 *            System command

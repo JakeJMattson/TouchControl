@@ -3,7 +3,7 @@ package io.github.mattson543.touchcontrol.touchables;
 import org.opencv.core.*;
 
 /**
- * Abstract Pad - contains general pad behavior
+ * Abstract Pad - contains general pad behavior.
  *
  * @author mattson543
  */

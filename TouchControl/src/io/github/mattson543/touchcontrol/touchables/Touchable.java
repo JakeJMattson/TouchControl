@@ -4,7 +4,7 @@ import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 
 /**
- * Contains fundamental functions for a Touchable object of any kind
+ * Contains fundamental functions for a Touchable object of any kind.
  *
  * @author mattson543
  */
@@ -52,7 +52,7 @@ public abstract class Touchable
 
 	/**
 	 * Search through the range of the Touchable and find the first occurrence
-	 * of a non-background pixel
+	 * of a non-background pixel.
 	 *
 	 * @param filteredImage
 	 *            Binary image
@@ -95,7 +95,7 @@ public abstract class Touchable
 	}
 
 	/**
-	 * Determine whether or not the current detection point is null
+	 * Determine whether or not the current detection point is null.
 	 *
 	 * @return Detection status
 	 */
@@ -105,7 +105,7 @@ public abstract class Touchable
 	}
 
 	/**
-	 * Draw Touchable onto image
+	 * Draw Touchable onto image.
 	 *
 	 * @param image
 	 *            Matrix to draw the Touchable object onto
@@ -124,12 +124,12 @@ public abstract class Touchable
 	}
 
 	/**
-	 * Enforce method requirement on subclasses
+	 * Abstract action that each Touchable subclass will perform.
 	 */
 	public abstract void performAction();
 
 	/**
-	 * Formatter to create a uniform toString() for all Touchable objects
+	 * Formatter to create a uniform toString() for all Touchable objects.
 	 *
 	 * @param name
 	 *            Name of field being formatted

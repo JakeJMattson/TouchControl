@@ -81,19 +81,12 @@ public class ImageHandler
 	public BufferedImage convertMatToImage(Mat matrix)
 	{
 		//Get image dimensions
-		int width = matrix.width();
-		int height = matrix.height();
+		int width = matrix.width(), height = matrix.height();
 
-		//Determine image type
-		int type;
+		int type = matrix.channels() != 1 ? BufferedImage.TYPE_3BYTE_BGR : BufferedImage.TYPE_BYTE_GRAY;
 
-		if (matrix.channels() != 1)
-		{
-			type = BufferedImage.TYPE_3BYTE_BGR;
+		if (type == BufferedImage.TYPE_3BYTE_BGR)
 			Imgproc.cvtColor(matrix, matrix, Imgproc.COLOR_BGR2RGB);
-		}
-		else
-			type = BufferedImage.TYPE_BYTE_GRAY;
 
 		//Get matrix data
 		byte[] data = new byte[width * height * (int) matrix.elemSize()];
