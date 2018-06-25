@@ -10,6 +10,9 @@
   <a href="LICENSE.md">
     <img src="https://img.shields.io/github/license/mattson543/TouchControl.svg">
   </a>
+  <a href="https://GitHub.com/mattson543/TouchControl/releases/">
+    <img src="https://img.shields.io/github/release/mattson543/TouchControl.svg" alt="release">
+  </a>
 </p>
 
 <p align="justify">
