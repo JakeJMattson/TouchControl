@@ -62,7 +62,7 @@ public class ImageFrame extends JFrame
 	 */
 	private WindowListener createWindowListener()
 	{
-		WindowListener listener = new WindowAdapter()
+		return new WindowAdapter()
 		{
 			@Override
 			public void windowClosing(WindowEvent windowClosed)
@@ -71,8 +71,6 @@ public class ImageFrame extends JFrame
 				isOpen = false;
 			}
 		};
-
-		return listener;
 	}
 
 	/**

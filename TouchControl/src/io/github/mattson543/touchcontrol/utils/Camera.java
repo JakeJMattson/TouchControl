@@ -13,7 +13,7 @@ public class Camera
 	/**
 	 * OpenCV VideoCapture to access physical camera
 	 */
-	private final VideoCapture camera;
+	private final VideoCapture videoCapture;
 	/**
 	 * How each frame will be flipped upon reading
 	 */
@@ -38,7 +38,7 @@ public class Camera
 	public Camera(Integer rotation, int cameraIndex)
 	{
 		this.rotation = rotation;
-		camera = new VideoCapture(cameraIndex);
+		videoCapture = new VideoCapture(cameraIndex);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Camera
 	 */
 	public double getWidth()
 	{
-		return camera.get(Videoio.CAP_PROP_FRAME_WIDTH);
+		return videoCapture.get(Videoio.CAP_PROP_FRAME_WIDTH);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Camera
 	 */
 	public double getHeight()
 	{
-		return camera.get(Videoio.CAP_PROP_FRAME_HEIGHT);
+		return videoCapture.get(Videoio.CAP_PROP_FRAME_HEIGHT);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class Camera
 	{
 		Mat frame = new Mat();
 
-		camera.read(frame);
+		videoCapture.read(frame);
 
 		if (rotation != null)
 			Core.flip(frame, frame, rotation);
@@ -86,7 +86,7 @@ public class Camera
 	 */
 	public boolean isOpened()
 	{
-		return camera.isOpened();
+		return videoCapture.isOpened();
 	}
 
 	/**
@@ -94,6 +94,6 @@ public class Camera
 	 */
 	public void release()
 	{
-		camera.release();
+		videoCapture.release();
 	}
 }

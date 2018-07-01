@@ -1,6 +1,6 @@
 package io.github.mattson543.touchcontrol.utils;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import org.opencv.core.*;
 
@@ -46,7 +46,7 @@ public class TouchableGroup
 		components.remove(component);
 	}
 
-	public ArrayList<Touchable> getComponents()
+	public List<Touchable> getComponents()
 	{
 		return components;
 	}
@@ -105,12 +105,14 @@ public class TouchableGroup
 	{
 		final String NEWLINE = System.lineSeparator();
 
-		String groupData = "Touchable objects in group (" + super.toString() + "): "
-				+ components.size() + NEWLINE + NEWLINE;
+		StringBuilder groupData = new StringBuilder();
+
+		groupData.append("Touchable objects in group (" + super.toString() + "): "
+				+ components.size() + NEWLINE + NEWLINE);
 
 		for (int i = 0; i < components.size(); i++)
-			groupData += "(" + i + ")" + components.get(i).toString() + NEWLINE;
+			groupData.append("(" + i + ")" + components.get(i).toString() + NEWLINE);
 
-		return groupData;
+		return groupData.toString();
 	}
 }

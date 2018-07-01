@@ -18,8 +18,8 @@ public class MousePad extends Pad
 	 */
 	private Robot mouseMover;
 
-	private final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	private final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	private static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	private static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 	public MousePad(Rect dimensions, Scalar color)
 	{

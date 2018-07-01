@@ -61,7 +61,8 @@ public class TouchController
 		}
 
 		//Get camera properties
-		double cameraWidth = camera.getWidth(), cameraHeight = camera.getHeight();
+		double cameraWidth = camera.getWidth();
+		double cameraHeight = camera.getHeight();
 
 		//Create display
 		ImageFrame rawDisplay = new ImageFrame("Touch Control");
@@ -139,9 +140,7 @@ public class TouchController
 		MousePad mousePad = new MousePad(mousePadRect, color);
 
 		//Create group
-		TouchableGroup group = new TouchableGroup(mousePad);
-
-		return group;
+		return new TouchableGroup(mousePad);
 	}
 
 	private TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight, Scalar color)
@@ -189,8 +188,6 @@ public class TouchController
 		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect, color);
 
 		//Create group
-		TouchableGroup group = new TouchableGroup(volumeSlider);
-
-		return group;
+		return new TouchableGroup(volumeSlider);
 	}
 }

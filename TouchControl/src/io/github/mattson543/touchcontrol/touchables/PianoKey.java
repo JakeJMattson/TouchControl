@@ -60,8 +60,7 @@ public class PianoKey extends Button
 
 		//Determine key
 		int basekey = 60;
-		int key = basekey + offsets[note - 'A'];
-		return key;
+		return basekey + offsets[note - 'A'];
 	}
 
 	/**
