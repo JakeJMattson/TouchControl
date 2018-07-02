@@ -1,5 +1,3 @@
-# TouchControl
-
 <p align="center">
   <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">
     <img src="https://img.shields.io/badge/Java-8-blue.svg" alt="Java 8">
