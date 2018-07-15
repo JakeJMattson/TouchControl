@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.utils;
+package io.github.JakeJMattson.touchcontrol.utils;
 
 import org.opencv.core.*;
 import org.opencv.videoio.*;
@@ -6,7 +6,7 @@ import org.opencv.videoio.*;
 /**
  * Utility class containing functionality related to OpenCV VideoCapture.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public class Camera
 {

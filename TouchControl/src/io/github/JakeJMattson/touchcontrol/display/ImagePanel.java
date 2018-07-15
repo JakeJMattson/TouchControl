@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.display;
+package io.github.JakeJMattson.touchcontrol.display;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 /**
  * Panel - holds image to display in GUI.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 @SuppressWarnings("serial")
 public class ImagePanel extends JPanel

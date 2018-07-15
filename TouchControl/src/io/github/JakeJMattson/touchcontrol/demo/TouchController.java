@@ -11,15 +11,15 @@
  * Demo (main) class to run functions
  */
 
-package io.github.mattson543.touchcontrol.demo;
+package io.github.JakeJMattson.touchcontrol.demo;
 
 import javax.swing.JOptionPane;
 
 import org.opencv.core.*;
 
-import io.github.mattson543.touchcontrol.display.ImageFrame;
-import io.github.mattson543.touchcontrol.touchables.*;
-import io.github.mattson543.touchcontrol.utils.*;
+import io.github.JakeJMattson.touchcontrol.display.ImageFrame;
+import io.github.JakeJMattson.touchcontrol.touchables.*;
+import io.github.JakeJMattson.touchcontrol.utils.*;
 
 public class TouchController
 {

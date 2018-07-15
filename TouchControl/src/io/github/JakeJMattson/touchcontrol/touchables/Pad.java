@@ -1,11 +1,11 @@
-package io.github.mattson543.touchcontrol.touchables;
+package io.github.JakeJMattson.touchcontrol.touchables;
 
 import org.opencv.core.*;
 
 /**
  * Abstract Pad - contains general pad behavior.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public abstract class Pad extends Touchable
 {
@@ -16,7 +16,7 @@ public abstract class Pad extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#toString()
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable#toString()
 	 */
 	@Override
 	public String toString()

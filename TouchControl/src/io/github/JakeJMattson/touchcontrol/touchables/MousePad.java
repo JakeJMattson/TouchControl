@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.touchables;
+package io.github.JakeJMattson.touchcontrol.touchables;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ import org.opencv.core.Point;
  * Demo Pad - Example application of abstract pad.
  * Controls mouse pointer position.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public class MousePad extends Pad
 {
@@ -45,7 +45,7 @@ public class MousePad extends Pad
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * io.github.mattson543.touchcontrol.touchables.Touchable#performAction()
+	 * io.github.JakeJMattson.touchcontrol.touchables.Touchable#performAction()
 	 */
 	@Override
 	public void performAction()
@@ -82,7 +82,7 @@ public class MousePad extends Pad
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Pad#toString()
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Pad#toString()
 	 */
 	@Override
 	public String toString()

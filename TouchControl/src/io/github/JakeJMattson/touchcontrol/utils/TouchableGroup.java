@@ -1,15 +1,15 @@
-package io.github.mattson543.touchcontrol.utils;
+package io.github.JakeJMattson.touchcontrol.utils;
 
 import java.util.*;
 
 import org.opencv.core.*;
 
-import io.github.mattson543.touchcontrol.touchables.Touchable;
+import io.github.JakeJMattson.touchcontrol.touchables.Touchable;
 
 /**
  * Apply the same function over many Touchable objects.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public class TouchableGroup
 {

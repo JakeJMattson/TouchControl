@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.touchables;
+package io.github.JakeJMattson.touchcontrol.touchables;
 
 import java.io.*;
 
@@ -8,7 +8,7 @@ import org.opencv.core.*;
  * Demo Slider - Example application of abstract slider.
  * Controls system volume.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public class VolumeSlider extends Slider
 {
@@ -25,7 +25,7 @@ public class VolumeSlider extends Slider
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * io.github.mattson543.touchcontrol.touchables.Touchable#performAction()
+	 * io.github.JakeJMattson.touchcontrol.touchables.Touchable#performAction()
 	 */
 	@Override
 	public void performAction()
@@ -86,7 +86,7 @@ public class VolumeSlider extends Slider
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Slider#toString()
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Slider#toString()
 	 */
 	@Override
 	public String toString()

@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.display;
+package io.github.JakeJMattson.touchcontrol.display;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 /**
  * Frame - GUI container for components (holds ImagePanel).
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 @SuppressWarnings("serial")
 public class ImageFrame extends JFrame

@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.touchables;
+package io.github.JakeJMattson.touchcontrol.touchables;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
@@ -6,7 +6,7 @@ import org.opencv.imgproc.Imgproc;
 /**
  * Contains fundamental functions for a Touchable object of any kind.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 
 public abstract class Touchable
@@ -62,6 +62,7 @@ public abstract class Touchable
 	{
 		//Point of possible detection
 		Point farthestPoint = null;
+		double background = 0.0;
 
 		//Range variables
 		Point tl = dimensions.tl(); //Top left
@@ -73,17 +74,12 @@ public abstract class Touchable
 		for (int y = tlY; y < brY; y++)
 		{
 			for (int x = brX; x >= tlX; x--)
-			{
-				//Get pixel at coordinate
-				double[] pixelColor = filteredImage.get(y, x);
-
-				//Check pixel for non-background coloring
-				if (pixelColor[0] != 0.0)
+				if (filteredImage.get(y, x)[0] != background)
 				{
 					farthestPoint = new Point(x, y);
 					break;
 				}
-			}
+
 			if (farthestPoint != null)
 				break;
 		}

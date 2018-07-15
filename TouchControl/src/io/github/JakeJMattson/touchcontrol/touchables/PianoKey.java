@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.touchables;
+package io.github.JakeJMattson.touchcontrol.touchables;
 
 import javax.sound.midi.*;
 
@@ -8,7 +8,7 @@ import org.opencv.core.*;
  * Demo Button - Example application of abstract button.
  * Plays note when touched.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public class PianoKey extends Button
 {
@@ -87,7 +87,7 @@ public class PianoKey extends Button
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * io.github.mattson543.touchcontrol.touchables.Touchable#performAction()
+	 * io.github.JakeJMattson.touchcontrol.touchables.Touchable#performAction()
 	 */
 	@Override
 	public void performAction()
@@ -140,7 +140,7 @@ public class PianoKey extends Button
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Button#toString()
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Button#toString()
 	 */
 	@Override
 	public String toString()

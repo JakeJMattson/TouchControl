@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.touchables;
+package io.github.JakeJMattson.touchcontrol.touchables;
 
 import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
@@ -6,7 +6,7 @@ import org.opencv.imgproc.Imgproc;
 /**
  * Abstract Slider - contains general slider behavior.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public abstract class Slider extends Touchable
 {
@@ -90,7 +90,7 @@ public abstract class Slider extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable
 	 * #updateDetectionPoint(org.opencv.core.Mat)
 	 */
 	@Override
@@ -107,7 +107,7 @@ public abstract class Slider extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable
 	 * #drawOnto(org.opencv.core.Mat)
 	 */
 	@Override
@@ -154,7 +154,7 @@ public abstract class Slider extends Touchable
 
 	/*
 	 * (non-Javadoc)
-	 * @see io.github.mattson543.touchcontrol.touchables.Touchable#toString()
+	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable#toString()
 	 */
 	@Override
 	public String toString()

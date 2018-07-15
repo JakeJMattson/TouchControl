@@ -1,4 +1,4 @@
-package io.github.mattson543.touchcontrol.utils;
+package io.github.JakeJMattson.touchcontrol.utils;
 
 import java.awt.image.BufferedImage;
 
@@ -9,7 +9,7 @@ import org.opencv.video.*;
 /**
  * Utility class containing functionality related to image (matrix) operations.
  *
- * @author mattson543
+ * @author JakeJMattson
  */
 public class ImageHandler
 {
