@@ -6,10 +6,10 @@
     <img src="https://img.shields.io/badge/OpenCV-3.4.1-blue.svg">
   </a>
   <a href="LICENSE.md">
-    <img src="https://img.shields.io/github/license/mattson543/TouchControl.svg">
+    <img src="https://img.shields.io/github/license/JakeJMattson/TouchControl.svg">
   </a>
-  <a href="https://GitHub.com/mattson543/TouchControl/releases/">
-    <img src="https://img.shields.io/github/release/mattson543/TouchControl.svg" alt="release">
+  <a href="https://GitHub.com/JakeJMattson/TouchControl/releases/">
+    <img src="https://img.shields.io/github/release/JakeJMattson/TouchControl.svg" alt="release">
   </a>
 </p>
 
