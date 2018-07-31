@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"io.github.JakeJMattson.touchcontrol.display"},{"l":"io.github.JakeJMattson.touchcontrol.touchables"},{"l":"io.github.JakeJMattson.touchcontrol.utils"}]
