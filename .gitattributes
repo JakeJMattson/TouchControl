@@ -1,3 +1,0 @@
-# Mark the repo language as Java
-* linguist-vendored
-*.java linguist-vendored=false
