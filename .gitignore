@@ -1,15 +1,17 @@
-### Eclipse ###
-.metadata
-.recommenders
-.settings/
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.loadpath
+### IntelliJ ###
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+.idea/modules.xml
+.idea/misc.xml
+
+# Sonarlint plugin
+.idea/sonarlint
 
 ### Java ###
 # Binaries #
