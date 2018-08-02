@@ -53,12 +53,13 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 	 * Attempted value
 	 * @return Value within range
 	 */
-	private fun validateDivisions(divisions: Int): Int {
-		var divisions = divisions
+	private fun validateDivisions(attemptedVal: Int): Int {
 
-		if (divisions < 0)
+		var divisions = attemptedVal
+
+		if (attemptedVal < 0)
 			divisions = 0
-		else if (divisions > 100)
+		else if (attemptedVal > 100)
 			divisions = 100
 
 		return divisions
@@ -74,7 +75,7 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 		super.updateDetectionPoint(filteredImage)
 
 		if (hasDetection())
-			division = Math.ceil((detectionPoint.y - dimensions.y) / divisionSize).toInt()
+			division = Math.ceil((detectionPoint!!.y - dimensions.y) / divisionSize).toInt()
 
 		return detectionPoint
 	}
@@ -84,7 +85,7 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable
 	 * #drawOnto(org.opencv.core.Mat)
 	 */
-	override fun drawOnto(image: Mat) {
+	override fun drawOnto(image: Mat?) {
 		super.drawOnto(image)
 		setSliderStatus(image)
 	}
@@ -95,7 +96,7 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 	 * @param image
 	 * Matrix
 	 */
-	private fun setSliderStatus(image: Mat) {
+	private fun setSliderStatus(image: Mat?) {
 		//Calculate position of line
 		val linePosition = divisionSize * division + dimensions.y
 

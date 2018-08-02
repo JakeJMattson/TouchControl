@@ -46,8 +46,8 @@ class MousePad(dimensions: Rect, color: Scalar) : Pad(dimensions, color) {
 
 		//Adjust point
 		val adjustedPoint = Point()
-		adjustedPoint.x = detectionPoint.x * widthAdjustment
-		adjustedPoint.y = detectionPoint.y * heightAdjustment
+		adjustedPoint.x = detectionPoint!!.x * widthAdjustment
+		adjustedPoint.y = detectionPoint!!.y * heightAdjustment
 
 		return adjustedPoint
 	}

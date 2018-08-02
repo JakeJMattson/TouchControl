@@ -62,12 +62,5 @@ class VolumeSlider(dimensions: Rect, color: Scalar) : Slider(dimensions, color) 
 	 * @param command
 	 * System command
 	 */
-	private fun executeCommand(command: String) {
-		try {
-			Runtime.getRuntime().exec(command)
-		}
-		catch (e: IOException) {
-			e.printStackTrace()
-		}
-	}
+	private fun executeCommand(command: String) = Runtime.getRuntime().exec(command)
 }

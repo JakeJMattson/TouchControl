@@ -1,10 +1,11 @@
 package io.github.JakeJMattson.touchcontrol.utils;
 
-import java.util.*;
-
-import org.opencv.core.*;
-
 import io.github.JakeJMattson.touchcontrol.touchables.Touchable;
+import org.opencv.core.Mat;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+
+import java.util.*;
 
 /**
  * Apply the same function over many Touchable objects.
@@ -18,13 +19,9 @@ public class TouchableGroup
 	 */
 	private final ArrayList<Touchable> components;
 
-	public TouchableGroup(Touchable...components)
+	public TouchableGroup(Touchable... components)
 	{
-		this.components = new ArrayList<>();
-
-		for (Touchable component : components)
-			this.components.add(component);
-
+		this.components = new ArrayList<>(Arrays.asList(components));
 		checkCollision();
 	}
 
@@ -37,7 +34,6 @@ public class TouchableGroup
 	public void addComponent(Touchable component)
 	{
 		components.add(component);
-
 		checkCollision();
 	}
 
