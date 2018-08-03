@@ -13,13 +13,20 @@
 
 package io.github.JakeJMattson.touchcontrol.demo;
 
-import javax.swing.JOptionPane;
-
-import org.opencv.core.*;
-
 import io.github.JakeJMattson.touchcontrol.display.ImageFrame;
-import io.github.JakeJMattson.touchcontrol.touchables.*;
-import io.github.JakeJMattson.touchcontrol.utils.*;
+import io.github.JakeJMattson.touchcontrol.touchables.MousePad;
+import io.github.JakeJMattson.touchcontrol.touchables.PianoKey;
+import io.github.JakeJMattson.touchcontrol.touchables.VolumeSlider;
+import io.github.JakeJMattson.touchcontrol.utils.Camera;
+import io.github.JakeJMattson.touchcontrol.utils.ImageHandler;
+import io.github.JakeJMattson.touchcontrol.utils.LibraryLoader;
+import io.github.JakeJMattson.touchcontrol.utils.TouchableGroup;
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+
+import javax.swing.*;
 
 public class TouchController
 {

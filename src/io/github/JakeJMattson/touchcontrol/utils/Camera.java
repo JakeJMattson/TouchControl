@@ -1,7 +1,9 @@
 package io.github.JakeJMattson.touchcontrol.utils;
 
-import org.opencv.core.*;
-import org.opencv.videoio.*;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.videoio.VideoCapture;
+import org.opencv.videoio.Videoio;
 
 /**
  * Utility class containing functionality related to OpenCV VideoCapture.

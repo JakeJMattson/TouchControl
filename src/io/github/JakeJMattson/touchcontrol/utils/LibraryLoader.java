@@ -1,11 +1,10 @@
 package io.github.JakeJMattson.touchcontrol.utils;
 
-import java.io.*;
-import java.nio.file.Files;
+import org.opencv.core.Core;
 
 import javax.swing.*;
-
-import org.opencv.core.Core;
+import java.io.*;
+import java.nio.file.Files;
 
 /**
  * Load the OpenCV library.
@@ -80,8 +79,7 @@ public final class LibraryLoader
 	 * Attempt to read a file containing the full OpenCV path.
 	 * Note: this will not exist on the first run.
 	 *
-	 * @param pathFile
-	 *            Path where the file is expected to be
+	 * @param pathFile Path where the file is expected to be
 	 * @return Path from file (if read)
 	 */
 	private static String readFile(File pathFile)
@@ -241,10 +239,8 @@ public final class LibraryLoader
 	/**
 	 * Write the OpenCV path to a file for future launches.
 	 *
-	 * @param pathFile
-	 *            File to contain the path
-	 * @param libraryPath
-	 *            Full path to OpenCV library
+	 * @param pathFile    File to contain the path
+	 * @param libraryPath Full path to OpenCV library
 	 */
 	private static void createFile(File pathFile, String libraryPath)
 	{
@@ -266,8 +262,7 @@ public final class LibraryLoader
 	/**
 	 * Load the OpenCV library into the system.
 	 *
-	 * @param libraryPath
-	 *            Full path to OpenCV library
+	 * @param libraryPath Full path to OpenCV library
 	 * @return Whether or not the operation was successful
 	 */
 	private static boolean load(String libraryPath)
