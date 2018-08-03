@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">
-    <img src="https://img.shields.io/badge/Java-8-blue.svg" alt="Java 8">
+  <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html">
+    <img src="https://img.shields.io/badge/Java-10-blue.svg" alt="Java 10">
   </a>
   <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.1/opencv-3.4.1-vc14_vc15.exe/download">
     <img src="https://img.shields.io/badge/OpenCV-3.4.1-blue.svg">
@@ -71,7 +71,8 @@ in order to correctly build OpenCV for your operating system.
 </p>
 
 ### Downloading NirCmd
-This code is used by the VolumeSlider demo to control system volume on Windows. As there are no runnable versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code. You can download either the [64 bit](http://www.nirsoft.net/utils/nircmd-x64.zip) or the [32 bit](http://www.nirsoft.net/utils/nircmd.zip) versions.
+<p align="justify">
+NirCmd is used by the VolumeSlider demo to control system volume on Windows. As there are no released versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code. You can download either the <a href="http://www.nirsoft.net/utils/nircmd-x64.zip">64 bit</a> or the <a href="http://www.nirsoft.net/utils/nircmd.zip">32 bit</a> version.
 </p>
 
 ## Getting Started (Hardware)
