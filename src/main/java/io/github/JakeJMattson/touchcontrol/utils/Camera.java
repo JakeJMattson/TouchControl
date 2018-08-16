@@ -5,6 +5,8 @@ import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.Videoio;
 
+import javax.swing.*;
+
 /**
  * Utility class containing functionality related to OpenCV VideoCapture.
  *
@@ -41,6 +43,9 @@ public class Camera
 	{
 		this.rotation = rotation;
 		videoCapture = new VideoCapture(cameraIndex);
+
+		if (!isOpened())
+			JOptionPane.showMessageDialog(null, "No camera detected!", "Missing hardware", JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**

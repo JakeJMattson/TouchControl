@@ -19,7 +19,6 @@ import io.github.JakeJMattson.touchcontrol.touchables.PianoKey;
 import io.github.JakeJMattson.touchcontrol.touchables.VolumeSlider;
 import io.github.JakeJMattson.touchcontrol.utils.Camera;
 import io.github.JakeJMattson.touchcontrol.utils.ImageHandler;
-import io.github.JakeJMattson.touchcontrol.utils.LibraryLoader;
 import io.github.JakeJMattson.touchcontrol.utils.TouchableGroup;
 import org.bytedeco.javacpp.*;
 import org.opencv.core.*;
@@ -30,27 +29,11 @@ public class TouchController
 {
 	public static void main(String[] args)
 	{
-
-		TouchController driver = new TouchController();
-		driver.start();
-	}
-
-	private void start()
-	{
-		//Debug mode switch
-		boolean debugMode = true;
-
-		Loader.load(opencv_java.class);
-		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-
 		//Load OpenCV
-		//boolean isLoaded = LibraryLoader.loadLibrary();
+		Loader.load(opencv_java.class);
 
-		//Run program
-		if (true)
-			capture(debugMode);
-		else
-			displayFatalError("Failed to load OpenCV!");
+		//Start program (with debug mode switch)
+		new TouchController().capture(true);
 
 		//Force exit
 		System.exit(0);
@@ -64,10 +47,7 @@ public class TouchController
 
 		//Do not start if no camera is available
 		if (!camera.isOpened())
-		{
-			displayFatalError("No camera detected!");
 			return;
-		}
 
 		//Get camera properties
 		double cameraWidth = camera.getWidth();
@@ -130,11 +110,6 @@ public class TouchController
 
 		//Return camera control to OS
 		camera.release();
-	}
-
-	private void displayFatalError(String message)
-	{
-		JOptionPane.showMessageDialog(null, message, "Fatal Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private TouchableGroup createMouseDemo(double cameraWidth, double cameraHeight, Scalar color)
