@@ -122,7 +122,7 @@ public final class LibraryLoader
 		//OS-specific variables
 		String osName = System.getProperty("os.name");
 		String javaDir = "", extension = "";
-		boolean isValidOS = false;
+		boolean isValidOS = true;
 
 		if (osName.startsWith("Windows"))
 		{
@@ -134,9 +134,6 @@ public final class LibraryLoader
 
 			//Set OS-specific library extension
 			extension = ".dll";
-
-			//Mark OS as valid
-			isValidOS = true;
 		}
 		else if (osName.equals("Mac OS X"))
 		{
@@ -148,9 +145,6 @@ public final class LibraryLoader
 
 			//Set OS-specific library extension
 			extension = ".dylib";
-
-			//Mark OS as valid
-			isValidOS = true;
 		}
 		else if (osName.contains("nix") || osName.contains("nux") || osName.contains("aix"))
 		{
@@ -159,13 +153,15 @@ public final class LibraryLoader
 
 			//Set OS-specific library extension
 			extension = ".so";
-
-			//Mark OS as valid
-			isValidOS = true;
 		}
 		else
+		{
+			//Mark OS as invalid
+			isValidOS = false;
+
 			JOptionPane.showMessageDialog(null, "Unsupported Operating System", "Sorry...",
 					JOptionPane.INFORMATION_MESSAGE);
+		}
 
 		//Path determined to be library file
 		String libraryPath = null;
@@ -268,7 +264,7 @@ public final class LibraryLoader
 	private static boolean load(String libraryPath)
 	{
 		File libraryFile = new File(libraryPath);
-		File tempFile = null;
+		File tempFile;
 
 		//Create temporary file
 		try

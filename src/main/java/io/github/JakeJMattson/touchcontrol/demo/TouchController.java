@@ -21,10 +21,8 @@ import io.github.JakeJMattson.touchcontrol.utils.Camera;
 import io.github.JakeJMattson.touchcontrol.utils.ImageHandler;
 import io.github.JakeJMattson.touchcontrol.utils.LibraryLoader;
 import io.github.JakeJMattson.touchcontrol.utils.TouchableGroup;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
+import org.bytedeco.javacpp.*;
+import org.opencv.core.*;
 
 import javax.swing.*;
 
@@ -32,6 +30,7 @@ public class TouchController
 {
 	public static void main(String[] args)
 	{
+
 		TouchController driver = new TouchController();
 		driver.start();
 	}
@@ -39,13 +38,16 @@ public class TouchController
 	private void start()
 	{
 		//Debug mode switch
-		boolean debugMode = false;
+		boolean debugMode = true;
+
+		Loader.load(opencv_java.class);
+		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
 		//Load OpenCV
-		boolean isLoaded = LibraryLoader.loadLibrary();
+		//boolean isLoaded = LibraryLoader.loadLibrary();
 
 		//Run program
-		if (isLoaded)
+		if (true)
 			capture(debugMode);
 		else
 			displayFatalError("Failed to load OpenCV!");
@@ -83,7 +85,7 @@ public class TouchController
 		TouchableGroup mouse = createMouseDemo(cameraWidth, cameraHeight, color);
 		TouchableGroup piano = createPianoDemo(cameraWidth, cameraHeight, color);
 		TouchableGroup volume = createVolumeDemo(cameraWidth, cameraHeight, color);
-		TouchableGroup group = piano;
+		TouchableGroup group = volume;
 
 		//Print objects in group
 		if (debugMode)

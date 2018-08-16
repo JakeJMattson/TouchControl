@@ -100,7 +100,6 @@ public class TouchableGroup
 	public String toString()
 	{
 		final String NEWLINE = System.lineSeparator();
-
 		StringBuilder groupData = new StringBuilder();
 
 		groupData.append("Touchable objects in group (" + super.toString() + "): "
