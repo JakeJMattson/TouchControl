@@ -1,4 +1,4 @@
-package io.github.JakeJMattson.touchcontrol.touchables
+package io.github.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
 
@@ -16,11 +16,6 @@ abstract class ToggleButton protected constructor(dimensions: Rect, color: Scala
 	 * Whether or not the button has already switched states internally
 	 */
 	private var hasSwitched: Boolean = false
-
-	init {
-		isToggledOn = false
-		hasSwitched = false
-	}
 
 	/*
 	 * (non-Javadoc)

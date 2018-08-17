@@ -1,10 +1,8 @@
-package io.github.JakeJMattson.touchcontrol.touchables
+package io.github.jakejmattson.touchcontrol.touchables
 
+import org.opencv.core.*
 import org.opencv.core.Point
-import org.opencv.core.Rect
-import org.opencv.core.Scalar
-import java.awt.Robot
-import java.awt.Toolkit
+import java.awt.*
 
 /**
  * Demo Pad - Example application of abstract pad.

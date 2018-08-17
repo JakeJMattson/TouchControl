@@ -1,11 +1,8 @@
-package io.github.JakeJMattson.touchcontrol.utils
+package io.github.jakejmattson.touchcontrol.utils
 
-import org.opencv.core.Core
-import org.opencv.core.Mat
-import org.opencv.videoio.VideoCapture
-import org.opencv.videoio.Videoio
-
-import javax.swing.*
+import org.opencv.core.*
+import org.opencv.videoio.*
+import javax.swing.JOptionPane
 
 /**
  * Utility class containing functionality related to OpenCV VideoCapture.

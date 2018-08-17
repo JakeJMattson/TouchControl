@@ -1,4 +1,4 @@
-package io.github.JakeJMattson.touchcontrol.touchables
+package io.github.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc

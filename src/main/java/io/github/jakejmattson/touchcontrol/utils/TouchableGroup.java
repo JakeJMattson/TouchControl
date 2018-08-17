@@ -1,9 +1,7 @@
-package io.github.JakeJMattson.touchcontrol.utils;
+package io.github.jakejmattson.touchcontrol.utils;
 
-import io.github.JakeJMattson.touchcontrol.touchables.Touchable;
-import org.opencv.core.Mat;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
+import io.github.jakejmattson.touchcontrol.touchables.Touchable;
+import org.opencv.core.*;
 
 import java.util.*;
 
@@ -87,7 +85,7 @@ public class TouchableGroup
 
 				//Print warning
 				if (overlaps)
-					System.out.println("Touchable colision warning in " + super.toString() +
+					System.out.println("Touchable collision warning in " + super.toString() +
 							" between component " + i + " and component " + j);
 			}
 	}
@@ -99,14 +97,14 @@ public class TouchableGroup
 	@Override
 	public String toString()
 	{
-		final String NEWLINE = System.lineSeparator();
+		String NEWLINE = System.lineSeparator();
 		StringBuilder groupData = new StringBuilder();
 
-		groupData.append("Touchable objects in group (" + super.toString() + "): "
-				+ components.size() + NEWLINE + NEWLINE);
+		groupData.append("Touchable objects in group (").append(super.toString()).append("): ")
+				.append(components.size()).append(NEWLINE).append(NEWLINE);
 
 		for (int i = 0; i < components.size(); i++)
-			groupData.append("(" + i + ")" + components.get(i).toString() + NEWLINE);
+			groupData.append("(").append(i).append(")").append(components.get(i).toString()).append(NEWLINE);
 
 		return groupData.toString();
 	}

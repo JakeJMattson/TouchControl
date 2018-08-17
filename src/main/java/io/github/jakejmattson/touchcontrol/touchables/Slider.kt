@@ -1,4 +1,4 @@
-package io.github.JakeJMattson.touchcontrol.touchables
+package io.github.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
@@ -8,7 +8,7 @@ import org.opencv.imgproc.Imgproc
  *
  * @author JakeJMattson
  */
-abstract class Slider protected constructor(dimensions: Rect, color: Scalar): Touchable(dimensions, color) {
+abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : Touchable(dimensions, color) {
 	/**
 	 * Number of sectors that the slider is divided into
 	 */
@@ -49,7 +49,6 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 	/**
 	 * Confine number of divisions to range.
 	 *
-	 * @param divisions
 	 * Attempted value
 	 * @return Value within range
 	 */

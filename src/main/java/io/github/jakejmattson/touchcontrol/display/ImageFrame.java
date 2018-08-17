@@ -1,9 +1,7 @@
-package io.github.JakeJMattson.touchcontrol.display;
+package io.github.jakejmattson.touchcontrol.display;
 
-import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import javax.swing.JFrame;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -11,7 +9,6 @@ import java.awt.image.BufferedImage;
  *
  * @author JakeJMattson
  */
-@SuppressWarnings("serial")
 public class ImageFrame extends JFrame
 {
 	/**
@@ -42,7 +39,8 @@ public class ImageFrame extends JFrame
 	/**
 	 * Construct the display and its children.
 	 *
-	 * @param title Title of the frame
+	 * @param title
+	 * 		Title of the frame
 	 */
 	private void buildGUI(String title)
 	{
@@ -76,7 +74,8 @@ public class ImageFrame extends JFrame
 	/**
 	 * Display an image in the frame.
 	 *
-	 * @param image Image to be shown
+	 * @param image
+	 * 		Image to be shown
 	 */
 	public void showImage(BufferedImage image)
 	{
@@ -84,7 +83,7 @@ public class ImageFrame extends JFrame
 		imagePanel.setImage(image);
 
 		//Redraw frame
-		this.repaint();
+		repaint();
 
 		//Resize frame to fit image
 		pack();

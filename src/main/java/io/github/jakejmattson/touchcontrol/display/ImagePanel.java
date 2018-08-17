@@ -1,6 +1,6 @@
-package io.github.JakeJMattson.touchcontrol.display;
+package io.github.jakejmattson.touchcontrol.display;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -9,8 +9,7 @@ import java.awt.image.BufferedImage;
  *
  * @author JakeJMattson
  */
-@SuppressWarnings("serial")
-public class ImagePanel extends JPanel
+class ImagePanel extends JPanel
 {
 	/**
 	 * Image to be displayed to the user

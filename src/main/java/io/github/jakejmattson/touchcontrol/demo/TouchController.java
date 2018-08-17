@@ -2,8 +2,6 @@
  * Project Description:
  * This project is designed to be a touch screen without the screen.
  * Current configuration:
- * Required:
- * Camera should be rotated 180 degrees
  * Optimal:
  * Object to detect should be lighter than background
  * (darker background is better)
@@ -11,21 +9,15 @@
  * Demo (main) class to run functions
  */
 
-package io.github.JakeJMattson.touchcontrol.demo;
+package io.github.jakejmattson.touchcontrol.demo;
 
-import io.github.JakeJMattson.touchcontrol.display.ImageFrame;
-import io.github.JakeJMattson.touchcontrol.touchables.MousePad;
-import io.github.JakeJMattson.touchcontrol.touchables.PianoKey;
-import io.github.JakeJMattson.touchcontrol.touchables.VolumeSlider;
-import io.github.JakeJMattson.touchcontrol.utils.Camera;
-import io.github.JakeJMattson.touchcontrol.utils.ImageHandler;
-import io.github.JakeJMattson.touchcontrol.utils.TouchableGroup;
+import io.github.jakejmattson.touchcontrol.display.ImageFrame;
+import io.github.jakejmattson.touchcontrol.touchables.*;
+import io.github.jakejmattson.touchcontrol.utils.*;
 import org.bytedeco.javacpp.*;
 import org.opencv.core.*;
 
-import javax.swing.*;
-
-public class TouchController
+class TouchController
 {
 	public static void main(String[] args)
 	{
@@ -39,7 +31,6 @@ public class TouchController
 		System.exit(0);
 	}
 
-	@SuppressWarnings("unused")
 	private void capture(boolean debugMode)
 	{
 		//Start camera
@@ -55,17 +46,14 @@ public class TouchController
 
 		//Create display
 		ImageFrame rawDisplay = new ImageFrame("Touch Control");
-		ImageFrame filteredDisplay = null;
-
-		if (debugMode)
-			filteredDisplay = new ImageFrame("Debug frame");
+		ImageFrame filteredDisplay = debugMode ? new ImageFrame("Debug frame") : null;
 
 		//Create demo groups
 		Scalar color = new Scalar(0, 255, 0);
-		TouchableGroup mouse = createMouseDemo(cameraWidth, cameraHeight, color);
-		TouchableGroup piano = createPianoDemo(cameraWidth, cameraHeight, color);
-		TouchableGroup volume = createVolumeDemo(cameraWidth, cameraHeight, color);
-		TouchableGroup group = volume;
+
+		//TouchableGroup group = createMouseDemo(cameraWidth, cameraHeight, color);
+		//TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup group = createVolumeDemo(cameraWidth, cameraHeight, color);
 
 		//Print objects in group
 		if (debugMode)
@@ -74,14 +62,9 @@ public class TouchController
 		//Create image modifier
 		ImageHandler handler = new ImageHandler();
 
+		//Give sample background images to subtractor
 		for (int i = 0; i < 5; i++)
-		{
-			//Read image from camera
-			Mat background = camera.getFrame();
-
-			//Give sample background image to subtractor
-			handler.trainSubtractor(background);
-		}
+			handler.trainSubtractor(camera.getFrame());
 
 		//While frame is open and camera is detected
 		while (rawDisplay.isOpen() && camera.isOpened())

@@ -1,12 +1,8 @@
-package io.github.JakeJMattson.touchcontrol.utils;
+package io.github.jakejmattson.touchcontrol.utils;
 
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
+import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.video.BackgroundSubtractorMOG2;
-import org.opencv.video.Video;
+import org.opencv.video.*;
 
 import java.awt.image.BufferedImage;
 
@@ -30,7 +26,8 @@ public class ImageHandler
 	/**
 	 * Average samples to create a background model.
 	 *
-	 * @param image Sample background
+	 * @param image
+	 * 		Sample background
 	 */
 	public void trainSubtractor(Mat image)
 	{
@@ -40,7 +37,9 @@ public class ImageHandler
 	/**
 	 * Apply all filtering required to process the image.
 	 *
-	 * @param image Matrix to be filtered
+	 * @param image
+	 * 		Matrix to be filtered
+	 *
 	 * @return Filtered image
 	 */
 	public Mat filterImage(Mat image)
@@ -76,7 +75,9 @@ public class ImageHandler
 	/**
 	 * Convert an OpenCV Mat to a Java BufferedImage.
 	 *
-	 * @param matrix OpenCV Mat
+	 * @param matrix
+	 * 		OpenCV Mat
+	 *
 	 * @return BufferedImage
 	 */
 	public BufferedImage convertMatToImage(Mat matrix)

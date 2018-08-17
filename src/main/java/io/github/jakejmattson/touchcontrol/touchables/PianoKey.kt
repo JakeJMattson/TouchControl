@@ -1,8 +1,7 @@
-package io.github.JakeJMattson.touchcontrol.touchables
-
-import javax.sound.midi.*
+package io.github.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
+import javax.sound.midi.*
 
 /**
  * Demo Button - Example application of abstract button.
@@ -18,17 +17,13 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char) : Button(dimensions,
 	/**
 	 * Sound to be played
 	 */
-	private var key: Int = 0
+	private var key: Int = determineKey(note)
 	/**
 	 * Audio player
 	 */
 	private var channel: MidiChannel? = null
 
 	init {
-		//Determine key to play based on note
-		key = determineKey(note)
-
-		//Get channel to play note on
 		setupMidi()
 	}
 

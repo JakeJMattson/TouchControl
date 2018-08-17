@@ -1,8 +1,7 @@
-package io.github.JakeJMattson.touchcontrol.touchables
-
-import java.io.*
+package io.github.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
+import java.io.File
 
 /**
  * Demo Slider - Example application of abstract slider.

@@ -7,24 +7,10 @@
     <artifactId>TouchControl</artifactId>
     <version>2.0</version>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <kotlin.version>1.2.60</kotlin.version>
         <exec.mainClass>TouchController</exec.mainClass>
     </properties>
     <dependencies>
-
-        <!-- OpenCV -->
-        <dependency>
-            <groupId>org.bytedeco</groupId>
-            <artifactId>javacv-platform</artifactId>
-            <version>1.4.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bytedeco.javacpp-presets</groupId>
-            <artifactId>opencv-platform</artifactId>
-            <version>3.4.2-1.4.2</version>
-        </dependency>
 
         <!-- Kotlin -->
         <dependency>
@@ -32,6 +18,14 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+
+        <!-- OpenCV -->
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>opencv-platform</artifactId>
+            <version>3.4.2-1.4.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -59,6 +53,13 @@
                         <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
