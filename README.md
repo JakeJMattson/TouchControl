@@ -2,14 +2,17 @@
   <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html">
     <img src="https://img.shields.io/badge/Java-10-blue.svg" alt="Java 10">
   </a>
-  <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.1/opencv-3.4.1-vc14_vc15.exe/download">
-    <img src="https://img.shields.io/badge/OpenCV-3.4.1-blue.svg">
+  <a href="https://kotlinlang.org/">
+    <img src="https://img.shields.io/badge/Kotlin-1.2.60-blue.svg" alt="Kotlin 1.2.60">
   </a>
-  <a href="LICENSE.md">
-    <img src="https://img.shields.io/github/license/JakeJMattson/TouchControl.svg">
+  <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.2/opencv-3.4.2-vc14_vc15.exe/download">
+    <img src="https://img.shields.io/badge/OpenCV-3.4.2-blue.svg">
   </a>
   <a href="https://GitHub.com/JakeJMattson/TouchControl/releases/">
     <img src="https://img.shields.io/github/release/JakeJMattson/TouchControl.svg" alt="release">
+  </a>
+  <a href="LICENSE.md">
+    <img src="https://img.shields.io/github/license/JakeJMattson/TouchControl.svg">
   </a>
 </p>
 
@@ -43,6 +46,7 @@ This project is intended to be a touch screen without the screen. By using only 
 
 ### Languages
 * [Java](https://go.java/index.html?intcmp=gojava-banner-java-com)
+* [Kotlin](https://kotlinlang.org/)
 
 ### Libraries
 * [OpenCV](https://opencv.org/about.html)
@@ -61,7 +65,14 @@ page and select the version of your choice.
 Run the installer and follow the instructions provided.
 </p>
 
+### Installing Kotlin
+**Note:** Included as Maven dependency. Below are manual instructions.
+<br /><br />
+Kotlin can be added to your project manually by following the instructions on the Kotlin website. It supports [IntelliJ](https://kotlinlang.org/docs/tutorials/getting-started.html), [Eclipse](https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html), or a simple [command line compiler](https://kotlinlang.org/docs/tutorials/command-line.html).
+
 ### Building OpenCV
+**Note:** Included as Maven dependency. Below are manual instructions.
+<br/>
 <p align="justify">
 Visit the <a href="https://opencv.org/releases.html">OpenCV Releases</a> page and select the version of your choice.
 Note: older versions of this library may work with this code, but this is not gauranteed.
@@ -87,9 +98,15 @@ Position a camera (rotated at 180 degrees) above a dark surface. The camera shou
 Move your finger (or any object) through the area covered by the camera. The program will detect the location of the object and perform an action depending on the Touchable object being used.
 </p>
 
+## Building
+TouchControl is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
+* [IntelliJ](https://www.tutorialspoint.com/maven/maven_intellij_idea.htm)
+* [Eclipse](https://www.tutorialspoint.com/maven/maven_eclispe_ide.htm)
+* [NetBeans](https://www.tutorialspoint.com/maven/maven_netbeans.htm)
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-* [OS Compatibility](https://stackoverflow.com/a/18780559)
+* [OpenCV binaries (Maven)](https://github.com/bytedeco/javacpp-presets)
 * [Foreground Extraction](https://stackoverflow.com/a/27036614)
