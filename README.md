@@ -54,7 +54,7 @@ This project is intended to be a touch screen without the screen. By using only 
 
 ## Getting Started (Software)
 <p align="justify">
-The versions for the additional software used to build this project are listed in the badges at the top of the page. This is handled by Maven. If building manually, other versions may work, but this is not guaranteed.
+The version numbers for each additional software used to build this project are listed in the badges at the top of the page. These dependencies are handled by Maven during build. If building manually, other versions may work, but this is not guaranteed.
 </p>
 
 ### Installing Java
