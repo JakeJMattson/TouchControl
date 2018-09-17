@@ -18,10 +18,10 @@ import org.opencv.core.*;
 
 class TouchController
 {
+	private static final boolean DEBUG_MODE = true;
+
 	public static void main(String[] args)
 	{
-		boolean isDebugging = true;
-
 		//Load OpenCV
 		Loader.load(opencv_java.class);
 
@@ -38,13 +38,13 @@ class TouchController
 
 		//Create display
 		ImageFrame rawDisplay = new ImageFrame("Touch Control");
-		ImageFrame filteredDisplay = isDebugging ? new ImageFrame("Debug frame") : null;
+		ImageFrame filteredDisplay = DEBUG_MODE ? new ImageFrame("Debug frame") : null;
 
 		//Create demo
 		Scalar color = new Scalar(0, 255, 0);
 		TouchableGroup group = Demos.createPianoDemo(cameraWidth, cameraHeight, color);
 
-		if (isDebugging)
+		if (DEBUG_MODE)
 			System.out.print(group);
 
 		//Create image modifier
@@ -75,7 +75,7 @@ class TouchController
 			//Display components
 			rawDisplay.showImage(handler.convertMatToImage(cameraImage));
 
-			if (isDebugging)
+			if (DEBUG_MODE)
 				filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
 		}
 

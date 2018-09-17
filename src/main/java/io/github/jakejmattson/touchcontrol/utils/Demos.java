@@ -7,7 +7,8 @@ public final class Demos
 {
 	private static final int PADDING = 10;
 
-	private Demos(){}
+	private Demos()
+	{}
 
 	public static TouchableGroup createMouseDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{

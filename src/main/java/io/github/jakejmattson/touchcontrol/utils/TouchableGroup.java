@@ -42,7 +42,7 @@ public class TouchableGroup
 
 	public List<Touchable> getComponents()
 	{
-		return components;
+		return (ArrayList<Touchable>) components.clone();
 	}
 
 	public void updateDetectionPoint(Mat filteredImage)
@@ -97,14 +97,14 @@ public class TouchableGroup
 	@Override
 	public String toString()
 	{
-		String NEWLINE = System.lineSeparator();
+		String newline = System.lineSeparator();
 		StringBuilder groupData = new StringBuilder();
 
 		groupData.append("Touchable objects in group (").append(super.toString()).append("): ")
-				.append(components.size()).append(NEWLINE).append(NEWLINE);
+				.append(components.size()).append(newline).append(newline);
 
 		for (int i = 0; i < components.size(); i++)
-			groupData.append("(").append(i).append(")").append(components.get(i).toString()).append(NEWLINE);
+			groupData.append("(").append(i).append(")").append(components.get(i).toString()).append(newline);
 
 		return groupData.toString();
 	}

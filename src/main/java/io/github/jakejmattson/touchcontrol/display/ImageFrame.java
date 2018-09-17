@@ -9,21 +9,27 @@ import java.awt.image.BufferedImage;
  *
  * @author JakeJMattson
  */
-public class ImageFrame extends JFrame
+public class ImageFrame
 {
+	private final JFrame frame;
+	/**
+	 * Panel to hold/display a BufferedImage
+	 */
+	private final ImagePanel imagePanel;
 	/**
 	 * Whether or not the frame is currently open
 	 */
 	private boolean isOpen;
-	/**
-	 * Panel to hold/display a BufferedImage
-	 */
-	private ImagePanel imagePanel;
 
 	public ImageFrame(String title)
 	{
-		super();
-		buildGUI(title);
+		frame = new JFrame(title);
+		imagePanel = new ImagePanel();
+		isOpen = true;
+
+		frame.addWindowListener(createWindowListener());
+		frame.add(imagePanel);
+		frame.setVisible(true);
 	}
 
 	/**
@@ -34,23 +40,6 @@ public class ImageFrame extends JFrame
 	public boolean isOpen()
 	{
 		return isOpen;
-	}
-
-	/**
-	 * Construct the display and its children.
-	 *
-	 * @param title
-	 * 		Title of the frame
-	 */
-	private void buildGUI(String title)
-	{
-		//Create frame
-		setTitle(title);
-		addWindowListener(createWindowListener());
-		imagePanel = new ImagePanel();
-		add(imagePanel);
-		setVisible(true);
-		isOpen = true;
 	}
 
 	/**
@@ -83,9 +72,9 @@ public class ImageFrame extends JFrame
 		imagePanel.setImage(image);
 
 		//Redraw frame
-		repaint();
+		frame.repaint();
 
 		//Resize frame to fit image
-		pack();
+		frame.pack();
 	}
 }

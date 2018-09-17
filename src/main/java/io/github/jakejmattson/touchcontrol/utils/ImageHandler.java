@@ -56,7 +56,7 @@ public class ImageHandler
 		Core.absdiff(background, image, diffImage);
 
 		//Extract foreground
-		float threshold = 128.0f;
+		float threshold = 128.0F;
 		for (int j = 0; j < diffImage.rows(); ++j)
 			for (int i = 0; i < diffImage.cols(); ++i)
 			{
@@ -83,7 +83,8 @@ public class ImageHandler
 	public BufferedImage convertMatToImage(Mat matrix)
 	{
 		//Get image dimensions
-		int width = matrix.width(), height = matrix.height();
+		int width = matrix.width();
+		int height = matrix.height();
 
 		int type = matrix.channels() != 1 ? BufferedImage.TYPE_3BYTE_BGR : BufferedImage.TYPE_BYTE_GRAY;
 

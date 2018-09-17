@@ -16,12 +16,12 @@ class ImagePanel extends JPanel
 	 */
 	private BufferedImage image;
 
-	public ImagePanel()
+	ImagePanel()
 	{
 		super();
 	}
 
-	public void setImage(BufferedImage image)
+	void setImage(BufferedImage image)
 	{
 		this.image = image;
 	}
