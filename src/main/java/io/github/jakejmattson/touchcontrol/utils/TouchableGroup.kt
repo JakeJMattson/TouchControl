@@ -2,7 +2,6 @@ package io.github.jakejmattson.touchcontrol.utils
 
 import io.github.jakejmattson.touchcontrol.touchables.Touchable
 import org.opencv.core.*
-
 import java.util.*
 
 /**
@@ -16,42 +15,19 @@ class TouchableGroup(vararg components: Touchable) {
 	 */
 	private val components: ArrayList<Touchable> = ArrayList(Arrays.asList(*components))
 
-	init {
-		checkCollision()
-	}
+	fun addComponent(component: Touchable) = components.add(component)
 
-	fun setColor(color: Scalar) {
-		for (component in components)
-			component.color = color
-	}
+	fun removeComponent(component: Touchable) = components.remove(component)
 
-	fun addComponent(component: Touchable) {
-		components.add(component)
-		checkCollision()
-	}
+	fun getComponents() = components
 
-	fun removeComponent(component: Touchable) {
-		components.remove(component)
-	}
+	fun setColor(color: Scalar) = components.forEach { it.color = color }
 
-	fun getComponents(): List<Touchable> {
-		return components.clone() as ArrayList<Touchable>
-	}
+	fun updateDetectionPoint(filteredImage: Mat) = components.forEach { it.updateDetectionPoint(filteredImage) }
 
-	fun updateDetectionPoint(filteredImage: Mat) {
-		for (component in components)
-			component.updateDetectionPoint(filteredImage)
-	}
+	fun drawOnto(rawImage: Mat) = components.forEach { it.drawOnto(rawImage) }
 
-	fun drawOnto(rawImage: Mat) {
-		for (component in components)
-			component.drawOnto(rawImage)
-	}
-
-	fun performAction() {
-		for (component in components)
-			component.performAction()
-	}
+	fun performAction() = components.forEach { it.performAction() }
 
 	/**
 	 * Check whether or not any of the components in

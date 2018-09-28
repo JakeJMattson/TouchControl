@@ -67,9 +67,7 @@ abstract class Touchable protected constructor(
 	 *
 	 * @return Detection status
 	 */
-	protected fun hasDetection(): Boolean {
-		return detectionPoint != null
-	}
+	protected fun hasDetection() = detectionPoint != null
 
 	/**
 	 * Draw Touchable onto image.
@@ -108,10 +106,8 @@ abstract class Touchable protected constructor(
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	override fun toString(): String {
-		return (this.javaClass.simpleName
-				+ " (" + super.toString() + "):" + System.lineSeparator()
-				+ format("Dimensions:", dimensions)
-				+ format("Color:", color))
-	}
+	override fun toString() = (this.javaClass.simpleName
+			+ " (" + super.toString() + "):" + System.lineSeparator()
+			+ format("Dimensions:", dimensions)
+			+ format("Color:", color))
 }

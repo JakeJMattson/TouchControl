@@ -9,7 +9,7 @@ import java.io.File
  *
  * @author JakeJMattson
  */
-class VolumeSlider(dimensions: Rect, color: Scalar) : Slider(dimensions, color) {
+class VolumeSlider(dimensions: Rect, color: Scalar): Slider(dimensions, color) {
 	/**
 	 * Internal representation of current system volume
 	 */

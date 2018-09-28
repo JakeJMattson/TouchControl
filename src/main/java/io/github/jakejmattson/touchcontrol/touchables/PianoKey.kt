@@ -9,7 +9,7 @@ import javax.sound.midi.*
  *
  * @author JakeJMattson
  */
-class PianoKey(dimensions: Rect, color: Scalar, note: Char) : Button(dimensions, color) {
+class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, color) {
 	/**
 	 * Whether or not the key has already been played on a given touch
 	 */
@@ -86,7 +86,7 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char) : Button(dimensions,
 	 */
 	private fun playNote(duration: Int) {
 		//Create thread to play note
-		object : Thread() {
+		object: Thread() {
 			override fun run() {
 				//Start playing note
 				channel!!.noteOn(key, 100)
@@ -109,7 +109,5 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char) : Button(dimensions,
 	 * (non-Javadoc)
 	 * @see io.github.JakeJMattson.touchcontrol.touchables.Button#toString()
 	 */
-	override fun toString(): String {
-		return super.toString() + format("Key (note):", key)
-	}
+	override fun toString() = super.toString() + format("Key (note):", key)
 }

@@ -8,7 +8,7 @@ import org.opencv.imgproc.Imgproc
  *
  * @author JakeJMattson
  */
-abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : Touchable(dimensions, color) {
+abstract class Slider protected constructor(dimensions: Rect, color: Scalar): Touchable(dimensions, color) {
 	/**
 	 * Number of sectors that the slider is divided into
 	 */
@@ -122,11 +122,9 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : T
 		}
 	}
 
-	override fun toString(): String {
-		return (super.toString()
-				+ format("Divisions:", numOfDivisions)
-				+ format("Is Labeled:", isLabeled))
-	}
+	override fun toString() = (super.toString()
+			+ format("Divisions:", numOfDivisions)
+			+ format("Is Labeled:", isLabeled))
 
 	companion object {
 		private const val DEFAULT_DIVISIONS = 100

@@ -10,7 +10,7 @@ import java.awt.*
  *
  * @author JakeJMattson
  */
-class MousePad(dimensions: Rect, color: Scalar) : Pad(dimensions, color) {
+class MousePad(dimensions: Rect, color: Scalar): Pad(dimensions, color) {
 	/**
 	 * Java robot to control the mouse position
 	 */
@@ -54,11 +54,9 @@ class MousePad(dimensions: Rect, color: Scalar) : Pad(dimensions, color) {
 	 * (non-Javadoc)
 	 * @see io.github.JakeJMattson.touchcontrol.touchables.Pad#toString()
 	 */
-	override fun toString(): String {
-		return (super.toString()
-				+ format("Screen height:", SCREEN_HEIGHT)
-				+ format("Screen width:", SCREEN_WIDTH))
-	}
+	override fun toString() = (super.toString()
+			+ format("Screen height:", SCREEN_HEIGHT)
+			+ format("Screen width:", SCREEN_WIDTH))
 
 	companion object {
 		private val SCREEN_WIDTH = Toolkit.getDefaultToolkit().screenSize.getWidth()

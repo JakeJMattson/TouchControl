@@ -7,7 +7,7 @@ import org.opencv.core.*
  *
  * @author JakeJMattson
  */
-abstract class Button protected constructor(dimensions: Rect, color: Scalar) : Touchable(dimensions, color) {
+abstract class Button protected constructor(dimensions: Rect, color: Scalar): Touchable(dimensions, color) {
 	/**
 	 * Whether or not a non-background pixel is currently being detected
 	 */

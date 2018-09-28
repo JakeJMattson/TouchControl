@@ -7,4 +7,4 @@ import org.opencv.core.*
  *
  * @author JakeJMattson
  */
-abstract class Pad protected constructor(dimensions: Rect, color: Scalar) : Touchable(dimensions, color)
+abstract class Pad protected constructor(dimensions: Rect, color: Scalar): Touchable(dimensions, color)

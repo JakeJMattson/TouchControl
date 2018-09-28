@@ -7,7 +7,7 @@ import org.opencv.core.*
  *
  * @author JakeJMattson
  */
-abstract class ToggleButton protected constructor(dimensions: Rect, color: Scalar) : Button(dimensions, color) {
+abstract class ToggleButton protected constructor(dimensions: Rect, color: Scalar): Button(dimensions, color) {
 	/**
 	 * The current state of the button
 	 */
@@ -47,7 +47,5 @@ abstract class ToggleButton protected constructor(dimensions: Rect, color: Scala
 	 * (non-Javadoc)
 	 * @see io.github.JakeJMattson.touchcontrol.touchables.Button#toString()
 	 */
-	override fun toString(): String {
-		return super.toString() + format("Toggled on:", isToggledOn)
-	}
+	override fun toString() = super.toString() + format("Toggled on:", isToggledOn)
 }
