@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html">
-    <img src="https://img.shields.io/badge/Java-11-blue.svg" alt="Java 11">
+    <img src="https://img.shields.io/badge/Java-8-blue.svg" alt="Java 8">
   </a>
   <a href="https://kotlinlang.org/">
     <img src="https://img.shields.io/badge/Kotlin-1.2.71-blue.svg" alt="Kotlin 1.2.71">
