@@ -12,31 +12,20 @@ import java.awt.image.BufferedImage;
 public class ImageFrame
 {
 	private final JFrame frame;
-	/**
-	 * Panel to hold/display a BufferedImage
-	 */
 	private final ImagePanel imagePanel;
-	/**
-	 * Whether or not the frame is currently open
-	 */
 	private boolean isOpen;
 
 	public ImageFrame(String title)
 	{
-		frame = new JFrame(title);
 		imagePanel = new ImagePanel();
 		isOpen = true;
 
+		frame = new JFrame(title);
 		frame.addWindowListener(createWindowListener());
 		frame.add(imagePanel);
 		frame.setVisible(true);
 	}
 
-	/**
-	 * Externally called to see if display frame is still open.
-	 *
-	 * @return Open status
-	 */
 	public boolean isOpen()
 	{
 		return isOpen;
@@ -54,7 +43,6 @@ public class ImageFrame
 			@Override
 			public void windowClosing(WindowEvent windowClosed)
 			{
-				//Set window closing events
 				isOpen = false;
 			}
 		};
@@ -68,13 +56,8 @@ public class ImageFrame
 	 */
 	public void showImage(BufferedImage image)
 	{
-		//Send image to panel
 		imagePanel.setImage(image);
-
-		//Redraw frame
 		frame.repaint();
-
-		//Resize frame to fit image
 		frame.pack();
 	}
 }
