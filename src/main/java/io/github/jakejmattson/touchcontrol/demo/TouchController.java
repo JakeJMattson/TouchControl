@@ -22,67 +22,44 @@ class TouchController
 
 	public static void main(String[] args)
 	{
-		//Load OpenCV
 		Loader.load(opencv_java.class);
-
-		//Start camera
 		Camera camera = new Camera(-1);
 
-		//Do not start if no camera is available
 		if (!camera.isOpened())
 			return;
 
-		//Get camera properties
 		double cameraWidth = camera.getWidth();
 		double cameraHeight = camera.getHeight();
-
-		//Create display
-		ImageFrame rawDisplay = new ImageFrame("Touch Control");
-		ImageFrame filteredDisplay = DEBUG_MODE ? new ImageFrame("Debug frame") : null;
-
-		//Create demo
 		Scalar color = new Scalar(0, 255, 0);
 		TouchableGroup group = Demos.createPianoDemo(cameraWidth, cameraHeight, color);
 
 		if (DEBUG_MODE)
 			System.out.print(group);
 
-		//Create image modifier
+		ImageFrame rawDisplay = new ImageFrame("Touch Control");
+		ImageFrame filteredDisplay = DEBUG_MODE ? new ImageFrame("Debug frame") : null;
 		ImageHandler handler = new ImageHandler();
 
 		//Give sample background images to subtractor
 		for (int i = 0; i < 5; i++)
 			handler.trainSubtractor(camera.getFrame());
 
-		//While frame is open and camera is detected
 		while (rawDisplay.isOpen() && camera.isOpened())
 		{
-			//Read image from camera
-			Mat cameraImage = camera.getFrame();
+			Mat rawImage = camera.getFrame();
+			Mat filteredImage = handler.filterImage(rawImage);
 
-			//Filter image for processing
-			Mat filteredImage = handler.filterImage(cameraImage);
-
-			//Find the farthest point that is not background
 			group.updateDetectionPoint(filteredImage);
-
-			//Draw components onto image
-			group.drawOnto(cameraImage);
-
-			//Perform class action
+			group.drawOnto(rawImage);
 			group.performAction();
 
-			//Display components
-			rawDisplay.showImage(handler.convertMatToImage(cameraImage));
+			rawDisplay.showImage(handler.convertMatToImage(rawImage));
 
 			if (DEBUG_MODE)
 				filteredDisplay.showImage(handler.convertMatToImage(filteredImage));
 		}
 
-		//Return camera control to OS
 		camera.release();
-
-		//Force exit
 		System.exit(0);
 	}
 }
