@@ -1,16 +1,17 @@
-package io.github.jakejmattson.touchcontrol.utils;
+package io.github.jakejmattson.touchcontrol.demo;
 
 import io.github.jakejmattson.touchcontrol.touchables.*;
+import io.github.jakejmattson.touchcontrol.utils.TouchableGroup;
 import org.opencv.core.*;
 
-public final class Demos
+final class Demos
 {
 	private static final int PADDING = 10;
 
 	private Demos()
 	{}
 
-	public static TouchableGroup createMouseDemo(double cameraWidth, double cameraHeight, Scalar color)
+	static TouchableGroup createMouseDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
 		//Create component dimensions
 		Point topLeft = new Point(PADDING, PADDING);
@@ -24,7 +25,7 @@ public final class Demos
 		return new TouchableGroup(mousePad);
 	}
 
-	public static TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight, Scalar color)
+	static TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
 		//Create group
 		TouchableGroup group = new TouchableGroup();
@@ -56,7 +57,7 @@ public final class Demos
 		return group;
 	}
 
-	public static TouchableGroup createVolumeDemo(double cameraWidth, double cameraHeight, Scalar color)
+	static TouchableGroup createVolumeDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
 		//Create component dimensions
 		Point topLeft = new Point(0.4 * cameraWidth, PADDING);
