@@ -1,7 +1,7 @@
 package io.github.jakejmattson.touchcontrol.demo;
 
 import io.github.jakejmattson.touchcontrol.touchables.*;
-import io.github.jakejmattson.touchcontrol.utils.TouchableGroup;
+import io.github.jakejmattson.touchcontrol.utils.*;
 import org.opencv.core.*;
 
 final class Demos
@@ -13,31 +13,23 @@ final class Demos
 
 	static TouchableGroup createMouseDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
-		Point topLeft = new Point(PADDING, PADDING);
-		Point bottomRight = new Point(cameraWidth - PADDING, cameraHeight - PADDING);
-		Rect mousePadRect = new Rect(topLeft, bottomRight);
+		Grid grid = new Grid(1, 1, cameraWidth, cameraHeight, PADDING);
+		MousePad mousePad = new MousePad(new Rect(), color);
+		grid.align(mousePad, new Point(0, 0), new Point(0, 0));
 
-		MousePad mousePad = new MousePad(mousePadRect, color);
 		return new TouchableGroup(mousePad);
 	}
 
 	static TouchableGroup createPianoDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
+		int keyCount = 7;
 		TouchableGroup group = new TouchableGroup();
-		char[] notes = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+		Grid grid = new Grid(keyCount, 5, cameraWidth, cameraHeight, PADDING);
 
-		for (int i = 0; i < notes.length; i++)
+		for (int i = 0; i < keyCount; i++)
 		{
-			double x1 = (double) i / notes.length * cameraWidth;
-			double x2 = (double) (i + 1) / notes.length * cameraWidth;
-			double y1 = 1 / 4.0 * cameraHeight;
-			double y2 = 3 / 4.0 * cameraHeight;
-
-			Point topLeft = new Point(x1 + PADDING, y1 + PADDING);
-			Point bottomRight = new Point(x2 - PADDING, y2 - PADDING);
-			Rect keyRect = new Rect(topLeft, bottomRight);
-
-			PianoKey key = new PianoKey(keyRect, color, notes[i]);
+			PianoKey key = new PianoKey(new Rect(), color, (char) (i + 'A'));
+			grid.align(key, new Point(i, 1), new Point(i, 3));
 			group.addComponent(key);
 		}
 
@@ -46,11 +38,10 @@ final class Demos
 
 	static TouchableGroup createVolumeDemo(double cameraWidth, double cameraHeight, Scalar color)
 	{
-		Point topLeft = new Point(0.4 * cameraWidth, PADDING);
-		Point bottomRight = new Point(0.6 * cameraWidth - PADDING, cameraHeight - PADDING);
-		Rect volumeSliderRect = new Rect(topLeft, bottomRight);
+		Grid grid = new Grid(100, 1, cameraWidth, cameraHeight, PADDING);
+		VolumeSlider volumeSlider = new VolumeSlider(new Rect(), color);
+		grid.align(volumeSlider, new Point(40, 0), new Point(60, 0));
 
-		VolumeSlider volumeSlider = new VolumeSlider(volumeSliderRect, color);
 		return new TouchableGroup(volumeSlider);
 	}
 }
