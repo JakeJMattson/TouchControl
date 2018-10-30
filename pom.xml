@@ -21,6 +21,13 @@
             <version>${kotlin.version}</version>
         </dependency>
 
+        <!-- Kotlin co-routines -->
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- OpenCV -->
         <dependency>
             <groupId>org.bytedeco.javacpp-presets</groupId>
