@@ -38,6 +38,8 @@ class TouchController
 
 		ImageFrame rawDisplay = new ImageFrame("Touch Control");
 		ImageFrame filteredDisplay = DEBUG_MODE ? new ImageFrame("Debug frame") : null;
+		placeFrames(rawDisplay, filteredDisplay, (int) cameraWidth);
+
 		ImageHandler handler = new ImageHandler();
 
 		//Give sample background images to subtractor
@@ -61,5 +63,15 @@ class TouchController
 
 		camera.release();
 		System.exit(0);
+	}
+
+	private static void placeFrames(ImageFrame frame1, ImageFrame frame2, int offset)
+	{
+		java.awt.Point location = new java.awt.Point(0, 0);
+		frame1.setLocation(location);
+		location.x = offset;
+
+		if (frame2 != null)
+			frame2.setLocation(location);
 	}
 }

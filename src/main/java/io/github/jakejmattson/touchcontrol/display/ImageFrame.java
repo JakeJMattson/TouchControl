@@ -1,6 +1,7 @@
 package io.github.jakejmattson.touchcontrol.display;
 
 import javax.swing.JFrame;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
@@ -59,5 +60,10 @@ public class ImageFrame
 		imagePanel.setImage(image);
 		frame.repaint();
 		frame.pack();
+	}
+
+	public void setLocation(Point location)
+	{
+		frame.setLocation(location);
 	}
 }
