@@ -1,8 +1,10 @@
 package io.github.jakejmattson.touchcontrol.utils
 
 import io.github.jakejmattson.touchcontrol.touchables.Touchable
+import kotlinx.coroutines.*
 import org.opencv.core.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Apply the same function over many Touchable objects.
@@ -23,21 +25,58 @@ class TouchableGroup(vararg components: Touchable) {
 
 	fun setColor(color: Scalar) = components.forEach { it.color = color }
 
-	fun updateDetectionPoint(filteredImage: Mat) = components.forEach { it.updateDetectionPoint(filteredImage) }
+	fun updateDetectionPoint(filteredImage: Mat) =
+		runBlocking {
+			val jobs = ArrayList<Job>()
 
-	fun drawOnto(rawImage: Mat) = components.forEach { it.drawOnto(rawImage) }
+			components.forEach {
+				jobs.add(
+					GlobalScope.launch { it.updateDetectionPoint(filteredImage) }
+				)
+			}
 
-	fun performAction() = components.forEach { it.performAction() }
+			jobs.joinAll()
+		}
+
+	fun drawOnto(rawImage: Mat) =
+		runBlocking {
+			val jobs = ArrayList<Job>()
+
+			components.forEach {
+				jobs.add(
+					GlobalScope.launch { it.drawOnto(rawImage) }
+				)
+			}
+
+			jobs.joinAll()
+		}
+
+	fun performAction() =
+		runBlocking {
+			val jobs = ArrayList<Job>()
+
+			components.forEach {
+				jobs.add(
+					GlobalScope.launch { it.performAction() }
+				)
+			}
+
+			jobs.joinAll()
+		}
 
 	/**
 	 * Check whether or not any of the components in
 	 * the group overlaps (collides) with another.
-	 * Note: This has no return. It is only to print warnings.
+	 *
+	 * @return Whether or not the group is collision-free
 	 */
-	private fun checkCollision() {
+	private fun checkCollision(): Boolean {
+
+		var hasNoCollision = true
+
 		for (i in components.indices)
 			for (j in i + 1 until components.size) {
-				//Get components dimensions
+
 				val dim1 = components[i].dimensions
 				val dim2 = components[j].dimensions
 
@@ -47,17 +86,17 @@ class TouchableGroup(vararg components: Touchable) {
 						|| dim1.x + dim1.width <= dim2.x
 						|| dim1.x >= dim2.x + dim2.width)
 
-				//Print warning
-				if (overlaps)
+				if (overlaps) {
+					hasNoCollision = false
+					
 					println("Touchable collision warning in " + super.toString() +
 							" between component " + i + " and component " + j)
+				}
 			}
+
+		return hasNoCollision
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	override fun toString(): String {
 		val newline = System.lineSeparator()
 		val groupData = StringBuilder()
