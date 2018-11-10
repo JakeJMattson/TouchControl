@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk10-downloads-4416644.html">
+  <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">
     <img src="https://img.shields.io/badge/Java-8-blue.svg" alt="Java 8">
   </a>
   <a href="https://kotlinlang.org/">
@@ -98,7 +98,7 @@ Move your finger (or any object) through the area covered by the camera. The pro
 </p>
 
 ## Building
-TouchControl is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
+This project is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
 * [IntelliJ](https://www.tutorialspoint.com/maven/maven_intellij_idea.htm)
 * [Eclipse](https://www.tutorialspoint.com/maven/maven_eclispe_ide.htm)
 * [NetBeans](https://www.tutorialspoint.com/maven/maven_netbeans.htm)
