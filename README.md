@@ -6,13 +6,13 @@
     <img src="https://img.shields.io/badge/Kotlin-1.3.0-blue.svg" alt="Kotlin 1.3.0">
   </a>
   <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.2/opencv-3.4.2-vc14_vc15.exe/download">
-    <img src="https://img.shields.io/badge/OpenCV-3.4.2-blue.svg">
+    <img src="https://img.shields.io/badge/OpenCV-3.4.2-blue.svg" alt="OpenCV-3.4.2">
   </a>
   <a href="https://GitHub.com/JakeJMattson/TouchControl/releases/">
     <img src="https://img.shields.io/github/release/JakeJMattson/TouchControl.svg" alt="release">
   </a>
   <a href="LICENSE.md">
-    <img src="https://img.shields.io/github/license/JakeJMattson/TouchControl.svg">
+    <img src="https://img.shields.io/github/license/JakeJMattson/TouchControl.svg" alt="license">
   </a>
 </p>
 
