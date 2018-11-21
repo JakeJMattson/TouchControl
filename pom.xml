@@ -8,10 +8,15 @@
     <version>2.0</version>
 
     <properties>
+        <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Version Numbers -->
         <java.version>1.8</java.version>
         <kotlin.version>1.3.0</kotlin.version>
+
+        <!-- Compiler -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
@@ -38,7 +43,6 @@
             <version>3.4.2-1.4.2</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
