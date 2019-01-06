@@ -17,12 +17,6 @@ abstract class ToggleButton protected constructor(dimensions: Rect, color: Scala
 	 */
 	private var hasSwitched: Boolean = false
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * io.github.JakeJMattson.touchcontrol.touchables.Button
-	 * #updateDetectionPoint(org.opencv.core.Mat)
-	 */
 	override fun updateDetectionPoint(filteredImage: Mat): Point? {
 		//Save previous state
 		val wasClicked = isBeingClicked
@@ -43,9 +37,5 @@ abstract class ToggleButton protected constructor(dimensions: Rect, color: Scala
 		return detectionPoint
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see io.github.JakeJMattson.touchcontrol.touchables.Button#toString()
-	 */
 	override fun toString() = super.toString() + format("Toggled on:", isToggledOn)
 }

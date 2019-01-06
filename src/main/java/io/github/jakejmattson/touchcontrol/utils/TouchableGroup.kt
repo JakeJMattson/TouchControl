@@ -89,8 +89,7 @@ class TouchableGroup(vararg components: Touchable) {
 				if (overlaps) {
 					hasNoCollision = false
 					
-					println("Touchable collision warning in " + super.toString() +
-							" between component " + i + " and component " + j)
+					println("Touchable collision warning in ${super.toString()} between component $i and component $j")
 				}
 			}
 
@@ -98,15 +97,12 @@ class TouchableGroup(vararg components: Touchable) {
 	}
 
 	override fun toString(): String {
-		val newline = System.lineSeparator()
-		val groupData = StringBuilder()
+		var groupData = "Touchable objects in group (${super.toString()}): ${components.size}\n\n"
 
-		groupData.append("Touchable objects in group (").append(super.toString()).append("): ")
-			.append(components.size).append(newline).append(newline)
+		components.forEachIndexed { index, component ->
+			groupData += "($index)$component\n"
+		}
 
-		for (i in components.indices)
-			groupData.append("(").append(i).append(")").append(components[i].toString()).append(newline)
-
-		return groupData.toString()
+		return groupData
 	}
 }

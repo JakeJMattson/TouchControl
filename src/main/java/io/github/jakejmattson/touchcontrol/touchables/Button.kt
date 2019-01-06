@@ -13,11 +13,6 @@ abstract class Button protected constructor(dimensions: Rect, color: Scalar): To
 	 */
 	protected var isBeingClicked: Boolean = false
 
-	/*
-	 * (non-Javadoc)
-	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable
-	 * #updateDetectionPoint(org.opencv.core.Mat)
-	 */
 	override fun updateDetectionPoint(filteredImage: Mat): Point? {
 		//Update state
 		super.updateDetectionPoint(filteredImage)

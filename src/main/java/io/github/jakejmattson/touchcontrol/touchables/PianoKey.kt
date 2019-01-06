@@ -61,11 +61,6 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * io.github.JakeJMattson.touchcontrol.touchables.Touchable#performAction()
-	 */
 	override fun performAction() {
 		//Play note
 		if (isBeingClicked) {
@@ -105,9 +100,5 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 		}.start()
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see io.github.JakeJMattson.touchcontrol.touchables.Button#toString()
-	 */
 	override fun toString() = super.toString() + format("Key (note):", key)
 }

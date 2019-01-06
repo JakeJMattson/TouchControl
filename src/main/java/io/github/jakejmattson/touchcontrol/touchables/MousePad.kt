@@ -16,11 +16,6 @@ class MousePad(dimensions: Rect, color: Scalar): Pad(dimensions, color) {
 	 */
 	private var mouseMover: Robot? = Robot()
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * io.github.JakeJMattson.touchcontrol.touchables.Touchable#performAction()
-	 */
 	override fun performAction() {
 		if (hasDetection()) {
 			//Convert point in range to point on screen
@@ -50,10 +45,6 @@ class MousePad(dimensions: Rect, color: Scalar): Pad(dimensions, color) {
 		return adjustedPoint
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see io.github.JakeJMattson.touchcontrol.touchables.Pad#toString()
-	 */
 	override fun toString() = (super.toString()
 			+ format("Screen height:", SCREEN_HEIGHT)
 			+ format("Screen width:", SCREEN_WIDTH))

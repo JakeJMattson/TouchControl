@@ -15,11 +15,6 @@ class VolumeSlider(dimensions: Rect, color: Scalar): Slider(dimensions, color) {
 	 */
 	private var previousVolume: Int = 0
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * io.github.JakeJMattson.touchcontrol.touchables.Touchable#performAction()
-	 */
 	override fun performAction() {
 		if (hasDetection()) {
 			//Calculate volume

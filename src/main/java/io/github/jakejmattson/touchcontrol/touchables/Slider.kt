@@ -64,11 +64,6 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 		return divisions
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable
-	 * #updateDetectionPoint(org.opencv.core.Mat)
-	 */
 	override fun updateDetectionPoint(filteredImage: Mat): Point? {
 		//Update state
 		super.updateDetectionPoint(filteredImage)
@@ -79,11 +74,6 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 		return detectionPoint
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see io.github.JakeJMattson.touchcontrol.touchables.Touchable
-	 * #drawOnto(org.opencv.core.Mat)
-	 */
 	override fun drawOnto(image: Mat?) {
 		super.drawOnto(image)
 		setSliderStatus(image)

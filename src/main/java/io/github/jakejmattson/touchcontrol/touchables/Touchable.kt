@@ -102,10 +102,6 @@ abstract class Touchable protected constructor(
 	 */
 	protected fun <T> format(name: String, data: T): String = String.format("   %-17s %-1s%n", name, data)
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	override fun toString() = (this.javaClass.simpleName
 			+ " (" + super.toString() + "):" + System.lineSeparator()
 			+ format("Dimensions:", dimensions)
