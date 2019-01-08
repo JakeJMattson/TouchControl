@@ -14,7 +14,7 @@ class MousePad(dimensions: Rect, color: Scalar): Pad(dimensions, color) {
 	/**
 	 * Java robot to control the mouse position
 	 */
-	private var mouseMover: Robot? = Robot()
+	private var mouseMover: Robot = Robot()
 
 	override fun performAction() {
 		if (hasDetection()) {
@@ -22,7 +22,7 @@ class MousePad(dimensions: Rect, color: Scalar): Pad(dimensions, color) {
 			val mousePoint = adjustPoint()
 
 			//Move mouse pointer to point
-			mouseMover!!.mouseMove(mousePoint.x.toInt(), mousePoint.y.toInt())
+			mouseMover.mouseMove(mousePoint.x.toInt(), mousePoint.y.toInt())
 		}
 	}
 

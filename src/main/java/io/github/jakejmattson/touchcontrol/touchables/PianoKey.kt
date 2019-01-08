@@ -21,11 +21,7 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 	/**
 	 * Audio player
 	 */
-	private var channel: MidiChannel? = null
-
-	init {
-		setupMidi()
-	}
+	private var channel: MidiChannel = setupMidi()
 
 	/**
 	 * Determine the key of the note based on the character input.
@@ -46,19 +42,14 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 	/**
 	 * Create the audio player.
 	 */
-	private fun setupMidi() {
-		try {
-			//Set up environment to play audio
-			val midiSynth = MidiSystem.getSynthesizer()
-			val instr = midiSynth.defaultSoundbank.instruments
-			midiSynth.loadInstrument(instr[0])
-			midiSynth.open()
+	private fun setupMidi(): MidiChannel {
+		//Set up environment to play audio
+		val midiSynth = MidiSystem.getSynthesizer()
+		val instr = midiSynth.defaultSoundbank.instruments
+		midiSynth.loadInstrument(instr[0])
+		midiSynth.open()
 
-			channel = midiSynth.channels[0]
-		}
-		catch (e: MidiUnavailableException) {
-			e.printStackTrace()
-		}
+		return midiSynth.channels[0]
 	}
 
 	override fun performAction() {
@@ -84,7 +75,7 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 		object: Thread() {
 			override fun run() {
 				//Start playing note
-				channel!!.noteOn(key, 100)
+				channel.noteOn(key, 100)
 
 				try {
 					//Hold the note for x milliseconds
@@ -95,7 +86,7 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 				}
 
 				//Stop playing note
-				channel!!.noteOff(key)
+				channel.noteOff(key)
 			}
 		}.start()
 	}
