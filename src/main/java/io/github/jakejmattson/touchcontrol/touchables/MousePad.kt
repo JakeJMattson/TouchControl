@@ -1,5 +1,6 @@
 package io.github.jakejmattson.touchcontrol.touchables
 
+import io.github.jakejmattson.touchcontrol.utils.times
 import org.opencv.core.*
 import org.opencv.core.Point
 import java.awt.*
@@ -33,16 +34,9 @@ class MousePad(dimensions: Rect, color: Scalar): Pad(dimensions, color) {
 	 * @return Adjusted point
 	 */
 	private fun adjustPoint(): Point {
-		//Determine ratio
-		val widthAdjustment = SCREEN_WIDTH / dimensions.width
-		val heightAdjustment = SCREEN_HEIGHT / dimensions.height
+		val ratioPoint = Point(SCREEN_WIDTH / dimensions.width, SCREEN_HEIGHT / dimensions.height)
 
-		//Adjust point
-		val adjustedPoint = Point()
-		adjustedPoint.x = detectionPoint!!.x * widthAdjustment
-		adjustedPoint.y = detectionPoint!!.y * heightAdjustment
-
-		return adjustedPoint
+		return detectionPoint!! * ratioPoint
 	}
 
 	override fun toString() = (super.toString()
