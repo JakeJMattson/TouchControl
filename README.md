@@ -53,10 +53,6 @@ This project is intended to be a touch screen without the screen. By using only 
 * [NirCmd](http://www.nirsoft.net/utils/nircmd.html)
 
 ## Getting Started (Software)
-<p align="justify">
-The version numbers for each additional software used to build this project are listed in the badges at the top of the page. These dependencies are handled by Maven during build. If building manually, other versions may work, but this is not guaranteed.
-</p>
-
 ### Installing Java
 <p align="justify">
 Visit the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java Downloads</a> 
@@ -64,21 +60,11 @@ page and select the version of your choice.
 Run the installer and follow the instructions provided.
 </p>
 
-### Installing Kotlin
-**Note:** Included as Maven dependency. Below are manual instructions.
-<br /><br />
-Kotlin can be added to your project manually by following the instructions on the Kotlin website. It supports [IntelliJ](https://kotlinlang.org/docs/tutorials/getting-started.html), [Eclipse](https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html), or a simple [command line compiler](https://kotlinlang.org/docs/tutorials/command-line.html).
-
-### Building OpenCV
-**Note:** Included as Maven dependency. Below are manual instructions.
-<br/>
-<p align="justify">
-Visit the <a href="https://opencv.org/releases.html">OpenCV Releases</a> page and select the version of your choice.
-Note: older versions of this library may work with this code, but this is not gauranteed.
-Please read the tutorial on
-<a href="https://github.com/opencv-java/opencv-java-tutorials/blob/master/docs/source/01-installing-opencv-for-java.rst">Installing OpenCV for Java</a> 
-in order to correctly build OpenCV for your operating system.
-</p>
+### Building
+This project is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
+* [IntelliJ](https://www.tutorialspoint.com/maven/maven_intellij_idea.htm)
+* [Eclipse](https://www.tutorialspoint.com/maven/maven_eclispe_ide.htm)
+* [NetBeans](https://www.tutorialspoint.com/maven/maven_netbeans.htm)
 
 ### Downloading NirCmd
 <p align="justify">
@@ -96,12 +82,6 @@ Position a camera (rotated at 180 degrees) above a dark surface. The camera shou
 <p align="justify">
 Move your finger (or any object) through the area covered by the camera. The program will detect the location of the object and perform an action depending on the Touchable object being used.
 </p>
-
-## Building
-This project is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
-* [IntelliJ](https://www.tutorialspoint.com/maven/maven_intellij_idea.htm)
-* [Eclipse](https://www.tutorialspoint.com/maven/maven_eclispe_ide.htm)
-* [NetBeans](https://www.tutorialspoint.com/maven/maven_netbeans.htm)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
