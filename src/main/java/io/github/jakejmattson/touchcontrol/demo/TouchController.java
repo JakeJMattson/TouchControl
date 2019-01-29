@@ -16,6 +16,8 @@ import io.github.jakejmattson.touchcontrol.utils.*;
 import org.bytedeco.javacpp.*;
 import org.opencv.core.*;
 
+import static io.github.jakejmattson.touchcontrol.demo.DemosKt.*;
+
 class TouchController
 {
 	private static final boolean DEBUG_MODE = true;
@@ -31,7 +33,7 @@ class TouchController
 		double cameraWidth = camera.getWidth();
 		double cameraHeight = camera.getHeight();
 		Scalar color = new Scalar(0, 255, 0);
-		TouchableGroup group = Demos.createPianoDemo(cameraWidth, cameraHeight, color);
+		TouchableGroup group = createPianoDemo(cameraWidth, cameraHeight, color);
 
 		if (DEBUG_MODE)
 			System.out.print(group);
