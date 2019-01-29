@@ -55,36 +55,9 @@ class ImageHandler {
                 val dist = Math.sqrt(pixel[0] * pixel[0] + pixel[1] * pixel[1] + pixel[2] * pixel[2]).toFloat()
 
                 if (dist > threshold)
-                    filteredImage.put(j, i, intArrayOf(255))
+                    filteredImage.put(j, i, 255.0)
             }
 
         return filteredImage
-    }
-
-    /**
-     * Convert an OpenCV Mat to a Java BufferedImage.
-     *
-     * @param matrix
-     * OpenCV Mat
-     *
-     * @return BufferedImage
-     */
-    fun convertMatToImage(matrix: Mat): BufferedImage {
-        val type = if (matrix.channels() != 1) BufferedImage.TYPE_3BYTE_BGR else BufferedImage.TYPE_BYTE_GRAY
-
-        if (type == BufferedImage.TYPE_3BYTE_BGR)
-            Imgproc.cvtColor(matrix, matrix, Imgproc.COLOR_BGR2RGB)
-
-        //Get matrix data
-        val width = matrix.width()
-        val height = matrix.height()
-        val data = ByteArray(width * height * matrix.elemSize().toInt())
-        matrix.get(0, 0, data)
-
-        //Create image with matrix data
-        val out = BufferedImage(width, height, type)
-        out.raster.setDataElements(0, 0, width, height, data)
-
-        return out
     }
 }
