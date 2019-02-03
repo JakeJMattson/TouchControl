@@ -45,7 +45,7 @@ This project is intended to be a touch screen without the screen. By using only 
 ## Prerequisites
 
 ### Languages
-* [Java](https://go.java/index.html?intcmp=gojava-banner-java-com)
+* [Java](https://jdk.java.net/11/)
 * [Kotlin](https://kotlinlang.org/)
 
 ### Libraries
