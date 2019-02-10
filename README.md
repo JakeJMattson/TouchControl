@@ -55,8 +55,7 @@ This project is intended to be a touch screen without the screen. By using only 
 ## Getting Started (Software)
 ### Installing Java
 <p align="justify">
-Visit the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java Downloads</a> 
-page and select the version of your choice.
+Visit the <a href="https://jdk.java.net/11/">Java Downloads</a> page and select the version of your choice.
 Run the installer and follow the instructions provided.
 </p>
 
