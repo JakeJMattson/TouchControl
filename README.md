@@ -3,7 +3,7 @@
     <img src="https://img.shields.io/badge/Java-11-blue.svg" alt="Java 11">
   </a>
   <a href="https://kotlinlang.org/">
-    <img src="https://img.shields.io/badge/Kotlin-1.3.20-blue.svg" alt="Kotlin 1.3.20">
+    <img src="https://img.shields.io/badge/Kotlin-1.3.21-blue.svg" alt="Kotlin 1.3.21">
   </a>
   <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.2/opencv-3.4.2-vc14_vc15.exe/download">
     <img src="https://img.shields.io/badge/OpenCV-3.4.2-blue.svg" alt="OpenCV-3.4.2">
@@ -87,4 +87,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * [OpenCV binaries (Maven)](https://github.com/bytedeco/javacpp-presets)
-* [Foreground Extraction](https://stackoverflow.com/a/27036614)
