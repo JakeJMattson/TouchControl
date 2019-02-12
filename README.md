@@ -1,7 +1,4 @@
 <p align="center">
-  <a href="https://jdk.java.net/11/">
-    <img src="https://img.shields.io/badge/Java-11-blue.svg" alt="Java 11">
-  </a>
   <a href="https://kotlinlang.org/">
     <img src="https://img.shields.io/badge/Kotlin-1.3.21-blue.svg" alt="Kotlin 1.3.21">
   </a>
@@ -45,7 +42,6 @@ This project is intended to be a touch screen without the screen. By using only 
 ## Prerequisites
 
 ### Languages
-* [Java](https://jdk.java.net/11/)
 * [Kotlin](https://kotlinlang.org/)
 
 ### Libraries
@@ -63,7 +59,6 @@ Run the installer and follow the instructions provided.
 This project is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
 * [IntelliJ](https://www.tutorialspoint.com/maven/maven_intellij_idea.htm)
 * [Eclipse](https://www.tutorialspoint.com/maven/maven_eclispe_ide.htm)
-* [NetBeans](https://www.tutorialspoint.com/maven/maven_netbeans.htm)
 
 ### Downloading NirCmd
 <p align="justify">
