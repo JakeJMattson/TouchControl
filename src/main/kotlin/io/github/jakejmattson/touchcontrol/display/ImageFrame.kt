@@ -1,9 +1,9 @@
 package io.github.jakejmattson.touchcontrol.display
 
-import javax.swing.JFrame
-import java.awt.*
+import java.awt.Point
 import java.awt.event.*
 import java.awt.image.BufferedImage
+import javax.swing.JFrame
 
 /**
  * Frame - GUI container for components (holds ImagePanel).

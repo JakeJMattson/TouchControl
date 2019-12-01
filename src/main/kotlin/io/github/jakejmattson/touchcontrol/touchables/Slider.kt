@@ -2,6 +2,7 @@ package io.github.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
+import kotlin.math.ceil
 
 /**
  * Abstract Slider - contains general slider behavior.
@@ -69,7 +70,7 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar): To
 		super.updateDetectionPoint(filteredImage)
 
 		if (hasDetection())
-			division = Math.ceil((detectionPoint!!.y - dimensions.y) / divisionSize).toInt()
+			division = ceil((detectionPoint!!.y - dimensions.y) / divisionSize).toInt()
 
 		return detectionPoint
 	}

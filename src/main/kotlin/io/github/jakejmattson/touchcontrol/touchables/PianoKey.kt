@@ -1,5 +1,6 @@
 package io.github.jakejmattson.touchcontrol.touchables
 
+import kotlinx.coroutines.*
 import org.opencv.core.*
 import javax.sound.midi.*
 
@@ -42,15 +43,12 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 	/**
 	 * Create the audio player.
 	 */
-	private fun setupMidi(): MidiChannel {
-		//Set up environment to play audio
-		val midiSynth = MidiSystem.getSynthesizer()
-		val instr = midiSynth.defaultSoundbank.instruments
-		midiSynth.loadInstrument(instr[0])
-		midiSynth.open()
-
-		return midiSynth.channels[0]
-	}
+	private fun setupMidi() =
+		with (MidiSystem.getSynthesizer()) {
+			loadInstrument(defaultSoundbank.instruments[0])
+			open()
+			channels.first()
+		}
 
 	override fun performAction() {
 		//Play note
@@ -70,25 +68,17 @@ class PianoKey(dimensions: Rect, color: Scalar, note: Char): Button(dimensions, 
 	 * @param duration
 	 * The amount of ms that the note should be held for
 	 */
-	private fun playNote(duration: Int) {
-		//Create thread to play note
-		object: Thread() {
-			override fun run() {
-				//Start playing note
-				channel.noteOn(key, 100)
+	private fun playNote(duration: Long) {
+		GlobalScope.launch {
+			//Start playing note
+			channel.noteOn(key, 100)
 
-				try {
-					//Hold the note for x milliseconds
-					Thread.sleep(duration.toLong())
-				}
-				catch (e: InterruptedException) {
-					e.printStackTrace()
-				}
+			//Hold the note for x milliseconds
+			delay(duration)
 
-				//Stop playing note
-				channel.noteOff(key)
-			}
-		}.start()
+			//Stop playing note
+			channel.noteOff(key)
+		}
 	}
 
 	override fun toString() = super.toString() + format("Key (note):", key)

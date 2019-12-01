@@ -1,8 +1,8 @@
 package io.github.jakejmattson.touchcontrol.display
 
-import javax.swing.JPanel
 import java.awt.*
 import java.awt.image.BufferedImage
+import javax.swing.JPanel
 
 /**
  * Panel - holds image to display in GUI.

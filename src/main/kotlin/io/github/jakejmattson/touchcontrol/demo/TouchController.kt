@@ -14,11 +14,10 @@ package io.github.jakejmattson.touchcontrol.demo
 import io.github.jakejmattson.touchcontrol.display.ImageFrame
 import io.github.jakejmattson.touchcontrol.utils.*
 import org.bytedeco.javacpp.*
-import org.opencv.core.*
+import org.opencv.core.Scalar
+import kotlin.system.exitProcess
 
-import io.github.jakejmattson.touchcontrol.demo.*
-
-private val DEBUG_MODE = true
+private const val DEBUG_MODE = true
 
 fun main() {
     Loader.load(opencv_java::class.java)
@@ -60,7 +59,7 @@ fun main() {
     }
 
     camera.release()
-    System.exit(0)
+    exitProcess(0)
 }
 
 private fun placeFrames(frame1: ImageFrame, frame2: ImageFrame?, offset: Int) {

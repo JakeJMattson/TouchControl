@@ -3,8 +3,6 @@ package io.github.jakejmattson.touchcontrol.utils
 import io.github.jakejmattson.touchcontrol.touchables.Touchable
 import kotlinx.coroutines.*
 import org.opencv.core.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Apply the same function over many Touchable objects.
@@ -15,7 +13,7 @@ class TouchableGroup(vararg components: Touchable) {
 	/**
 	 * A List of all components in the group
 	 */
-	private val components: ArrayList<Touchable> = ArrayList(Arrays.asList(*components))
+	private val components: MutableList<Touchable> = mutableListOf(*components)
 
 	fun addComponent(component: Touchable) = components.add(component)
 
