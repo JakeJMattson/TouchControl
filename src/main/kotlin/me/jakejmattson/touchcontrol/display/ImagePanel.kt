@@ -10,11 +10,7 @@ import javax.swing.JPanel
  * @author JakeJMattson
  */
 internal class ImagePanel : JPanel() {
-    private var image: BufferedImage? = null
-
-    fun setImage(image: BufferedImage) {
-        this.image = image
-    }
+    var image: BufferedImage? = null
 
     public override fun paintComponent(g: Graphics) {
         super.paintComponent(g)

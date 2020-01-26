@@ -9,15 +9,7 @@ import org.opencv.imgproc.Imgproc
  * @author JakeJMattson
  */
 
-abstract class Touchable protected constructor(
-    /**
-     * Location and size of the Touchable
-     */
-    var dimensions: Rect,
-    /**
-     * Color that the Touchable will be drawn in
-     */
-    var color: Scalar) {
+abstract class Touchable protected constructor(var dimensions: Rect, var color: Scalar) {
     /**
      * Farthest non-background pixel found within range
      */
@@ -75,15 +67,13 @@ abstract class Touchable protected constructor(
      * @param image
      * Matrix to draw the Touchable object onto
      */
-    open fun drawOnto(image: Mat?) {
-        if (image != null) {
-            //Draw component
-            Imgproc.rectangle(image, dimensions.tl(), dimensions.br(), color, 3)
+    open fun drawOnto(image: Mat) {
+        //Draw component
+        Imgproc.rectangle(image, dimensions.tl(), dimensions.br(), color, 3)
 
-            //Draw circle around detection
-            if (hasDetection())
-                Imgproc.circle(image, detectionPoint!!, 10, color)
-        }
+        //Draw circle around detection
+        if (hasDetection())
+            Imgproc.circle(image, detectionPoint!!, 10, color)
     }
 
     /**
@@ -102,8 +92,7 @@ abstract class Touchable protected constructor(
      */
     protected fun <T> format(name: String, data: T): String = String.format("   %-17s %-1s%n", name, data)
 
-    override fun toString() = (this.javaClass.simpleName
-        + " (" + super.toString() + "):" + System.lineSeparator()
-        + format("Dimensions:", dimensions)
-        + format("Color:", color))
+    override fun toString() = "${this.javaClass.simpleName} (${super.toString()}):\n" +
+        format("Dimensions:", dimensions) +
+        format("Color:", color)
 }

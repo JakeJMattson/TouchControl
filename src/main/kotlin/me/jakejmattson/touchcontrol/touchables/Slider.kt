@@ -2,6 +2,7 @@ package me.jakejmattson.touchcontrol.touchables
 
 import org.opencv.core.*
 import org.opencv.imgproc.Imgproc
+import kotlin.math.ceil
 
 /**
  * Abstract Slider - contains general slider behavior.
@@ -12,82 +13,42 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : T
     /**
      * Number of sectors that the slider is divided into
      */
-    protected var numOfDivisions: Int = 0
+    protected var numOfDivisions: Int = DEFAULT_DIVISIONS
         set(value) {
-            field = validateDivisions(value)
-            calculateDivisionSize()
+            field = value.coerceIn(0..100)
         }
 
     /**
      * The size of a single division sector
      */
-    private var divisionSize: Double = 0.toDouble()
+    private val divisionSize: Double
+        get() = dimensions.height.toDouble() / numOfDivisions
     /**
      * The division in which the detection point is located in
      */
-    protected var division: Int = 0
+    protected var currentDivision: Int = 0
     /**
      * Whether or not the location line should have a label
      */
-    private var isLabeled: Boolean = false
-
-    init {
-        numOfDivisions = DEFAULT_DIVISIONS
-        isLabeled = DEFAULT_VISIBILITY
-
-        calculateDivisionSize()
-    }
-
-    /**
-     * Determine the size of each division sector.
-     */
-    private fun calculateDivisionSize() {
-        //Calculate the size of a single slider sector
-        this.divisionSize = dimensions.height.toDouble() / numOfDivisions
-    }
-
-    /**
-     * Confine number of divisions to range.
-     *
-     * Attempted value
-     * @return Value within range
-     */
-    private fun validateDivisions(attemptedVal: Int): Int {
-
-        var divisions = attemptedVal
-
-        if (attemptedVal < 0)
-            divisions = 0
-        else if (attemptedVal > 100)
-            divisions = 100
-
-        return divisions
-    }
+    private var isLabeled: Boolean = DEFAULT_VISIBILITY
 
     override fun updateDetectionPoint(filteredImage: Mat): Point? {
-        //Update state
         super.updateDetectionPoint(filteredImage)
 
         if (hasDetection())
-            division = Math.ceil((detectionPoint!!.y - dimensions.y) / divisionSize).toInt()
+            currentDivision = ceil((detectionPoint!!.y - dimensions.y) / divisionSize).toInt()
 
         return detectionPoint
     }
 
-    override fun drawOnto(image: Mat?) {
+    override fun drawOnto(image: Mat) {
         super.drawOnto(image)
         setSliderStatus(image)
     }
 
-    /**
-     * Draw status line and label.
-     *
-     * @param image
-     * Matrix
-     */
-    private fun setSliderStatus(image: Mat?) {
+    private fun setSliderStatus(image: Mat) {
         //Calculate position of line
-        val linePosition = divisionSize * division + dimensions.y
+        val linePosition = divisionSize * currentDivision + dimensions.y
 
         //Draw status line
         Imgproc.line(image, Point(dimensions.x.toDouble(), linePosition),
@@ -95,15 +56,16 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : T
 
         if (isLabeled) {
             //Offset text to avoid collision with line and slider
-            val textShift = if (numOfDivisions - division >= numOfDivisions / 2.0) 18 else -8
+            val textShift = if (numOfDivisions - currentDivision >= numOfDivisions / 2.0) 18 else -8
 
             //Calculate percentage to display
-            val percent = (numOfDivisions - division) * (100 / numOfDivisions)
+            val percent = (numOfDivisions - currentDivision) * (100 / numOfDivisions)
 
-            var unit = ""
-
-            if (numOfDivisions == 100)
-                unit = "%"
+            val unit =
+                when (numOfDivisions) {
+                    100 -> "%"
+                    else -> ""
+                }
 
             //Draw text
             Imgproc.putText(image, percent.toString() + unit,
@@ -112,9 +74,9 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : T
         }
     }
 
-    override fun toString() = (super.toString()
-        + format("Divisions:", numOfDivisions)
-        + format("Is Labeled:", isLabeled))
+    override fun toString() = super.toString() +
+        format("Divisions:", numOfDivisions) +
+        format("Is Labeled:", isLabeled)
 
     companion object {
         private const val DEFAULT_DIVISIONS = 100

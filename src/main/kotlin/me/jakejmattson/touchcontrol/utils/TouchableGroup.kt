@@ -11,10 +11,8 @@ import java.util.Arrays
  * @author JakeJMattson
  */
 class TouchableGroup(vararg components: Touchable) {
-    /**
-     * A List of all components in the group
-     */
-    private val components: ArrayList<Touchable> = ArrayList(Arrays.asList(*components))
+
+    private val components: ArrayList<Touchable> = arrayListOf(*components)
 
     fun addComponent(component: Touchable) = components.add(component)
 
@@ -26,41 +24,23 @@ class TouchableGroup(vararg components: Touchable) {
 
     fun updateDetectionPoint(filteredImage: Mat) =
         runBlocking {
-            val jobs = ArrayList<Job>()
-
             components.forEach {
-                jobs.add(
-                    GlobalScope.launch { it.updateDetectionPoint(filteredImage) }
-                )
+                launch { it.updateDetectionPoint(filteredImage) }
             }
-
-            jobs.joinAll()
         }
 
     fun drawOnto(rawImage: Mat) =
         runBlocking {
-            val jobs = ArrayList<Job>()
-
             components.forEach {
-                jobs.add(
-                    GlobalScope.launch { it.drawOnto(rawImage) }
-                )
+                launch { it.drawOnto(rawImage) }
             }
-
-            jobs.joinAll()
         }
 
     fun performAction() =
         runBlocking {
-            val jobs = ArrayList<Job>()
-
             components.forEach {
-                jobs.add(
-                    GlobalScope.launch { it.performAction() }
-                )
+                launch { it.performAction() }
             }
-
-            jobs.joinAll()
         }
 
     /**
@@ -95,13 +75,12 @@ class TouchableGroup(vararg components: Touchable) {
         return hasNoCollision
     }
 
-    override fun toString(): String {
-        var groupData = "Touchable objects in group (${super.toString()}): ${components.size}\n\n"
+    override fun toString() =
+        buildString {
+            appendln("Touchable objects in group (${super.toString()}): ${components.size}\n")
 
-        components.forEachIndexed { index, component ->
-            groupData += "($index)$component\n"
+            components.forEachIndexed { index, component ->
+                appendln("($index)$component")
+            }
         }
-
-        return groupData
-    }
 }

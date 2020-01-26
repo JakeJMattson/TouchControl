@@ -17,44 +17,30 @@ class VolumeSlider(dimensions: Rect, color: Scalar) : Slider(dimensions, color) 
 
     override fun performAction() {
         if (hasDetection()) {
-            //Calculate volume
-            val newVolume = (numOfDivisions - division) * (100 / numOfDivisions)
+            val newVolume = (numOfDivisions - currentDivision) * (100 / numOfDivisions)
 
-            //Avoid unnecessary calls
             if (previousVolume != newVolume)
                 setVolume(newVolume)
         }
     }
 
-    /**
-     * Set system volume.
-     *
-     * @param volume
-     * New target system volume
-     */
     private fun setVolume(volume: Int) {
-        //Nircmd allows volume changing
-        val nircmdPath = File("nircmd/nircmd.exe").absolutePath
+        setSystemVolume(volume)
+        previousVolume = volume
+    }
+
+    private fun setSystemVolume(volume: Int) {
+        val nircmd = File("nircmd/nircmd.exe")
+
+        if (!nircmd.exists())
+            return
 
         //Convert volume to nircmd standard
         val nircmdVolume = 655.35 * volume
 
         //Build command to set system volume
-        val command = "$nircmdPath setsysvolume $nircmdVolume"
+        val command = "${nircmd.absolutePath} setsysvolume $nircmdVolume"
 
-        //Set volume
-        previousVolume = volume
-        executeCommand(command)
-
-        //Display message for debugging
-        println("Volume set to: $volume")
+        Runtime.getRuntime().exec(command)
     }
-
-    /**
-     * Execute a system command (Call nircmd from command line).
-     *
-     * @param command
-     * System command
-     */
-    private fun executeCommand(command: String) = Runtime.getRuntime().exec(command)
 }

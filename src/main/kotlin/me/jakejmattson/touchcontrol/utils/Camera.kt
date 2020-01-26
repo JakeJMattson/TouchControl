@@ -9,7 +9,7 @@ import javax.swing.JOptionPane
  *
  * @author JakeJMattson
  */
-class Camera @JvmOverloads constructor(private val rotation: Int? = null, cameraIndex: Int = 0) {
+class Camera(private val rotation: Int? = null, cameraIndex: Int = 0) {
 
     /**
      * OpenCV VideoCapture to access physical camera

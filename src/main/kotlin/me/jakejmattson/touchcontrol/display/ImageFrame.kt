@@ -11,25 +11,17 @@ import javax.swing.JFrame
  * @author JakeJMattson
  */
 class ImageFrame(title: String) {
-    private val frame: JFrame
     private val imagePanel = ImagePanel()
-    var isOpen: Boolean = false
-        private set
 
-    init {
-        isOpen = true
-
-        frame = JFrame(title)
-        frame.addWindowListener(createWindowListener())
-        frame.add(imagePanel)
-        frame.isVisible = true
+    private val frame: JFrame = JFrame(title).apply {
+        addWindowListener(createWindowListener())
+        add(imagePanel)
+        isVisible = true
     }
 
-    /**
-     * Create a listener to monitor the frame closing event.
-     *
-     * @return WindowListener
-     */
+    var isOpen: Boolean = true
+        private set
+
     private fun createWindowListener(): WindowListener {
         return object : WindowAdapter() {
             override fun windowClosing(windowClosed: WindowEvent?) {
@@ -38,14 +30,8 @@ class ImageFrame(title: String) {
         }
     }
 
-    /**
-     * Display an image in the frame.
-     *
-     * @param image
-     * Image to be shown
-     */
     fun showImage(image: BufferedImage) {
-        imagePanel.setImage(image)
+        imagePanel.image = image
         frame.repaint()
         frame.pack()
     }

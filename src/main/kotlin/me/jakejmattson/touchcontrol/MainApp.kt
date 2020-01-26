@@ -9,32 +9,30 @@
  * Demo (main) class to run functions
  */
 
-package me.jakejmattson.touchcontrol.demo
+package me.jakejmattson.touchcontrol
 
+import me.jakejmattson.touchcontrol.demo.*
 import me.jakejmattson.touchcontrol.display.ImageFrame
 import me.jakejmattson.touchcontrol.utils.*
 import org.bytedeco.javacpp.*
 import org.opencv.core.Scalar
+import kotlin.system.exitProcess
 
 private val DEBUG_MODE = true
 
 fun main() {
     Loader.load(opencv_java::class.java)
-    val camera = Camera(-1)
-
-    if (!camera.isOpened)
-        return
+    val camera = Camera(-1).takeIf { it.isOpened } ?: return
 
     val cameraWidth = camera.width
-    val cameraHeight = camera.height
     val color = Scalar(0.0, 255.0, 0.0)
-    val group = createVolumeDemo(cameraWidth, cameraHeight, color)
+    val group = createPianoDemo(cameraWidth, camera.height, color)
 
     if (DEBUG_MODE)
         print(group)
 
     val rawDisplay = ImageFrame("Touch Control")
-    val filteredDisplay = if (DEBUG_MODE) ImageFrame("Debug frame") else null
+    val filteredDisplay = ImageFrame("Debug frame").takeIf { DEBUG_MODE }
     placeFrames(rawDisplay, filteredDisplay, cameraWidth.toInt())
 
     val handler = ImageHandler()
@@ -47,18 +45,18 @@ fun main() {
         val rawImage = camera.frame
         val filteredImage = handler.filterImage(rawImage)
 
-        group.updateDetectionPoint(filteredImage)
-        group.drawOnto(rawImage)
-        group.performAction()
+        with (group) {
+            updateDetectionPoint(filteredImage)
+            drawOnto(rawImage)
+            performAction()
+        }
 
         rawDisplay.showImage(rawImage.toBufferedImage())
-
-        if (DEBUG_MODE)
-            filteredDisplay!!.showImage(filteredImage.toBufferedImage())
+        filteredDisplay?.showImage(filteredImage.toBufferedImage())
     }
 
     camera.release()
-    System.exit(0)
+    exitProcess(0)
 }
 
 private fun placeFrames(frame1: ImageFrame, frame2: ImageFrame?, offset: Int) {

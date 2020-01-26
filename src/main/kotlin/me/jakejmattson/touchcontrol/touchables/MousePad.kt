@@ -1,6 +1,6 @@
 package me.jakejmattson.touchcontrol.touchables
 
-import me.jakejmattson.touchcontrol.utils.times
+import me.jakejmattson.touchcontrol.utils.*
 import org.opencv.core.*
 import org.opencv.core.Point
 import java.awt.*
@@ -12,9 +12,6 @@ import java.awt.*
  * @author JakeJMattson
  */
 class MousePad(dimensions: Rect, color: Scalar) : Pad(dimensions, color) {
-    /**
-     * Java robot to control the mouse position
-     */
     private var mouseMover: Robot = Robot()
 
     override fun performAction() {
@@ -23,7 +20,7 @@ class MousePad(dimensions: Rect, color: Scalar) : Pad(dimensions, color) {
             val mousePoint = adjustPoint()
 
             //Move mouse pointer to point
-            mouseMover.mouseMove(mousePoint.x.toInt(), mousePoint.y.toInt())
+            mouseMover.mouseMove(mousePoint)
         }
     }
 
@@ -39,9 +36,9 @@ class MousePad(dimensions: Rect, color: Scalar) : Pad(dimensions, color) {
         return detectionPoint!! * ratioPoint
     }
 
-    override fun toString() = (super.toString()
-        + format("Screen height:", SCREEN_HEIGHT)
-        + format("Screen width:", SCREEN_WIDTH))
+    override fun toString() = super.toString() +
+        format("Screen height:", SCREEN_HEIGHT) +
+        format("Screen width:", SCREEN_WIDTH)
 
     companion object {
         private val SCREEN_WIDTH = Toolkit.getDefaultToolkit().screenSize.getWidth()
