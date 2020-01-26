@@ -1,7 +1,7 @@
-package io.github.jakejmattson.touchcontrol.demo
+package me.jakejmattson.touchcontrol.demo
 
-import io.github.jakejmattson.touchcontrol.touchables.*
-import io.github.jakejmattson.touchcontrol.utils.*
+import me.jakejmattson.touchcontrol.touchables.*
+import me.jakejmattson.touchcontrol.utils.*
 import org.opencv.core.*
 
 private const val PADDING = 10

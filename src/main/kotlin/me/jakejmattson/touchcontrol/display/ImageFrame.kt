@@ -1,4 +1,4 @@
-package io.github.jakejmattson.touchcontrol.display
+package me.jakejmattson.touchcontrol.display
 
 import java.awt.Point
 import java.awt.event.*

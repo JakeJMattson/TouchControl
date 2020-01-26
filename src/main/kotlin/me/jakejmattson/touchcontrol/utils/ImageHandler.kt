@@ -1,8 +1,7 @@
-package io.github.jakejmattson.touchcontrol.utils
+package me.jakejmattson.touchcontrol.utils
 
 import org.opencv.core.*
 import org.opencv.video.Video
-import kotlin.math.sqrt
 
 /**
  * Utility class containing functionality related to image (matrix) operations.
@@ -50,7 +49,7 @@ class ImageHandler {
         for (j in 0 until diffImage.rows())
             for (i in 0 until diffImage.cols()) {
                 val pixel = diffImage.get(j, i)
-                val dist = sqrt(pixel[0] * pixel[0] + pixel[1] * pixel[1] + pixel[2] * pixel[2]).toFloat()
+                val dist = Math.sqrt(pixel[0] * pixel[0] + pixel[1] * pixel[1] + pixel[2] * pixel[2]).toFloat()
 
                 if (dist > threshold)
                     filteredImage.put(j, i, 255.0)

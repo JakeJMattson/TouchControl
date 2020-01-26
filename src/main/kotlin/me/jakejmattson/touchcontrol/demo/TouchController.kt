@@ -9,15 +9,14 @@
  * Demo (main) class to run functions
  */
 
-package io.github.jakejmattson.touchcontrol.demo
+package me.jakejmattson.touchcontrol.demo
 
-import io.github.jakejmattson.touchcontrol.display.ImageFrame
-import io.github.jakejmattson.touchcontrol.utils.*
+import me.jakejmattson.touchcontrol.display.ImageFrame
+import me.jakejmattson.touchcontrol.utils.*
 import org.bytedeco.javacpp.*
 import org.opencv.core.Scalar
-import kotlin.system.exitProcess
 
-private const val DEBUG_MODE = true
+private val DEBUG_MODE = true
 
 fun main() {
     Loader.load(opencv_java::class.java)
@@ -29,7 +28,7 @@ fun main() {
     val cameraWidth = camera.width
     val cameraHeight = camera.height
     val color = Scalar(0.0, 255.0, 0.0)
-    val group = createPianoDemo(cameraWidth, cameraHeight, color)
+    val group = createVolumeDemo(cameraWidth, cameraHeight, color)
 
     if (DEBUG_MODE)
         print(group)
@@ -59,7 +58,7 @@ fun main() {
     }
 
     camera.release()
-    exitProcess(0)
+    System.exit(0)
 }
 
 private fun placeFrames(frame1: ImageFrame, frame2: ImageFrame?, offset: Int) {
