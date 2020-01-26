@@ -3,7 +3,7 @@
     <img src="https://img.shields.io/badge/Kotlin-1.3.61-blue.svg" alt="Kotlin 1.3.61">
   </a>
   <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.2/opencv-3.4.2-vc14_vc15.exe/download">
-    <img src="https://img.shields.io/badge/OpenCV-3.4.2-blue.svg" alt="OpenCV-3.4.2">
+    <img src="https://img.shields.io/badge/OpenCV-4.0.1-blue.svg" alt="OpenCV-4.0.1">
   </a>
   <a href="https://GitHub.com/JakeJMattson/TouchControl/releases/">
     <img src="https://img.shields.io/github/release/JakeJMattson/TouchControl.svg" alt="release">

@@ -108,7 +108,7 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : T
             //Draw text
             Imgproc.putText(image, percent.toString() + unit,
                 Point((dimensions.x + 5).toDouble(), linePosition + textShift),
-                Core.FONT_HERSHEY_COMPLEX, 0.5, color)
+                Imgproc.FONT_HERSHEY_COMPLEX, 0.5, color)
         }
     }
 
