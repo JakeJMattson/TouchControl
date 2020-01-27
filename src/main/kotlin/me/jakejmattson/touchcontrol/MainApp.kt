@@ -11,7 +11,7 @@
 
 package me.jakejmattson.touchcontrol
 
-import me.jakejmattson.touchcontrol.demo.*
+import me.jakejmattson.touchcontrol.demo.createPianoDemo
 import me.jakejmattson.touchcontrol.display.ImageFrame
 import me.jakejmattson.touchcontrol.utils.*
 import org.bytedeco.javacpp.*
@@ -31,38 +31,26 @@ fun main() {
     if (DEBUG_MODE)
         print(group)
 
-    val rawDisplay = ImageFrame("Touch Control")
-    val filteredDisplay = ImageFrame("Debug frame").takeIf { DEBUG_MODE }
-    placeFrames(rawDisplay, filteredDisplay, cameraWidth.toInt())
-
+    val display = ImageFrame("Touch Control")
     val handler = ImageHandler()
 
     //Give sample background images to subtractor
     for (i in 0..4)
         handler.trainSubtractor(camera.frame)
 
-    while (rawDisplay.isOpen && camera.isOpened) {
+    while (display.isOpen && camera.isOpened) {
         val rawImage = camera.frame
         val filteredImage = handler.filterImage(rawImage)
 
-        with (group) {
+        with(group) {
             updateDetectionPoint(filteredImage)
             drawOnto(rawImage)
             performAction()
         }
 
-        rawDisplay.showImage(rawImage.toBufferedImage())
-        filteredDisplay?.showImage(filteredImage.toBufferedImage())
+        display.showImages(rawImage.toBufferedImage(), filteredImage.toBufferedImage())
     }
 
     camera.release()
     exitProcess(0)
-}
-
-private fun placeFrames(frame1: ImageFrame, frame2: ImageFrame?, offset: Int) {
-    val location = java.awt.Point(0, 0)
-    frame1.setLocation(location)
-    location.x = offset
-
-    frame2?.setLocation(location)
 }

@@ -3,7 +3,7 @@ package me.jakejmattson.touchcontrol.display
 import java.awt.Point
 import java.awt.event.*
 import java.awt.image.BufferedImage
-import javax.swing.JFrame
+import javax.swing.*
 
 /**
  * Frame - GUI container for components (holds ImagePanel).
@@ -11,11 +11,17 @@ import javax.swing.JFrame
  * @author JakeJMattson
  */
 class ImageFrame(title: String) {
-    private val imagePanel = ImagePanel()
+    private val leftPanel = ImagePanel()
+    private val rightPanel = ImagePanel()
 
     private val frame: JFrame = JFrame(title).apply {
         addWindowListener(createWindowListener())
-        add(imagePanel)
+
+        add(JPanel().apply {
+            add(leftPanel)
+            add(rightPanel)
+        })
+
         isVisible = true
     }
 
@@ -30,8 +36,9 @@ class ImageFrame(title: String) {
         }
     }
 
-    fun showImage(image: BufferedImage) {
-        imagePanel.image = image
+    fun showImages(leftImage: BufferedImage, rightImage: BufferedImage) {
+        leftPanel.image = leftImage
+        rightPanel.image = rightImage
         frame.repaint()
         frame.pack()
     }
