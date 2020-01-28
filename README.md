@@ -2,7 +2,7 @@
   <a href="https://kotlinlang.org/">
     <img src="https://img.shields.io/badge/Kotlin-1.3.61-blue.svg" alt="Kotlin 1.3.61">
   </a>
-  <a href="https://sourceforge.net/projects/opencvlibrary/files/opencv-win/3.4.2/opencv-3.4.2-vc14_vc15.exe/download">
+  <a href="https://opencv.org/releases/">
     <img src="https://img.shields.io/badge/OpenCV-4.0.1-blue.svg" alt="OpenCV-4.0.1">
   </a>
   <a href="https://GitHub.com/JakeJMattson/TouchControl/releases/">
