@@ -1,17 +1,11 @@
-### Intellij ###
+# Intellij #
 .idea/
-target/
 *.iml
-*.iws
-*.ipr
 
-### Java ###
-# Binaries #
-*.class
-*.jar
-*.exe
+# Gradle
+.gradle/
+build/
+gradle.properties
 
-# Package Files #
-*.zip
-*.tar.gz
-*.rar
+# Project #
+nircmd
