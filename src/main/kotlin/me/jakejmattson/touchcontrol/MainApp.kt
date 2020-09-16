@@ -18,7 +18,7 @@ import org.bytedeco.javacpp.*
 import org.opencv.core.Scalar
 import kotlin.system.exitProcess
 
-private val DEBUG_MODE = true
+private const val DEBUG_MODE = true
 
 fun main() {
     Loader.load(opencv_java::class.java)

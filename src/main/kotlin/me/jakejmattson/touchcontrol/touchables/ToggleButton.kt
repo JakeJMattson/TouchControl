@@ -12,6 +12,7 @@ abstract class ToggleButton protected constructor(dimensions: Rect, color: Scala
      * The current state of the button
      */
     protected var isToggledOn: Boolean = false
+
     /**
      * Whether or not the button has already switched states internally
      */

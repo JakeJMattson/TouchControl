@@ -10,14 +10,11 @@ import org.opencv.core.*
  * @author JakeJMattson
  */
 class TouchableGroup(vararg components: Touchable) {
-
-    private val components: ArrayList<Touchable> = arrayListOf(*components)
+    private val components = components.toMutableList()
 
     fun addComponent(component: Touchable) = components.add(component)
 
     fun removeComponent(component: Touchable) = components.remove(component)
-
-    fun getComponents() = components
 
     fun setColor(color: Scalar) = components.forEach { it.color = color }
 
@@ -76,10 +73,10 @@ class TouchableGroup(vararg components: Touchable) {
 
     override fun toString() =
         buildString {
-            appendln("Touchable objects in group (${super.toString()}): ${components.size}\n")
+            appendLine("Touchable objects in group (${super.toString()}): ${components.size}\n")
 
             components.forEachIndexed { index, component ->
-                appendln("($index)$component")
+                appendLine("($index)$component")
             }
         }
 }

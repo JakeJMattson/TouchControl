@@ -23,10 +23,12 @@ abstract class Slider protected constructor(dimensions: Rect, color: Scalar) : T
      */
     private val divisionSize: Double
         get() = dimensions.height.toDouble() / numOfDivisions
+
     /**
      * The division in which the detection point is located in
      */
     protected var currentDivision: Int = 0
+
     /**
      * Whether or not the location line should have a label
      */

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package me.jakejmattson.touchcontrol.demo
 
 import me.jakejmattson.touchcontrol.touchables.*
