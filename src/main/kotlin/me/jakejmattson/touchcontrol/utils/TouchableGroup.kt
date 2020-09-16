@@ -3,7 +3,6 @@ package me.jakejmattson.touchcontrol.utils
 import kotlinx.coroutines.*
 import me.jakejmattson.touchcontrol.touchables.Touchable
 import org.opencv.core.*
-import java.util.Arrays
 
 /**
  * Apply the same function over many Touchable objects.

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://kotlinlang.org/">
-    <img src="https://img.shields.io/badge/Kotlin-1.3.70-blue.svg" alt="Kotlin 1.3.70">
+    <img src="https://img.shields.io/badge/Kotlin-1.4.10-blue.svg" alt="Kotlin 1.4.10">
   </a>
   <a href="https://opencv.org/releases/">
     <img src="https://img.shields.io/badge/OpenCV-4.0.1-blue.svg" alt="OpenCV-4.0.1">
