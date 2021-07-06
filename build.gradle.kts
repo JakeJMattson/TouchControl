@@ -1,11 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 group = "me.jakejmattson"
 version = "2.0.0"
 
 plugins {
-    kotlin("jvm") version "1.4.10"
-    id("com.github.ben-manes.versions") version "0.33.0"
+    kotlin("jvm") version "1.5.20"
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 repositories {
@@ -13,10 +11,10 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     implementation("org.bytedeco.javacpp-presets:opencv-platform:4.0.1-1.4.4")
 }
 
-tasks.withType<KotlinCompile> {
+tasks.compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }

@@ -1,9 +1,9 @@
 <p align="center">
   <a href="https://kotlinlang.org/">
-    <img src="https://img.shields.io/badge/Kotlin-1.4.10-blue.svg" alt="Kotlin 1.4.10">
+    <img src="https://img.shields.io/badge/Kotlin-1.5.20-blue.svg" alt="Kotlin">
   </a>
   <a href="https://opencv.org/releases/">
-    <img src="https://img.shields.io/badge/OpenCV-4.0.1-blue.svg" alt="OpenCV-4.0.1">
+    <img src="https://img.shields.io/badge/OpenCV-4.0.1-blue.svg" alt="OpenCV">
   </a>
   <a href="https://GitHub.com/JakeJMattson/TouchControl/releases/">
     <img src="https://img.shields.io/github/release/JakeJMattson/TouchControl.svg" alt="release">
@@ -44,25 +44,19 @@ This project is intended to be a touch screen without the screen. By using only 
 ### Languages
 * [Kotlin](https://kotlinlang.org/)
 
-### Libraries
+### Libraries/Tools
+* [JDK](https://openjdk.java.net/)
 * [OpenCV](https://opencv.org/about.html)
 * [NirCmd](http://www.nirsoft.net/utils/nircmd.html)
 
 ## Getting Started (Software)
-### Installing Java
-<p align="justify">
-Visit the <a href="https://jdk.java.net/11/">Java Downloads</a> page and select the version of your choice.
-Run the installer and follow the instructions provided.
-</p>
 
 ### Building
-This project is built with Maven. To build the `pom.xml`, please follow the import instructions for your IDE.
-* [IntelliJ](https://www.tutorialspoint.com/maven/maven_intellij_idea.htm)
-* [Eclipse](https://www.tutorialspoint.com/maven/maven_eclispe_ide.htm)
+This project uses the [Gradle](https://gradle.org/) build tool. 
 
 ### Downloading NirCmd
 <p align="justify">
-NirCmd is used by the VolumeSlider demo to control system volume on Windows. As there are no released versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code. You can download either the <a href="http://www.nirsoft.net/utils/nircmd-x64.zip">64 bit</a> or the <a href="http://www.nirsoft.net/utils/nircmd.zip">32 bit</a> version.
+NirCmd is used by the VolumeSlider demo to control system volume on Windows. As there are no released versions of TouchControl with this functionality, NirCmd is optional and only for developers who wish to work with this part of the code. You can download either the <a href="https://www.nirsoft.net/utils/nircmd-x64.zip">64 bit</a> or the <a href="https://www.nirsoft.net/utils/nircmd.zip">32 bit</a> version.
 </p>
 
 ## Getting Started (Hardware)
@@ -81,4 +75,4 @@ Move your finger (or any object) through the area covered by the camera. The pro
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-* [OpenCV binaries (Maven)](https://github.com/bytedeco/javacpp-presets)
+* [OpenCV binaries](https://github.com/bytedeco/javacpp-presets)

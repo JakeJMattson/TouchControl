@@ -22,7 +22,7 @@ fun createPianoDemo(cameraWidth: Double, cameraHeight: Double, color: Scalar): T
 
     for (i in 0 until keyCount) {
         val dimensions = grid.calculateDimensions(Point(i.toDouble(), 1.0), Point(i.toDouble(), 3.0))
-        val key = PianoKey(dimensions, color, (i + 'A'.toInt()).toChar())
+        val key = PianoKey(dimensions, color, (i + 'A'.code).toChar())
         group.addComponent(key)
     }
 
